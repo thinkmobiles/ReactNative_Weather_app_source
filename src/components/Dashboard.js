@@ -12,6 +12,7 @@ import {
 import DateSelect from './dash-widgets/DateSelect/';
 import HoursList from './dash-widgets/HoursList/';
 
+
 export default class Dashboard extends Component {
     constructor(props) {
         super(props);
