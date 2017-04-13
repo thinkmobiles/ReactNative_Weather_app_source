@@ -32,7 +32,7 @@ export default class LeftComponent extends Component {
 
         let rangeArray = [];
 
-        for (let i = 0; i < 7; i++) {
+        for (let i = 0; i < 21; i++) {
             let key;
 
             _momentDate.add(1, 'd');
@@ -45,7 +45,7 @@ export default class LeftComponent extends Component {
             rangeArray.push({
                 index: i,
                 key: key,
-                momentDate: _momentDate
+                momentDate: _momentDate.clone()
             });
         }
 

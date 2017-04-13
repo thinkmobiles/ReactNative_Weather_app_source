@@ -13,9 +13,10 @@ import {connect} from 'react-redux';
 import * as dsActions from '../../../actions/dateSelectActions';
 
 import CustomButton from '../../Button';
+import SmallWeather from '../smallWeather';
 
 @connect(store => {
-    return {...store.dateSelect};
+    return {...store.dateSelect, ...store.calendar};
 })
 
 export default class RightComponent extends Component {
@@ -36,8 +37,11 @@ export default class RightComponent extends Component {
                     fontSize: 25,
                     color   : '#fff'
                 }}>
-                    Month will be here
+                    {this.props.calendar.checkedElement.momentDate.format('MMMM')}
                 </Text>
+
+                <SmallWeather/>
+
                 <CustomButton
                     onButtonClick={() => {
                         this.props.dispatch(dsActions.setVisibleState(false));

@@ -1,4 +1,5 @@
 import * as types from '../actions/actionTypes';
+import moment from 'moment';
 
 export default function reducer(state = {
                                     calendar: {
@@ -6,7 +7,7 @@ export default function reducer(state = {
                                         checkedElement: {
                                             key: '1',
                                             index: 0,
-                                            momentDate: null
+                                            momentDate: moment()
                                         }
                                     }
                                 }, action) {
