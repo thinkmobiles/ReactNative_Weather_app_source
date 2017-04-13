@@ -9,7 +9,14 @@ import {
     TouchableOpacity
 } from 'react-native';
 
+import {connect} from 'react-redux';
+import * as dsActions from '../../../actions/dateSelectActions';
+
 import CustomButton from '../../Button';
+
+@connect(store => {
+    return {...store.dateSelect};
+})
 
 export default class RightComponent extends Component {
     constructor(props) {
@@ -32,7 +39,9 @@ export default class RightComponent extends Component {
                     Month will be here
                 </Text>
                 <CustomButton
-                    onButtonClick={this.props.onMenuClick}
+                    onButtonClick={() => {
+                        this.props.dispatch(dsActions.setVisibleState(false));
+                    }}
                     iconColor="#777"
                     touchableStyle={{
                         justifyContent : 'center',

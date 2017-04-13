@@ -13,7 +13,14 @@ import {
 
 import CustomButton from '../../Button';
 
+import {connect} from 'react-redux';
+import * as dsActions from '../../../actions/dateSelectActions';
+
 // import IconI from 'react-native-vector-icons/MaterialIcons';
+
+@connect(store => {
+    return {...store.dateSelect};
+})
 
 export default class PictureTop extends Component {
     constructor(props) {
@@ -32,7 +39,9 @@ export default class PictureTop extends Component {
                 }}
             >
                 <CustomButton
-                    onButtonClick={this.props.onMenuClick}
+                    onButtonClick={() => {
+                        this.props.dispatch(dsActions.setVisibleState(true));
+                    }}
                     iconColor="white"
                     touchableStyle={{
                         width          : size,

@@ -19,6 +19,7 @@ import {connect} from 'react-redux';
 @connect(store => {
     return {...store.calendar, ...store.weather};
 })
+
 export default class LeftComponent extends Component {
     constructor(props) {
         super(props);
@@ -100,8 +101,6 @@ export default class LeftComponent extends Component {
             key: item.key,
             momentDate: item.momentDate
         }));
-
-        console.log(`${item.key} pressed`);
     };
 
     componentDidMount() {

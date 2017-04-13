@@ -10,7 +10,6 @@ const weatherApi = new WeatherApi();
 
 import {connect} from 'react-redux';
 
-
 import {
     View,
     Text,
@@ -20,10 +19,10 @@ import {
 @connect(store => {
     return {...store.weather};
 })
+
 export default class Splash extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props)
     }
 
     nav() {

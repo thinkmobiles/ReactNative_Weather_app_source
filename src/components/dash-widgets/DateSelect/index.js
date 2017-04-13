@@ -16,10 +16,18 @@ import {
     StyleSheet
 } from 'react-native';
 
+import * as dsActions from '../../../actions/dateSelectActions';
+
+import {connect} from 'react-redux';
+
 const deviceScreen = Dimensions.get('window');
 const widgetHeight = deviceScreen.height * 0.6;
 const shownPartHeight = 60;
 const hideTranslate = -(widgetHeight - shownPartHeight);
+
+@connect(store => {
+    return {...store.dateSelect};
+})
 
 export default class TopContainer extends Component {
     constructor(props) {
@@ -27,8 +35,7 @@ export default class TopContainer extends Component {
 
         this.state = {
             translateY      : 0,
-            bounceValueStart: new Animated.Value(0),
-            visible         : true
+            bounceValueStart: new Animated.Value(0)
         }
     }
 
@@ -46,7 +53,7 @@ export default class TopContainer extends Component {
 
     _toggleSubview(visibleState) {
         let toValue = 0;
-        let _visibleState = typeof visibleState !== 'undefined' ? visibleState : !this.state.visible;
+        let _visibleState = typeof visibleState !== 'undefined' ? visibleState : !this.props.dateSelect.visible;
 
         if (!_visibleState) {
             toValue = hideTranslate;
@@ -69,7 +76,7 @@ export default class TopContainer extends Component {
 
         let distance = -(this.pageY - pageY);
 
-        this._createAnimatiom(this.state.translateY + distance).start();
+        // this._createAnimatiom(this.state.translateY + distance).start();
 
         this.setState({
             translateY: this.state.translateY + distance
@@ -93,6 +100,13 @@ export default class TopContainer extends Component {
         this._toggleSubview(pageY >= deviceScreen.height * 0.3);
     }
 
+    componentWillReceiveProps(nextProps) {
+        console.log('sssss');
+        if (this.props.dateSelect.visible !== nextProps.dateSelect.visible) {
+            this._toggleSubview(nextProps.dateSelect.visible);
+        }
+    }
+
     render() {
         return (
             <Animated.View
@@ -108,12 +122,9 @@ export default class TopContainer extends Component {
                     style={styles.topPart}
                 >
                     <Left/>
-                    <Right
-                        onMenuClick={this._toggleSubview.bind(this, false)}
-                    />
+                    <Right/>
                 </View>
                 <Bottom
-                    onMenuClick={this._toggleSubview.bind(this, true)}
                     height={shownPartHeight}
                 />
             </Animated.View>
