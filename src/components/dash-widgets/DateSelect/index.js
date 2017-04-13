@@ -7,6 +7,7 @@ import React, {
 import Left from './leftList';
 import Right from './rightContainer';
 import Bottom from './bottomLine';
+import Top from './topSettings';
 
 import {
     Text,
@@ -21,8 +22,8 @@ import * as dsActions from '../../../actions/dateSelectActions';
 import {connect} from 'react-redux';
 
 const deviceScreen = Dimensions.get('window');
-const widgetHeight = deviceScreen.height * 0.6;
 const shownPartHeight = 60;
+const widgetHeight = deviceScreen.height * 0.5 + shownPartHeight;
 const hideTranslate = -(widgetHeight - shownPartHeight);
 
 @connect(store => {
@@ -34,8 +35,9 @@ export default class TopContainer extends Component {
         super(props)
 
         this.state = {
+            settingsVisible : false,
             translateY      : 0,
-            bounceValueStart: new Animated.Value(0)
+            bounceValueStart: new Animated.Value(-shownPartHeight)
         }
     }
 
@@ -51,32 +53,41 @@ export default class TopContainer extends Component {
         )
     };
 
-    _toggleSubview(visibleState) {
-        let toValue = 0;
+    _toggleSubview(visibleState, distance) {
+        let toValue = -shownPartHeight;
         let _visibleState = typeof visibleState !== 'undefined' ? visibleState : !this.props.dateSelect.visible;
+        let _visibleSettingsState;
 
         if (!_visibleState) {
             toValue = hideTranslate;
+            _visibleSettingsState = false;
+        } else {
+            if (distance < 0 && this.state.settingsVisible) {
+                toValue = -shownPartHeight;
+                _visibleSettingsState = false;
+            } else if (distance > 0 && !this.state.settingsVisible) {
+                toValue = 0;
+                _visibleSettingsState = true;
+            }
         }
 
         this._createAnimatiom(toValue).start();
 
         this.setState({
-            translateY: toValue,
-            visible   : _visibleState
+            settingsVisible: _visibleSettingsState,
+            translateY     : toValue,
+            visible        : _visibleState
         });
     }
 
     _onMove(e) {
         const {pageY} = e.nativeEvent;
 
-        if (pageY > widgetHeight - shownPartHeight) {
+        if (pageY > widgetHeight - shownPartHeight * 2) {
             return false;
         }
 
         let distance = -(this.pageY - pageY);
-
-        // this._createAnimatiom(this.state.translateY + distance).start();
 
         this.setState({
             translateY: this.state.translateY + distance
@@ -96,12 +107,12 @@ export default class TopContainer extends Component {
 
     _onMoveEnd(e) {
         const {pageY} = e.nativeEvent;
+        let distance = -(this.pageY - pageY);
 
-        this._toggleSubview(pageY >= deviceScreen.height * 0.3);
+        this._toggleSubview(pageY >= deviceScreen.height * 0.3, distance);
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('sssss');
         if (this.props.dateSelect.visible !== nextProps.dateSelect.visible) {
             this._toggleSubview(nextProps.dateSelect.visible);
         }
@@ -118,6 +129,9 @@ export default class TopContainer extends Component {
                 onResponderRelease={this._onMoveEnd.bind(this)}
                 onMoveShouldSetResponderCapture={this._onMoveStart.bind(this)}
             >
+                <Top
+                    height={shownPartHeight}
+                />
                 <View
                     style={styles.topPart}
                 >
