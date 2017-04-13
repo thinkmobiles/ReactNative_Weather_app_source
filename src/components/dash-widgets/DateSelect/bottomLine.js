@@ -16,10 +16,8 @@ import CustomButton from '../../Button';
 import {connect} from 'react-redux';
 import * as dsActions from '../../../actions/dateSelectActions';
 
-// import IconI from 'react-native-vector-icons/MaterialIcons';
-
 @connect(store => {
-    return {...store.dateSelect};
+    return {...store.dateSelect, ...store.weather, ...store.calendar};
 })
 
 export default class PictureTop extends Component {
@@ -53,10 +51,28 @@ export default class PictureTop extends Component {
                 />
                 <View
                     style={{
-                        flex: 1
+                        flex           : 1,
+                        backgroundColor: 'transparent'
                     }}
                 >
-                    <Text>Something</Text>
+                    <Text
+                        style={{
+                            flex    : 2,
+                            margin  : 7,
+                            fontSize: 18
+                        }}
+                    >
+                        {this.props.weather.location.name}
+                    </Text>
+                    <Text
+                        style={{
+                            flex    : 1,
+                            margin  : 2,
+                            fontSize: 12
+                        }}
+                    >
+                        {this.props.calendar.checkedElement.momentDate.format('dddd DD.MM.YYYY')}
+                    </Text>
                 </View>
             </View>
         );

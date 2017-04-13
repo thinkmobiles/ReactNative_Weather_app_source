@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         minHeight    : deviceScreen.height,
         width        : deviceScreen.width,
-
+        marginTop    : -60,
+        paddingTop   : 60
     },
     line     : {
         flex: 1

@@ -17,8 +17,6 @@ import {
     StyleSheet
 } from 'react-native';
 
-import * as dsActions from '../../../actions/dateSelectActions';
-
 import {connect} from 'react-redux';
 
 const deviceScreen = Dimensions.get('window');
@@ -41,7 +39,7 @@ export default class TopContainer extends Component {
         }
     }
 
-    _createAnimatiom = (toValue) => {
+    _createAnimation = (toValue) => {
         return Animated.spring(
             this.state.bounceValueStart,
             {
@@ -71,7 +69,7 @@ export default class TopContainer extends Component {
             }
         }
 
-        this._createAnimatiom(toValue).start();
+        this._createAnimation(toValue).start();
 
         this.setState({
             settingsVisible: _visibleSettingsState,
@@ -89,7 +87,7 @@ export default class TopContainer extends Component {
 
         let distance = -(this.pageY - pageY);
 
-        this._createAnimatiom(this.state.translateY + distance).start();
+        // this._createAnimation(this.state.translateY + distance).start();
 
         this.setState({
             translateY: this.state.translateY + distance
@@ -126,11 +124,13 @@ export default class TopContainer extends Component {
                 style={{
                     height   : widgetHeight,
                     // transform: [{translateY: this.state.bounceValueStart}]
-                    marginTop: this.state.bounceValueStart
+                    marginTop: this.state.bounceValueStart,
+                    zIndex   : 10
                 }}
                 onResponderMove={this._onMove.bind(this)}
                 onResponderRelease={this._onMoveEnd.bind(this)}
                 onMoveShouldSetResponderCapture={this._onMoveStart.bind(this)}
+                hitSlop={{top: 0, bottom: 50, left: 0, right: 0}}
             >
                 <Top
                     height={shownPartHeight}
