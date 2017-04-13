@@ -5,8 +5,12 @@ import React, {
 } from 'react';
 
 import {
+    AppRegistry,
+    StyleSheet,
+    Text,
     View,
-    Text
+    TouchableHighlight,
+    Animated
 } from 'react-native';
 
 import DateSelect from './dash-widgets/DateSelect/';
@@ -15,22 +19,26 @@ import HoursList from './dash-widgets/HoursList/';
 export default class Dashboard extends Component {
     constructor(props) {
         super(props);
-
-        console.log(this.props);
     }
 
     render() {
         return (
-            <View style={{
-                flex           : 1,
-                backgroundColor: '#fff73f',
-                width          : null,
-                height         : null,
-                justifyContent : 'space-between'
-            }}>
+            <View
+                style={styles.container}
+            >
                 <DateSelect/>
                 <HoursList/>
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex           : 1,
+        backgroundColor: '#ffffff',
+        width          : null,
+        height         : null,
+        justifyContent : 'space-between'
+    }
+});

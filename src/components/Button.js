@@ -16,9 +16,11 @@ export default class RightComponent extends Component {
 
     render() {
         let iconSize = this.props.iconSize || 25;
+
         return (
             <TouchableOpacity
                 style={this.props.touchableStyle}
+                onPress={this.props.onButtonClick}
             >
                 <Text
                     style={{

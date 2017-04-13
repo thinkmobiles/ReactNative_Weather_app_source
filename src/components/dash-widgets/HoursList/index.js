@@ -8,8 +8,6 @@ import {
     View
 } from 'react-native';
 
-import CustomButton from '../../Button';
-
 export default class TopContainer extends Component {
     constructor(props) {
         super(props)
@@ -19,19 +17,10 @@ export default class TopContainer extends Component {
     render() {
         return (
             <View style={{
-                flex           : 0.9,
+                flex           : 1,
                 flexDirection  : 'row',
-                backgroundColor: '#fff'
+                zIndex: 5
             }}>
-                <CustomButton
-                    iconColor="white"
-                    touchableStyle={{
-                        width          : 60,
-                        height         : 60,
-                        alignSelf      : 'flex-start',
-                        backgroundColor: '#333'
-                    }}
-                />
             </View>
         );
     }

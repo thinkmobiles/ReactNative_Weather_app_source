@@ -69,35 +69,33 @@ export default class LeftComponent extends Component {
         );
     }
 
-    _renderItem = (item, index) => {
-        return (
-            <TouchableOpacity
-                key={index}
-                style={{
-                    flex             : 1,
-                    justifyContent   : 'center',
-                    borderBottomWidth: 1,
-                    borderColor      : '#fff',
-                    backgroundColor  : this.state.checkedIndex === index ? '#e73535' : '#333333'
-                }}
-                onPress={() => this._onPress(item)}
-            >
-                <Text style={{
-                    flex    : 1,
-                    fontSize: 25,
-                    color   : '#fff',
-                    margin  : 12
-                }}>{item.key}</Text>
-            </TouchableOpacity>
-        )
-    }
+    _renderItem = (item, index) => (
+        <TouchableOpacity
+            key={index}
+            style={{
+                flex             : 1,
+                justifyContent   : 'center',
+                borderBottomWidth: 1,
+                borderColor      : '#fff',
+                backgroundColor  : this.state.checkedIndex === index ? '#e73535' : '#333333'
+            }}
+            onPress={() => this._onPress(item)}
+        >
+            <Text style={{
+                flex    : 1,
+                fontSize: 25,
+                color   : '#fff',
+                margin  : 12
+            }}>{item.key}</Text>
+        </TouchableOpacity>
+    );
 
     _onPress = (item) => {
         this.setState({
             checkedIndex: item.index
         });
         console.log(`${item.key} pressed`);
-    }
+    };
 
     componentDidMount() {
         this.getDatasource();

@@ -9,7 +9,6 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-import Top from './top';
 import CustomButton from '../../Button';
 
 export default class RightComponent extends Component {
@@ -25,8 +24,15 @@ export default class RightComponent extends Component {
                     justifyContent: 'space-between'
                 }}
             >
-                <Top/>
+                <Text style={{
+                    padding : 12,
+                    fontSize: 25,
+                    color   : '#fff'
+                }}>
+                    Month will be here
+                </Text>
                 <CustomButton
+                    onButtonClick={this.props.onMenuClick}
                     iconColor="#777"
                     touchableStyle={{
                         justifyContent : 'center',
