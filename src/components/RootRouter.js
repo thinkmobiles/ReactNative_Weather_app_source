@@ -12,8 +12,6 @@ import {
 } from 'react-native';
 import {Router, Route, Scene, Animations, TabBar} from 'react-native-router-flux';
 
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
 
 /*import Dashboard from './Dashboard';
  import Snaps from './Snaps';
@@ -22,13 +20,11 @@ import {connect} from 'react-redux';
  import Chats from './Chats';
  import Stories from './Stories';*/
 
-import * as actions from '../actions/actions';
 import Splash from './Splash';
 import Dashboard from './Dashboard';
 
-const RouterWithRedux = connect()(Router);
 
-class RootRouter extends Component {
+export default class RootRouter extends Component {
     constructor(props) {
         super(props);
     };
@@ -58,7 +54,6 @@ class RootRouter extends Component {
     render() {
         return (
             <View style={{flex: 1}}>
-
                 <Navigator
                     style={{flex: 1}}
                     initialRoute={{id: 'Splash', name: 'Splash'}}
@@ -69,10 +64,3 @@ class RootRouter extends Component {
     };
 
 }
-export default connect(state => ({
-        state: state.Weather
-    }),
-    (dispatch) => ({
-        actions: bindActionCreators(actions, dispatch)
-    })
-)(RootRouter);

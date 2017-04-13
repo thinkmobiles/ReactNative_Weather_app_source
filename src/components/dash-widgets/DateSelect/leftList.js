@@ -12,14 +12,17 @@ import {
 
 import moment from 'moment';
 
+import * as calendarActions from '../../../actions/calendarActions';
+
+import {connect} from 'react-redux';
+
+@connect(store => {
+    return {...store.calendar, ...store.weather};
+})
 export default class LeftComponent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            dataSource  : [],
-            checkedIndex: 0
-        };
     }
 
     getDatasource(date) {
@@ -39,15 +42,13 @@ export default class LeftComponent extends Component {
             }
 
             rangeArray.push({
-                index     : i,
-                key       : key,
+                index: i,
+                key: key,
                 momentDate: _momentDate
             });
         }
 
-        this.setState({
-            dataSource: rangeArray
-        });
+        this.props.dispatch(calendarActions.setDataSource(rangeArray));
     }
 
     render() {
@@ -60,40 +61,46 @@ export default class LeftComponent extends Component {
                 }}
                 scrollEventThrottle={200}
                 style={{
-                    flex    : 1,
+                    flex: 1,
                     maxWidth: 60
                 }}
             >
-                {this.state.dataSource.map(this._renderItem)}
+                {this.props.calendar.dataSource.map(this._renderItem)}
             </ScrollView>
         );
     }
 
-    _renderItem = (item, index) => (
-        <TouchableOpacity
-            key={index}
-            style={{
-                flex             : 1,
-                justifyContent   : 'center',
-                borderBottomWidth: 1,
-                borderColor      : '#fff',
-                backgroundColor  : this.state.checkedIndex === index ? '#e73535' : '#333333'
-            }}
-            onPress={() => this._onPress(item)}
-        >
-            <Text style={{
-                flex    : 1,
-                fontSize: 25,
-                color   : '#fff',
-                margin  : 12
-            }}>{item.key}</Text>
-        </TouchableOpacity>
-    );
+    _renderItem = (item, index) => {
+        const checkedIndex = this.props.calendar.checkedElement.index;
+        return (
+            <TouchableOpacity
+                key={index}
+                style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    borderBottomWidth: 1,
+                    borderColor: '#fff',
+                    backgroundColor: checkedIndex === index ? '#e73535' : '#333333'
+                }}
+                onPress={() => this._onPress(item)}
+            >
+                <Text style={{
+                    flex: 1,
+                    fontSize: 25,
+                    color: '#fff',
+                    margin: 12
+                }}>{item.key}</Text>
+            </TouchableOpacity>
+        )
+    };
 
     _onPress = (item) => {
-        this.setState({
-            checkedIndex: item.index
-        });
+        this.props.dispatch(calendarActions.setCheckedElement({
+            index: item.index,
+            key: item.key,
+            momentDate: item.momentDate
+        }));
+
         console.log(`${item.key} pressed`);
     };
 
