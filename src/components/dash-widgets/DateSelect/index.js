@@ -102,7 +102,7 @@ export default class TopContainer extends Component {
 
         this.pageY = pageY;
 
-        return locationX > 60;
+        return locationX > 60 && pageY > 60;
     }
 
     _onMoveEnd(e) {
@@ -130,7 +130,7 @@ export default class TopContainer extends Component {
                 onResponderMove={this._onMove.bind(this)}
                 onResponderRelease={this._onMoveEnd.bind(this)}
                 onMoveShouldSetResponderCapture={this._onMoveStart.bind(this)}
-                hitSlop={{top: 0, bottom: 50, left: 0, right: 0}}
+                hitSlop={{top: 0, bottom: 100, left: 0, right: 0}}
             >
                 <Top
                     height={shownPartHeight}
