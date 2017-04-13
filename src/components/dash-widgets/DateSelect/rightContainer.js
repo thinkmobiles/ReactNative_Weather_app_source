@@ -43,7 +43,8 @@ export default class RightComponent extends Component {
                     flex     : 1,
                     padding  : 12,
                     fontSize : 25,
-                    color    : '#fff'
+                    color    : '#fff',
+                    maxHeight: 60
                 }}>
                     {this.props.calendar.checkedElement.momentDate.format('MMMM')}
                 </Text>
@@ -60,7 +61,9 @@ export default class RightComponent extends Component {
                         width          : 60,
                         height         : 60,
                         alignSelf      : 'flex-end',
-                        backgroundColor: '#fff'
+                        backgroundColor: '#fff',
+                        marginTop      : -60,
+                        zIndex         : 11
                     }}
                 />
             </View>

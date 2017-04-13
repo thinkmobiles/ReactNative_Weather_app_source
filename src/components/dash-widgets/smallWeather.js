@@ -4,8 +4,11 @@ import {
     View,
     Image,
     Text,
-    StyleSheet
-} from 'react-native'
+    StyleSheet,
+    Dimensions
+} from 'react-native';
+
+const deviceScreen = Dimensions.get('window');
 
 @connect(store => {
     return {...store.weather}
@@ -23,21 +26,17 @@ export default class SmallWeather extends Component {
             <View style={styles.imageRow}>
                 <Image
                     source={{uri: imgUrl}}
-                    style={{width: 128, height: 128}}
+                    style={{width: deviceScreen.height * 0.2, height: deviceScreen.height * 0.2}}
                 />
-
-                <View style={styles.weatherDescRow}>
-                    <Text style={[styles.textElements, {fontSize: 14}]}>{day.condition.text}</Text>
-                </View>
+                <Text style={[styles.textElements, {fontSize: 14}]}>{day.condition.text}</Text>
             </View>
-
 
             <View style={styles.tempRow}>
                 <View style={styles.tempColumn}>
                     <Text style={styles.textElements}>min</Text>
                     <Text style={[styles.textElements, {fontSize: 22}]}>{day.mintemp_c}</Text>
                 </View>
-                <View style={styles.tempColumn}>
+                <View style={[styles.tempColumn, {borderBottomWidth: 2, borderTopWidth: 2, borderColor: 'white'}]}>
                     <Text style={styles.textElements}>avg</Text>
                     <Text style={[styles.textElements, {fontSize: 22}]}>{day.avgtemp_c}</Text>
                 </View>
@@ -56,13 +55,11 @@ const styles = StyleSheet.create({
     smallWeather  : {
         flex         : 1,
         flexDirection: "row",
-        borderWidth  : 1,
-        borderColor  : 'white',
-        height       : null,
-        width        : null,
+        marginTop    : -60,
+        alignItems   : "center"
     },
     imageRow      : {
-        flexGrow  : 2,
+        flex      : 3,
         alignItems: "center"
     },
     weatherDescRow: {
@@ -72,7 +69,8 @@ const styles = StyleSheet.create({
     tempRow       : {
         flexGrow     : 1,
         flexDirection: 'column',
-        alignSelf    : 'flex-end'
+        marginBottom : 60,
+        maxWidth     : 60
     },
     tempColumn    : {
         flexGrow  : 0.3,
