@@ -15,20 +15,37 @@ import CustomButton from '../../Button';
 
 import {connect} from 'react-redux';
 import * as dsActions from '../../../actions/dateSelectActions';
+import * as weatherActions from '../../../actions/weatherActions';
+import * as weatherApi from '../../../helpers/weatherAPI';
+
 
 @connect(store => {
-    return {...store.dateSelect};
-})
+        return {...store.dateSelect, ...store.weather}
+    }
+)
 
 export default class PictureTop extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            cityText: ''
+        };
+
+        this.onChangeText = this._onChangeText.bind(this);
         this.search = this._search.bind(this);
     }
 
-    _search(query) {
-        console.log(query)
+    _onChangeText(text) {
+        this.setState({
+            cityText: text
+        });
+    }
+
+    _search() {
+        weatherApi.initForecast(this.state.cityText, r => {
+            this.props.dispatch(weatherActions.setWeather(r))
+        });
     }
 
     render() {
@@ -54,6 +71,8 @@ export default class PictureTop extends Component {
                     placeholderTextColor='white'
                     underlineColorAndroid='white'
                     placeholder={'Type your city'}
+                    value={this.state.cityText}
+                    onChangeText={this.onChangeText}
                     onSubmitEditing={this.search}
                 />
                 <CustomButton

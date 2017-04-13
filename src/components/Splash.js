@@ -5,8 +5,7 @@ import React, {
 } from 'react';
 
 import * as weatherActions from '../actions/weatherActions';
-import WeatherApi from '../helpers/weatherAPI';
-const weatherApi = new WeatherApi();
+import * as weatherApi from '../helpers/weatherAPI';
 
 import {connect} from 'react-redux';
 
