@@ -43,8 +43,8 @@ export default class LeftComponent extends Component {
             }
 
             rangeArray.push({
-                index: i,
-                key: key,
+                index     : i,
+                key       : key,
                 momentDate: _momentDate.clone()
             });
         }
@@ -52,17 +52,20 @@ export default class LeftComponent extends Component {
         this.props.dispatch(calendarActions.setDataSource(rangeArray));
     }
 
+    setHoursRange(index) {
+        let _index = index || this.props.calendar.checkedElement.index;
+
+        this.props.dispatch(calendarActions.setHoursDataSource(this.props.weather.forecast.forecastday[_index].hour));
+    }
+
     render() {
         return (
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 automaticallyAdjustContentInsets={false}
-                onScroll={() => {
-                    console.log('onScroll!');
-                }}
                 scrollEventThrottle={200}
                 style={{
-                    flex: 1,
+                    flex    : 1,
                     maxWidth: 60
                 }}
             >
@@ -77,19 +80,19 @@ export default class LeftComponent extends Component {
             <TouchableOpacity
                 key={index}
                 style={{
-                    flex: 1,
-                    justifyContent: 'center',
+                    flex             : 1,
+                    justifyContent   : 'center',
                     borderBottomWidth: 1,
-                    borderColor: '#fff',
-                    backgroundColor: checkedIndex === index ? '#e73535' : '#333333'
+                    borderColor      : '#fff',
+                    backgroundColor  : checkedIndex === index ? '#e73535' : '#333333'
                 }}
                 onPress={() => this._onPress(item)}
             >
                 <Text style={{
-                    flex: 1,
+                    flex    : 1,
                     fontSize: 25,
-                    color: '#fff',
-                    margin: 12
+                    color   : '#fff',
+                    margin  : 12
                 }}>{item.key}</Text>
             </TouchableOpacity>
         )
@@ -97,13 +100,16 @@ export default class LeftComponent extends Component {
 
     _onPress = (item) => {
         this.props.dispatch(calendarActions.setCheckedElement({
-            index: item.index,
-            key: item.key,
+            index     : item.index,
+            key       : item.key,
             momentDate: item.momentDate
         }));
+
+        this.setHoursRange(item.index);
     };
 
     componentDidMount() {
         this.getDatasource();
+        this.setHoursRange();
     }
 }

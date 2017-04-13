@@ -89,6 +89,8 @@ export default class TopContainer extends Component {
 
         let distance = -(this.pageY - pageY);
 
+        this._createAnimatiom(this.state.translateY + distance).start();
+
         this.setState({
             translateY: this.state.translateY + distance
         });
@@ -123,7 +125,8 @@ export default class TopContainer extends Component {
             <Animated.View
                 style={{
                     height   : widgetHeight,
-                    transform: [{translateY: this.state.bounceValueStart}]
+                    // transform: [{translateY: this.state.bounceValueStart}]
+                    marginTop: this.state.bounceValueStart
                 }}
                 onResponderMove={this._onMove.bind(this)}
                 onResponderRelease={this._onMoveEnd.bind(this)}
