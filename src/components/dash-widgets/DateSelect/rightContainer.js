@@ -16,7 +16,11 @@ import CustomButton from '../../Button';
 import SmallWeather from '../smallWeather';
 
 @connect(store => {
-    return {...store.dateSelect, ...store.calendar};
+    return {
+        ...store.dateSelect,
+        ...store.calendar,
+        ...store.weather
+    };
 })
 
 export default class RightComponent extends Component {
@@ -25,6 +29,9 @@ export default class RightComponent extends Component {
     }
 
     render() {
+        let index = this.props.calendar.checkedElement.index;
+        let day = this.props.weather.forecast.forecastday[index].day;
+
         return (
             <View
                 style={{
@@ -40,7 +47,7 @@ export default class RightComponent extends Component {
                     {this.props.calendar.checkedElement.momentDate.format('MMMM')}
                 </Text>
 
-                <SmallWeather/>
+                <SmallWeather day={day}/>
 
                 <CustomButton
                     onButtonClick={() => {

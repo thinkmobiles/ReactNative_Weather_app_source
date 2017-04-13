@@ -32,7 +32,7 @@ export default class LeftComponent extends Component {
 
         let rangeArray = [];
 
-        for (let i = 0; i < 21; i++) {
+        for (let i = 0; i < 7; i++) {
             let key;
 
             _momentDate.add(1, 'd');
