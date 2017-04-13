@@ -23,10 +23,16 @@ import * as dsActions from '../../../actions/dateSelectActions';
 export default class PictureTop extends Component {
     constructor(props) {
         super(props);
+
+        this.search = this._search.bind(this);
+    }
+
+    _search(query) {
+        console.log(query)
     }
 
     render() {
-        const {height} = this.props
+        const {height} = this.props;
 
         return (
             <View
@@ -48,6 +54,7 @@ export default class PictureTop extends Component {
                     placeholderTextColor='white'
                     underlineColorAndroid='white'
                     placeholder={'Type your city'}
+                    onSubmitEditing={this.search}
                 />
                 <CustomButton
                     onButtonClick={() => {
