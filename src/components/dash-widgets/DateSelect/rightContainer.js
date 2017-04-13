@@ -40,9 +40,10 @@ export default class RightComponent extends Component {
                 }}
             >
                 <Text style={{
-                    padding : 12,
-                    fontSize: 25,
-                    color   : '#fff'
+                    flex     : 1,
+                    padding  : 12,
+                    fontSize : 25,
+                    color    : '#fff'
                 }}>
                     {this.props.calendar.checkedElement.momentDate.format('MMMM')}
                 </Text>

@@ -20,46 +20,49 @@ export default class SmallWeather extends Component {
         let imgUrl = 'https://' + day.condition.icon.substr(2);
 
         return <View style={styles.smallWeather}>
-
             <View style={styles.imageRow}>
                 <Image
                     source={{uri: imgUrl}}
-                    style={{width: 64, height: 64}}
+                    style={{width: 128, height: 128}}
                 />
+
+                <View style={styles.weatherDescRow}>
+                    <Text style={[styles.textElements, {fontSize: 14}]}>{day.condition.text}</Text>
+                </View>
             </View>
 
-            <View style={styles.weatherDescRow}>
-                <Text>{day.condition.text}</Text>
-            </View>
 
             <View style={styles.tempRow}>
                 <View style={styles.tempColumn}>
-                    <Text>min</Text>
-                    <Text>{day.mintemp_c}</Text>
+                    <Text style={styles.textElements}>min</Text>
+                    <Text style={[styles.textElements, {fontSize: 22}]}>{day.mintemp_c}</Text>
                 </View>
                 <View style={styles.tempColumn}>
-                    <Text>avg</Text>
-                    <Text>{day.avgtemp_c}</Text>
+                    <Text style={styles.textElements}>avg</Text>
+                    <Text style={[styles.textElements, {fontSize: 22}]}>{day.avgtemp_c}</Text>
                 </View>
                 <View style={styles.tempColumn}>
-                    <Text>max</Text>
-                    <Text>{day.maxtemp_c}</Text>
+                    <Text style={styles.textElements}>max</Text>
+                    <Text style={[styles.textElements, {fontSize: 22}]}>{day.maxtemp_c}</Text>
                 </View>
             </View>
         </View>
 
     }
 
-
 }
 
 const styles = StyleSheet.create({
     smallWeather  : {
         flex         : 1,
-        flexDirection: "column"
+        flexDirection: "row",
+        borderWidth  : 1,
+        borderColor  : 'white',
+        height       : null,
+        width        : null,
     },
     imageRow      : {
-        flexGrow  : 0.3,
+        flexGrow  : 2,
         alignItems: "center"
     },
     weatherDescRow: {
@@ -68,10 +71,14 @@ const styles = StyleSheet.create({
     },
     tempRow       : {
         flexGrow     : 1,
-        flexDirection: 'row'
+        flexDirection: 'column',
+        alignSelf    : 'flex-end'
     },
     tempColumn    : {
         flexGrow  : 0.3,
         alignItems: "center"
+    },
+    textElements  : {
+        color: 'white'
     }
 });
