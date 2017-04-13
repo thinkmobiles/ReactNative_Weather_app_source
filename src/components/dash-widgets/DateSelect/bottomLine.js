@@ -33,9 +33,9 @@ export default class PictureTop extends Component {
         return (
             <View
                 style={{
-                    flex: 1,
+                    flex         : 1,
                     flexDirection: 'row',
-                    maxHeight: size
+                    maxHeight    : size
                 }}
             >
                 <CustomButton
@@ -44,11 +44,11 @@ export default class PictureTop extends Component {
                     }}
                     iconColor="white"
                     touchableStyle={{
-                        width: size,
-                        height: size,
-                        alignSelf: 'flex-start',
+                        width          : size,
+                        height         : size,
+                        alignSelf      : 'flex-start',
                         backgroundColor: '#333333',
-                        zIndex: 11
+                        zIndex         : 11
                     }}
                 />
                 <View
