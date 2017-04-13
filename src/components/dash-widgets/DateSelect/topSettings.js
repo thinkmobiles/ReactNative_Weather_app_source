@@ -8,7 +8,9 @@ import {
     View,
     TouchableOpacity,
     Text,
-    TextInput
+    Alert,
+    TextInput,
+    ActivityIndicator
 } from 'react-native';
 
 import CustomButton from '../../Button';
@@ -29,7 +31,8 @@ export default class PictureTop extends Component {
         super(props);
 
         this.state = {
-            cityText: ''
+            cityText : '',
+            animating: false
         };
 
         this.onChangeText = this._onChangeText.bind(this);
@@ -43,8 +46,12 @@ export default class PictureTop extends Component {
     }
 
     _search() {
+        this.setState({animating: true});
         weatherApi.initForecast(this.state.cityText, r => {
-            this.props.dispatch(weatherActions.setWeather(r))
+            this.setState({animating: false});
+            if (!r.error) {
+                this.props.dispatch(weatherActions.setWeather(r));
+            }
         });
     }
 
@@ -60,6 +67,11 @@ export default class PictureTop extends Component {
                     backgroundColor: '#333333',
                 }}
             >
+                <ActivityIndicator
+                    color={'#ff5843'}
+                    style={{opacity: this.state.animating ? 1.0 : 0.0}}
+                    size={'large'}
+                />
                 <TextInput
                     style={{
                         flex    : 1,
@@ -77,9 +89,10 @@ export default class PictureTop extends Component {
                 />
                 <CustomButton
                     onButtonClick={() => {
+                        this.search();
                         this.props.dispatch(dsActions.setVisibleState(true));
                     }}
-                    iconColor="white"
+                    iconCtrueolor="white"
                     iconName="search"
                     touchableStyle={{
                         width          : height,
