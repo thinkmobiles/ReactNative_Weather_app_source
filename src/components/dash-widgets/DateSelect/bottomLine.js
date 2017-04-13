@@ -52,14 +52,17 @@ export default class PictureTop extends Component {
                 <View
                     style={{
                         flex           : 1,
-                        backgroundColor: 'transparent'
+                        backgroundColor: 'white',
+                        opacity        : 0.5
                     }}
                 >
                     <Text
                         style={{
                             flex    : 2,
                             margin  : 7,
-                            fontSize: 18
+                            fontSize: 18,
+                            opacity : 1,
+                            color   : '#000'
                         }}
                     >
                         {this.props.weather.location.name}
@@ -68,7 +71,9 @@ export default class PictureTop extends Component {
                         style={{
                             flex    : 1,
                             margin  : 2,
-                            fontSize: 12
+                            fontSize: 12,
+                            opacity : 1,
+                            color   : '#000'
                         }}
                     >
                         {this.props.calendar.checkedElement.momentDate.format('dddd DD.MM.YYYY')}
