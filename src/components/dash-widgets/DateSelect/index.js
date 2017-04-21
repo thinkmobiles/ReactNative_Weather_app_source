@@ -10,7 +10,6 @@ import Bottom from './bottomLine';
 import Top from './topSettings';
 
 import {
-    Text,
     View,
     Dimensions,
     Animated,
@@ -30,7 +29,7 @@ const hideTranslate = -(widgetHeight - shownPartHeight);
 
 export default class TopContainer extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             settingsVisible : false,
@@ -123,7 +122,6 @@ export default class TopContainer extends Component {
             <Animated.View
                 style={{
                     height   : widgetHeight,
-                    // transform: [{translateY: this.state.bounceValueStart}]
                     marginTop: this.state.bounceValueStart,
                     zIndex   : 10
                 }}
