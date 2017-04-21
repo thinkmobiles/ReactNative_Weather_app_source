@@ -2,7 +2,7 @@
 
 import React from 'react';
 import moment from 'moment';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import {connect} from 'react-redux';
 
 @connect((store) => {
@@ -11,35 +11,32 @@ import {connect} from 'react-redux';
 
 export default class extends React.Component {
     render() {
+        console.dir(this.props.collection);
+
         return <View style={{
+            flex           : 1,
+            flexDirection  : 'column',
             width          : '100%',
             height         : '100%',
             backgroundColor: 'white'
         }}>
-            <ScrollView
-                showsVerticalScrollIndicator={false}
-                automaticallyAdjustContentInsets={false}
-                scrollEventThrottle={200}
-                style={{
-                    flex         : 1,
-                    flexDirection: 'column'
-                }}
-            >
-                <View>
-                    {
-                        this.props.collection.map((rowElement, index) => <View
-                            key={'element-' + index}
-                            style={{
-                                flexDirection: 'row'
-                            }}
-                        >
-                            <Text>{moment(rowElement.date).format('dddd') + '   '}</Text>
-                            <Text>{rowElement.day.maxtemp_c + '   '}</Text>
-                            <Text>{rowElement.day.mintemp_c}</Text>
-                        </View>)
-                    }
-                </View>
-            </ScrollView>
+            {
+                this.props.collection.map((rowElement, index) => {
+                    let imgUrl = 'https://' + rowElement.day.condition.icon.substr(2);
+
+                    return <View
+                        key={'element-' + index}
+                        style={{
+                            flexDirection: 'row'
+                        }}
+                    >
+                        <Text>{moment(rowElement.date).format('dddd') + '   '}</Text>
+                        <Image source={{uri: imgUrl}} style={{width: 64, height: 64}}/>
+                        <Text>{rowElement.day.maxtemp_c + '   '}</Text>
+                        <Text>{rowElement.day.mintemp_c}</Text>
+                    </View>
+                })
+            }
         </View>
     }
 }
