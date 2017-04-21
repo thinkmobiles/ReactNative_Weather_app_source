@@ -8,7 +8,8 @@ import {
     Button,
     Text,
     FlatList,
-    TouchableOpacity
+    TouchableOpacity,
+    ActivityIndicator
 } from 'react-native';
 
 import {setWeather} from '../actions/weatherActions';
@@ -21,8 +22,12 @@ export default class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            text  : '',
-            cities: []
+            text     : '',
+            cities   : [],
+            indicator: {
+                animating: false,
+                color    : '#ff5843'
+            }
         };
 
         this.onButtonPress = this._onButtonPress.bind(this);
@@ -39,7 +44,13 @@ export default class Search extends Component {
         this.setWeather(item.name);
     }
 
-    setWeather(query){
+    setWeather(query) {
+        this.setState({
+            indicator: {
+                animating: true,
+                color    : '#0054ff'
+            }
+        });
         initForecast(query, r => {
             this.props.dispatch(setWeather(r));
             this.props.navigator.replace({id: "index"});
@@ -48,13 +59,31 @@ export default class Search extends Component {
 
     _onChangeText(text) {
         const self = this;
+        text = text.trim();
 
-        this.setState({text: text});
+
+        if (text.length < 3) {
+            this.setState({
+                text: text,
+            });
+            return;
+        }
+
+        this.setState({
+            text     : text,
+            indicator: {
+                animating: true,
+                color    : '#ff5843'
+            }
+        });
 
         getCities(text, r => {
             let cities = r && !r.error ? r : [];
             self.setState({
-                cities: cities
+                cities   : cities,
+                indicator: {
+                    animating: false
+                }
             });
         });
     }
@@ -68,6 +97,11 @@ export default class Search extends Component {
     render() {
         return <View style={{flex: 1, flexDirection: 'column'}}>
             <View style={{flex: 0.1, flexDirection: 'row'}}>
+                <ActivityIndicator
+                    color={this.state.indicator.color}
+                    style={{opacity: this.state.indicator.animating ? 1.0 : 0.0}}
+                    size={'large'}
+                />
                 <TextInput
                     style={{flex: 0.7}}
                     value={this.state.text}
