@@ -6,21 +6,11 @@ import {View, Text, ScrollView} from 'react-native';
 import {connect} from 'react-redux';
 
 @connect((store) => {
-    return {collection: store.weather.weather.forecast};
+    return {collection: store.weather.weather.forecast.forecastday};
 })
 
 export default class extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            collection: props.collection.forecastday
-        }
-    }
-
     render() {
-        console.dir(this.state.collection);
-
         return <View style={{
             width          : '100%',
             height         : '100%',
@@ -37,7 +27,7 @@ export default class extends React.Component {
             >
                 <View>
                     {
-                        this.state.collection.map((rowElement, index) => <View
+                        this.props.collection.map((rowElement, index) => <View
                             key={'element-' + index}
                             style={{
                                 flexDirection: 'row'
