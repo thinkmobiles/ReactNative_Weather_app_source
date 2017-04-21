@@ -59,8 +59,6 @@ export default class Search extends Component {
 
     _onChangeText(text) {
         const self = this;
-        text = text.trim();
-
 
         if (text.length < 3) {
             this.setState({
