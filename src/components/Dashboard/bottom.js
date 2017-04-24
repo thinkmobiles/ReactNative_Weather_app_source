@@ -11,8 +11,6 @@ import {connect} from 'react-redux';
 
 export default class extends React.Component {
     render() {
-        console.dir(this.props.collection);
-
         return <View style={{
             flex           : 1,
             flexDirection  : 'column',

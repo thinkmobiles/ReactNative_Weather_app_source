@@ -1,14 +1,29 @@
 'use strict';
 
 import React from 'react';
-import {View, Text} from 'react-native';
 import {connect} from 'react-redux';
+
+import {
+    View,
+    Text
+} from 'react-native';
+
 
 @connect((store) => {
     return {...store.weather.weather};
 })
 
 export default class extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.onLocationPress = this._onLocationPress.bind(this);
+    }
+
+    _onLocationPress() {
+        this.props.navigator.replace({id: 'search'});
+    }
+
     render() {
         let currentWeather = this.props.current || {};
         let location = this.props.location || {};
@@ -21,8 +36,8 @@ export default class extends React.Component {
             <Text style={{
                 marginTop   : 40,
                 marginBottom: 20,
-                textAlign   : 'center'
-            }}>
+                textAlign   : 'center',
+            }} onPress={this.onLocationPress}>
                 {location.country + ', ' + location.name}
             </Text>
             <Text style={{
