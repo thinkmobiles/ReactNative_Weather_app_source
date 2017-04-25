@@ -59,12 +59,12 @@ export default class extends React.Component {
                             <View style={styles.tempBlock}>
                                 <View style={styles.tempBlockElement}>
                                     <Text style={[styles.tempBlockElementText, styles.bottomText]}>
-                                        {Math.round(parseInt(rowElement.day.maxtemp_c, 10))}
+                                        {Math.round(parseInt(rowElement.day.maxtemp_c, 10)).toString()}
                                     </Text>
                                 </View>
                                 <View style={styles.tempBlockElement}>
                                     <Text style={[styles.tempBlockElementText, styles.bottomText]}>
-                                        {Math.round(parseInt(rowElement.day.mintemp_c, 10))}
+                                        {Math.round(parseInt(rowElement.day.mintemp_c, 10)).toString()}
                                     </Text>
                                 </View>
                             </View>

@@ -23,7 +23,7 @@ export default class extends React.Component {
     }
 
     _onLocationPress() {
-        this.props.navigator.replace({id: 'search'});
+        this.props.navigator.replace({id: 'Search'});
     }
 
     render() {
@@ -53,7 +53,7 @@ export default class extends React.Component {
                     <View style={styles.tempBlock}>
                         <View>
                             <Text style={[styles.headerText, styles.tempText]}>
-                                {currentWeather.temp_c}
+                                {currentWeather.temp_c.toString()}
                             </Text>
                         </View>
                         <View>

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {connect} from 'react-redux';
-import {View, Text, Image} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
 
 import {setWeather} from '../actions/weatherActions';
 import {initForecast} from '../helpers/weatherAPI';
@@ -25,19 +25,7 @@ export default class Splash extends React.Component {
     }
 
     render() {
-        return (
-            <View
-                style={{
-                    flex           : 1,
-                    flexDirection  : 'row',
-                    alignItems     : 'center',
-                    justifyContent : 'center',
-                    backgroundColor: '#fff73f'
-                }}
-            >
-                <Text>SPLASH</Text>
-            </View>
-        );
+        return <Image source={require('../images/Splash.png')} style={styles.container} />;
     }
 
     componentDidMount() {
@@ -52,3 +40,13 @@ export default class Splash extends React.Component {
 
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex           : 1,
+        width          : undefined,
+        height         : undefined,
+        backgroundColor: 'transparent'
+    }
+});
+

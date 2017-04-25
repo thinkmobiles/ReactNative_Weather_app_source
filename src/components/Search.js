@@ -46,7 +46,7 @@ export default class Search extends Component {
     }
 
     _onBackPress() {
-        this.props.navigator.replace({id: 'index'});
+        this.props.navigator.replace({id: 'Dashboard'});
         return true;
     }
 
@@ -92,7 +92,7 @@ export default class Search extends Component {
 
         initForecast(query, r => {
             this.props.dispatch(setWeather(r));
-            this.props.navigator.replace({id: "index"});
+            this.props.navigator.replace({id: "Dashboard"});
         });
     }
 
