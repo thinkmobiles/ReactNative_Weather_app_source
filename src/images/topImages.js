@@ -26,18 +26,18 @@ const images = {
     heavyRain  : require('./topImages/HeavyRain.png')
 };
 
-const gradientMap = {
+const gradColorsMap = {
     mist       : ['#2990d2', '#69c2ee'],
-    sunny      : ['#f9d676','333'],
-    snow       : [1066, 1114, 1213, 1216, 1219, 1258, 1261],
-    lightSnow  : [1204, 1207, 1210, 1249, 1252, 1255],
-    heavySnow  : [1069, 1117, 1222, 1225, 1237, 1264],
-    thunderSnow: [1279, 1282],
-    overcast   : [1009, 1072],
-    cloud      : [1003, 1006, 1063],
-    thunder    : [1087, 1273, 1276],
-    rain       : [1150, 1153, 1168, 1180, 1183, 1198, 1240],
-    heavyRain  : [1171, 1186, 1189, 1192, 1195, 1201, 1243, 1246]
+    sunny      : ['#f9d676', '#ffa67e'],
+    snow       : ['#2990d2', '#69c2ee'],
+    lightSnow  : ['#6e8290', '#a6cadf'],
+    heavySnow  : ['#2990d2', '#69c2ee'],
+    thunderSnow: ['#5f5f5f', '#b6bbbe'],
+    overcast   : ['#6e8290', '#a6cadf'],
+    cloud      : ['#f9d676', '#ffa67e'],
+    thunder    : ['#5f5f5f', '#b6bbbe'],
+    rain       : ['#6e8290', '#a6cadf'],
+    heavyRain  : ['#6e8290', '#a6cadf']
 }
 
 export const mapCode = (code) => {
@@ -56,4 +56,9 @@ export const getImage = (code) => {
     return images[key];
 }
 
+export const getGradColors = (code) => {
+    let key = mapCode(code);
+
+    return gradColorsMap[key];
+}
 export default images;
