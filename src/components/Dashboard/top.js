@@ -34,7 +34,7 @@ export default class extends React.Component {
             <View style={styles.topSection}>
                 <View style={styles.innerContainer}>
                     <View onPress={this.onLocationPress} style={styles.locationBlock}>
-                        <View style={[styles.locationBlockElement, {maxWidth: 19, marginRight: 5}]}>
+                        <View>
                             <Icon
                                 name="location"
                                 height="24"
@@ -44,11 +44,9 @@ export default class extends React.Component {
                                 strokeWidth="1"
                             />
                         </View>
-                        <View style={styles.locationBlockElement}>
-                            <Text style={[styles.headerText, styles.locationText]} onPress={this.onLocationPress}>
-                                {`${location.name}, ${location.country}`}
-                            </Text>
-                        </View>
+                        <Text style={[styles.headerText, styles.locationText]} onPress={this.onLocationPress}>
+                            {`${location.name}, ${location.country}`}
+                        </Text>
                     </View>
                     <View style={styles.tempBlock}>
                         <View>
@@ -70,22 +68,22 @@ export default class extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    topSection          : {
+    topSection       : {
         flex          : 0.9,
         flexDirection : 'row',
         alignItems    : 'flex-start',
         justifyContent: 'center'
     },
-    innerContainer      : {
+    innerContainer   : {
         flex     : 1,
         marginTop: 35
     },
-    headerText          : {
+    headerText       : {
         fontFamily: 'Muli-SemiBold',
         textAlign : 'center',
         color     : '#fff'
     },
-    locationBlock       : {
+    locationBlock    : {
         maxWidth      : deviseScreen.width,
         paddingLeft   : 20,
         paddingRight  : 20,
@@ -93,29 +91,25 @@ const styles = StyleSheet.create({
         alignItems    : 'center',
         justifyContent: 'center'
     },
-    locationBlockElement: {
-        flex          : 1,
-        alignItems    : 'center',
-        justifyContent: 'center'
-    },
-    locationText        : {
+    locationText     : {
         fontFamily: 'Muli-Regular',
         fontSize  : 24
     },
-    tempBlock           : {
+    tempBlock        : {
         flexDirection : 'row',
         alignItems    : 'flex-start',
         justifyContent: 'center'
     },
-    tempText            : {
+    tempText         : {
         fontSize  : 120,
         lineHeight: 110
     },
-    tempTextDimension   : {
+    tempTextDimension: {
+        marginLeft: -7,
         fontSize  : 70,
-        lineHeight: 100
+        lineHeight: 75
     },
-    conditionText       : {
+    conditionText    : {
         paddingTop: 10,
         fontSize  : 25
     }

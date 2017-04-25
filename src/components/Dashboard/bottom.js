@@ -53,8 +53,14 @@ export default class extends React.Component {
                                 </Text>
                             </View>
                             <View style={styles.iconBlock}>
-                                <Icon name={mapCodeToIcon(rowElement.day.condition.code)} height="30" width="30"
-                                      fill="#C4C4C3" stroke="#979797" strokeWidth="1"/>
+                                <Icon
+                                    name={mapCodeToIcon(rowElement.day.condition.code)}
+                                    origin="2,2"
+                                    height="30"
+                                    width="30"
+                                    fill="#C4C4C3"
+                                    stroke="none"
+                                />
                             </View>
                             <View style={styles.tempBlock}>
                                 <View style={styles.tempBlockElement}>
@@ -78,13 +84,15 @@ export default class extends React.Component {
 
 const styles = StyleSheet.create({
     container           : {
-        flex         : 1.3,
-        flexDirection: 'column'
+        flex         : 0.7,
+        flexDirection: 'column',
+        paddingLeft  : 35,
+        paddingRight : 25,
+        paddingTop   : 5,
+        paddingBottom: 5
     },
     row                 : {
         flex         : 1,
-        paddingLeft  : 35,
-        paddingRight : 25,
         alignItems   : 'center',
         flexDirection: 'row'
     },
