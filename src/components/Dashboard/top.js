@@ -8,6 +8,7 @@ import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import Icon from '../Icons';
 
 const deviseScreen = Dimensions.get('window');
+const locationDefFont = 24;
 
 @connect((store) => {
     return {
@@ -26,9 +27,29 @@ export default class extends React.Component {
         this.props.navigator.replace({id: 'Search'});
     }
 
+    getRealFont(text) {
+        const length = text.length;
+
+        let fontSize = locationDefFont;
+        let width = () => {
+            return length / 2 * fontSize * 0.7;
+        };
+
+        while (width() > deviseScreen.width - 40) {
+            fontSize -= 2;
+        }
+
+        return fontSize;
+    }
+
     render() {
         let currentWeather = this.props.current || {};
         let location = this.props.location || {};
+
+        let locationText = `${location.name}, ${location.country}`;
+        let locationFontStyle = {
+            fontSize: this.getRealFont(locationText)
+        };
 
         return (
             <View style={styles.topSection}>
@@ -44,8 +65,9 @@ export default class extends React.Component {
                                 strokeWidth="1"
                             />
                         </View>
-                        <Text style={[styles.headerText, styles.locationText]} onPress={this.onLocationPress}>
-                            {`${location.name}, ${location.country}`}
+                        <Text style={[styles.headerText, styles.locationText, locationFontStyle]}
+                              onPress={this.onLocationPress}>
+                            {locationText}
                         </Text>
                     </View>
                     <View style={styles.tempBlock}>
@@ -92,8 +114,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     locationText     : {
-        fontFamily: 'Muli-Regular',
-        fontSize  : 24
+        fontFamily: 'Muli-Regular'
     },
     tempBlock        : {
         flexDirection : 'row',
