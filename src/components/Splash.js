@@ -35,11 +35,6 @@ export default class Splash extends React.Component {
                     backgroundColor: '#fff73f'
                 }}
             >
-                <Image
-                    source={require("../../src/images/logo.png")}
-                    style={{width: 250, height: 250, marginBottom: 400}}
-                    resizeMode="contain"
-                />
                 <Text>SPLASH</Text>
             </View>
         );
@@ -50,4 +45,4 @@ export default class Splash extends React.Component {
             this.props.dispatch(setWeather(response));
         });
     }
-}	
+}
