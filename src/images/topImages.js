@@ -28,13 +28,13 @@ const images = {
 
 const gradColorsMap = {
     mist       : ['#2990d2', '#69c2ee'],
-    sunny      : ['#f9d676', '#ffa67e'],
+    sunny      : ['#ffa67e', '#f9d676'],
     snow       : ['#2990d2', '#69c2ee'],
     lightSnow  : ['#6e8290', '#a6cadf'],
     heavySnow  : ['#2990d2', '#69c2ee'],
     thunderSnow: ['#5f5f5f', '#b6bbbe'],
     overcast   : ['#6e8290', '#a6cadf'],
-    cloud      : ['#f9d676', '#ffa67e'],
+    cloud      : ['#ffa67e', '#f9d676'],
     thunder    : ['#5f5f5f', '#b6bbbe'],
     rain       : ['#6e8290', '#a6cadf'],
     heavyRain  : ['#6e8290', '#a6cadf']

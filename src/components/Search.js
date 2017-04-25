@@ -8,7 +8,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import {
     View,
     TextInput,
-    Button,
     Text,
     FlatList,
     TouchableOpacity,
@@ -25,28 +24,23 @@ import {getGradColors} from '../images/topImages';
 
 import Icon from './Icons';
 
-const COLOR_IND_LONG = '#0054ff';
-const COLOR_IND_SHORT = '#ff5843';
-const COLOR_TOP_SEARCH = '#1cd6ff';
-
 @connect((store) => {
     return {...store.weather.weather};
 })
 export default class Search extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            text     : '',
-            cities   : [],
-            indicator: {
-                animating: false,
-                color    : COLOR_IND_SHORT
-            },
-            infoMsg  : ''
-        };
 
         let code = this.props.current.condition.code;
         this.gradColors = getGradColors(code);
+
+        this.state = {
+            text      : '',
+            cities    : [],
+            loaderShow: false,
+            infoMsg   : ''
+        };
+
 
         this.onChangeText = this._onChangeText.bind(this);
         this.renderItem = this._renderItem.bind(this);
@@ -86,20 +80,16 @@ export default class Search extends Component {
         }
 
         this.setState({
-            indicator: {
-                animating: true,
-                color    : COLOR_IND_SHORT
-            }
+            loaderShow: true,
+            infoMsg   : ''
         });
 
         getCities(text, r => {
             let cities = r && !r.error ? r : [];
             this.setState({
-                cities   : cities,
-                indicator: {
-                    animating: false
-                },
-                infoMsg  : 'no cities found'
+                cities    : cities,
+                loaderShow: false,
+                infoMsg   : 'no cities found'
             });
         });
     }
@@ -107,18 +97,12 @@ export default class Search extends Component {
     _renderItem({item}) {
         return (
             <TouchableHighlight
-                underlayColor={COLOR_TOP_SEARCH}
+                underlayColor={this.gradColors[1]}
                 onPress={() => this.onItemPress(item)}
-                style={{
-                    flex         : 1,
-                    paddingLeft  : 12,
-                    paddingRight : 8,
-                    paddingTop   : 6,
-                    paddingBottom: 6
-                }}
+                style={styles.listItem}
             >
                 <Text
-                    style={{fontSize: 16}}
+                    style={styles.listItemText}
                 >
                     {item.name}
                 </Text>
@@ -128,10 +112,7 @@ export default class Search extends Component {
 
     setWeather(query) {
         this.setState({
-            indicator: {
-                animating: true,
-                color    : COLOR_IND_LONG
-            }
+            loaderShow: true
         });
 
         initForecast(query, r => {
@@ -148,7 +129,7 @@ export default class Search extends Component {
 
         const bottomComponent = cities.length ? (
             <FlatList
-                style={{flex: 1}}
+                style={styles.list}
                 data={cities}
                 renderItem={this.renderItem}
                 keyboardShouldPersistTaps="always"
@@ -164,21 +145,14 @@ export default class Search extends Component {
 
         return (
             <View
-                style={{
-                    flex         : 1,
-                    flexDirection: 'column'
-                }}
+                style={styles.mainView}
             >
 
                 <LinearGradient
                     colors={this.gradColors}
-                    start={{x: 1, y: 0}}
-                    end={{x: 0, y: 0}}
-                    style={{
-                        flex         : 1,
-                        flexDirection: 'row',
-                        maxHeight    : 42
-                    }}>
+                    start={{x: 0, y: 0}}
+                    end={{x: 1, y: 0}}
+                    style={styles.topBar}>
                     <TouchableOpacity
                         onPress={this.onBackPress}
                     >
@@ -192,22 +166,19 @@ export default class Search extends Component {
                     </TouchableOpacity>
                     <TextInput
                         ref="textInput"
-                        style={{
-                            flex : 1,
-                            color: '#fff'
-                        }}
+                        style={styles.textInput}
                         value={this.state.text}
                         onChangeText={this.onChangeText}
                         underlineColorAndroid={"#fff"}
                         placeholder={"Enter your location"}
                         placeholderTextColor={'#fff'}
                     />
+                    {this.state.loaderShow && <ActivityIndicator
+                        color={this.gradColors[0]}
+                        size={'large'}
+                    />}
                 </LinearGradient>
 
-                {this.state.indicator.animating && <ActivityIndicator
-                    color={this.state.indicator.color}
-                    size={'large'}
-                />}
                 {bottomComponent}
             </View>)
     }
@@ -219,19 +190,39 @@ export default class Search extends Component {
 
 
 const styles = StyleSheet.create({
-    infoMsg       : {
+    infoMsg     : {
         flex          : 1,
         flexDirection : 'row',
         justifyContent: 'center',
         paddingTop    : 24
     },
-    infoMsgText   : {
+    infoMsgText : {
         fontSize: 18
     },
-    linearGradient: {
+    list        : {flex: 1},
+    listItem    : {
         flex        : 1,
-        paddingLeft : 15,
-        paddingRight: 15,
-        borderRadius: 5
+        paddingLeft : 22,
+        paddingRight: 22,
+        paddingTop  : 26
+    },
+    listItemText: {
+        fontSize  : 20,
+        color     : '#8f8f8f',
+        fontFamily: 'Muli-Regular'
+    },
+    mainView    : {
+        flex         : 1,
+        flexDirection: 'column'
+    },
+    textInput   : {
+        flex      : 1,
+        color     : '#fff',
+        fontFamily: 'Muli-Bold'
+    },
+    topBar      : {
+        flex         : 1,
+        flexDirection: 'row',
+        maxHeight    : 42
     }
 });
