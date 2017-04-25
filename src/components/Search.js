@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 
+import {debounce} from 'lodash';
 import {connect} from 'react-redux';
+
+import LinearGradient from 'react-native-linear-gradient';
 
 import {
     View,
@@ -9,8 +12,10 @@ import {
     Text,
     FlatList,
     TouchableOpacity,
+    TouchableHighlight,
     ActivityIndicator,
-    BackAndroid
+    BackAndroid,
+    StyleSheet
 } from 'react-native';
 
 import {setWeather} from '../actions/weatherActions';
@@ -18,8 +23,10 @@ import {getCities, initForecast} from '../helpers/weatherAPI';
 
 const COLOR_IND_LONG = '#0054ff';
 const COLOR_IND_SHORT = '#ff5843';
-const COLOR_TOP_SEARCH = "#1cd6ff";
+const COLOR_TOP_SEARCH = '#1cd6ff';
+const colorsDict = {
 
+}
 @connect((store) => {
     return {...store.weather.weather};
 })
@@ -33,7 +40,7 @@ export default class Search extends Component {
                 animating: false,
                 color    : COLOR_IND_SHORT
             },
-            infoMsg  : ""
+            infoMsg  : ''
         };
 
         this.onChangeText = this._onChangeText.bind(this);
@@ -42,7 +49,11 @@ export default class Search extends Component {
         this.onBackPress = this._onBackPress.bind(this);
         this.search = this._search.bind(this);
 
-        BackAndroid.addEventListener("hardwareBackPress", this.onBackPress);
+        this.debounceSearch = debounce((text) => {
+            this._search(text);
+        }, 500);
+
+        BackAndroid.addEventListener('hardwareBackPress', this.onBackPress);
     }
 
     _onBackPress() {
@@ -50,11 +61,21 @@ export default class Search extends Component {
         return true;
     }
 
-    _search() {
-        const msg = "No cities found";
-        if (this.state.text.length < 3) {
+    _onChangeText(text) {
+        this.setState({
+            text: text
+        });
+        this.debounceSearch(text);
+    }
+
+    _onItemPress(item) {
+        this.setWeather(item.name);
+    }
+
+    _search(text) {
+        if (text.length < 3) {
             this.setState({
-                infoMsg: "type more than 3 symbols"
+                infoMsg: 'type 3 or more symbols'
             });
             return;
         }
@@ -66,45 +87,22 @@ export default class Search extends Component {
             }
         });
 
-        getCities(this.state.text, r => {
+        getCities(text, r => {
             let cities = r && !r.error ? r : [];
             this.setState({
                 cities   : cities,
                 indicator: {
                     animating: false
                 },
-                infoMsg  : msg
+                infoMsg  : 'no cities found'
             });
-        });
-    }
-
-    _onItemPress(item) {
-        this.setWeather(item.name);
-    }
-
-    setWeather(query) {
-        this.setState({
-            indicator: {
-                animating: true,
-                color    : COLOR_IND_LONG
-            }
-        });
-
-        initForecast(query, r => {
-            this.props.dispatch(setWeather(r));
-            this.props.navigator.replace({id: "Dashboard"});
-        });
-    }
-
-    _onChangeText(text) {
-        this.setState({
-            text: text
         });
     }
 
     _renderItem({item}) {
         return (
-            <TouchableOpacity
+            <TouchableHighlight
+                underlayColor={COLOR_TOP_SEARCH}
                 onPress={() => this.onItemPress(item)}
                 style={{
                     flex         : 1,
@@ -119,8 +117,22 @@ export default class Search extends Component {
                 >
                     {item.name}
                 </Text>
-            </TouchableOpacity>
+            </TouchableHighlight>
         )
+    }
+
+    setWeather(query) {
+        this.setState({
+            indicator: {
+                animating: true,
+                color    : COLOR_IND_LONG
+            }
+        });
+
+        initForecast(query, r => {
+            this.props.dispatch(setWeather(r));
+            this.props.navigator.replace({id: 'Dashboard'});
+        });
     }
 
     render() {
@@ -134,45 +146,53 @@ export default class Search extends Component {
                 style={{flex: 1}}
                 data={cities}
                 renderItem={this.renderItem}
+                keyboardShouldPersistTaps="always"
             />) : (
-            <View>
-                <Text>
+            <View style={styles.infoMsg}
+            >
+                <Text
+                    style={styles.infoMsgText}
+                >
                     {this.state.infoMsg}
                 </Text>
             </View>);
 
         return (
-            <View style={{flex: 1, flexDirection: 'column'}}>
-                <View style={{
-                    flex           : 1,
-                    flexDirection  : 'row',
-                    maxHeight      : 42,
-                    backgroundColor: COLOR_TOP_SEARCH
-                }}>
-                    <Button
-                        title="Back"
-                        onPress={this.onBackPress}
-                        color={COLOR_TOP_SEARCH}
-                    />
+            <View
+                style={{
+                    flex         : 1,
+                    flexDirection: 'column'
+                }}
+            >
 
+                <LinearGradient
+                    colors={['red','blue']}
+                    start={{x: 0, y: 0}}
+                    end={{x: 1, y: 0}}
+                    style={{
+                        flex         : 1,
+                        flexDirection: 'row',
+                        maxHeight    : 42
+                    }}>
+                    <TouchableOpacity>
+                        <Button
+                            title='Back'
+                            onPress={this.onBackPress}
+                            color={COLOR_TOP_SEARCH}
+                        />
+                    </TouchableOpacity>
                     <TextInput
+                        ref="textInput"
                         style={{
                             flex : 1,
-                            color: "#fff"
+                            color: '#fff'
                         }}
                         value={this.state.text}
                         onChangeText={this.onChangeText}
-                        onSubmitEditing={this.search}
+                        underlineColorAndroid={"#fff"}
                     />
-                    <Button
-                        title="Search"
-                        onPress={this.search}
-                        color={COLOR_TOP_SEARCH}
-                        style={{
-                            flex: 1
-                        }}
-                    />
-                </View>
+                </LinearGradient>
+
                 {this.state.indicator.animating && <ActivityIndicator
                     color={this.state.indicator.color}
                     size={'large'}
@@ -182,6 +202,25 @@ export default class Search extends Component {
     }
 
     componentWillUnmount() {
-        BackAndroid.removeEventListener("hardwareBackPress", this.onBackPress);
+        BackAndroid.removeEventListener('hardwareBackPress', this.onBackPress);
     }
 }
+
+
+const styles = StyleSheet.create({
+    infoMsg       : {
+        flex          : 1,
+        flexDirection : 'row',
+        justifyContent: 'center',
+        paddingTop    : 24
+    },
+    infoMsgText   : {
+        fontSize: 18
+    },
+    linearGradient: {
+        flex        : 1,
+        paddingLeft : 15,
+        paddingRight: 15,
+        borderRadius: 5
+    }
+});
