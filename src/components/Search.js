@@ -20,15 +20,15 @@ import {
 
 import {setWeather} from '../actions/weatherActions';
 import {getCities, initForecast} from '../helpers/weatherAPI';
+import {getGradColors} from '../images/topImages';
+
 
 import Icon from './Icons';
 
 const COLOR_IND_LONG = '#0054ff';
 const COLOR_IND_SHORT = '#ff5843';
 const COLOR_TOP_SEARCH = '#1cd6ff';
-const colorsDict = {
 
-}
 @connect((store) => {
     return {...store.weather.weather};
 })
@@ -44,6 +44,9 @@ export default class Search extends Component {
             },
             infoMsg  : ''
         };
+
+        let code = this.props.current.condition.code;
+        this.gradColors = getGradColors(code);
 
         this.onChangeText = this._onChangeText.bind(this);
         this.renderItem = this._renderItem.bind(this);
@@ -168,7 +171,7 @@ export default class Search extends Component {
             >
 
                 <LinearGradient
-                    colors={['red','blue']}
+                    colors={this.gradColors}
                     start={{x: 0, y: 0}}
                     end={{x: 1, y: 0}}
                     style={{
