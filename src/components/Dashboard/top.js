@@ -53,7 +53,7 @@ export default class extends React.Component {
                     <View style={styles.tempBlock}>
                         <View>
                             <Text style={[styles.headerText, styles.tempText]}>
-                                {currentWeather.temp_c.toString()}
+                                {Math.round(parseInt(currentWeather.temp_c, 10)).toString()}
                             </Text>
                         </View>
                         <View>
