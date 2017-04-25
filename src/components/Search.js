@@ -172,8 +172,8 @@ export default class Search extends Component {
 
                 <LinearGradient
                     colors={this.gradColors}
-                    start={{x: 0, y: 0}}
-                    end={{x: 1, y: 0}}
+                    start={{x: 1, y: 0}}
+                    end={{x: 0, y: 0}}
                     style={{
                         flex         : 1,
                         flexDirection: 'row',
@@ -199,6 +199,8 @@ export default class Search extends Component {
                         value={this.state.text}
                         onChangeText={this.onChangeText}
                         underlineColorAndroid={"#fff"}
+                        placeholder={"Enter your location"}
+                        placeholderTextColor={'#fff'}
                     />
                 </LinearGradient>
 
