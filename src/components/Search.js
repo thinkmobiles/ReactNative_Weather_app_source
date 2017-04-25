@@ -169,7 +169,7 @@ export default class Search extends Component {
                         style={styles.textInput}
                         value={this.state.text}
                         onChangeText={this.onChangeText}
-                        underlineColorAndroid={"#fff"}
+                        underlineColorAndroid={"transparent"}
                         placeholder={"Enter your location"}
                         placeholderTextColor={'#fff'}
                     />
