@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 
 import {
+    Platform,
     View,
     TextInput,
     Text,
@@ -20,7 +21,6 @@ import {
 import {setWeather} from '../actions/weatherActions';
 import {getCities, initForecast} from '../helpers/weatherAPI';
 import {getGradColors} from '../images/topImages';
-
 
 import Icon from './Icons';
 
@@ -40,7 +40,6 @@ export default class Search extends Component {
             loaderShow: false,
             infoMsg   : ''
         };
-
 
         this.onChangeText = this._onChangeText.bind(this);
         this.renderItem = this._renderItem.bind(this);
@@ -126,7 +125,6 @@ export default class Search extends Component {
             return {...item, key: `item-${index}`}
         });
 
-
         const bottomComponent = cities.length ? (
             <FlatList
                 style={styles.list}
@@ -188,7 +186,6 @@ export default class Search extends Component {
     }
 }
 
-
 const styles = StyleSheet.create({
     infoMsg     : {
         flex          : 1,
@@ -224,6 +221,8 @@ const styles = StyleSheet.create({
     topBar      : {
         flex         : 1,
         flexDirection: 'row',
-        maxHeight    : 42
+        alignItems   : 'center',
+        paddingTop   : Platform.OS === 'ios' ? 30 : 0,
+        maxHeight    : Platform.OS === 'ios' ? 42 : 72
     }
 });
