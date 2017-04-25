@@ -47,19 +47,20 @@ export default class extends React.Component {
         let location = this.props.location || {};
 
         let locationText = `${location.name}, ${location.country}`;
+        let fontSize = this.getRealFont(locationText);
         let locationFontStyle = {
-            fontSize: this.getRealFont(locationText)
+            fontSize: fontSize
         };
 
         return (
             <View style={styles.topSection}>
                 <View style={styles.innerContainer}>
                     <View onPress={this.onLocationPress} style={styles.locationBlock}>
-                        <View>
+                        <View style={{alignSelf: 'flex-start'}}>
                             <Icon
                                 name="location"
-                                height="24"
-                                width="24"
+                                height={fontSize}
+                                width={fontSize}
                                 fill="transparent"
                                 stroke="#fff"
                                 strokeWidth="1"
@@ -122,8 +123,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     tempText         : {
-        fontSize  : 120,
-        lineHeight: 110
+        fontSize     : 120,
+        lineHeight   : 110,
+        paddingBottom: 5,
     },
     tempTextDimension: {
         marginLeft: -7,
@@ -131,7 +133,7 @@ const styles = StyleSheet.create({
         lineHeight: 75
     },
     conditionText    : {
-        paddingTop: 10,
+        paddingTop: 5,
         fontSize  : 25
     }
 });

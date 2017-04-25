@@ -45,10 +45,18 @@ export default class extends React.Component {
         return (
             <View style={styles.container}>
                 {this.props.collection.map((rowElement, index) => {
+                    let boldStyleObject = {
+                        fontFamily: !index ? 'Muli-SemiBold' : 'Muli-Light',
+                    };
+
                     return (
                         <View key={'element-' + index} style={styles.row}>
                             <View style={[styles.rowElement, styles.dayElement]}>
-                                <Text style={[styles.dayElementText, styles.bottomText]}>
+                                <Text style={[
+                                    styles.dayElementText,
+                                    styles.bottomText,
+                                    boldStyleObject
+                                ]}>
                                     {moment(rowElement.date).format('dddd')}
                                 </Text>
                             </View>
@@ -63,12 +71,21 @@ export default class extends React.Component {
                             </View>
                             <View style={styles.tempBlock}>
                                 <View style={styles.tempBlockElement}>
-                                    <Text style={[styles.tempBlockElementText, styles.bottomText]}>
+                                    <Text style={[
+                                        styles.tempBlockElementText,
+                                        styles.bottomText,
+                                        boldStyleObject
+                                    ]}>
                                         {Math.round(parseInt(rowElement.day.maxtemp_c, 10)).toString()}
                                     </Text>
                                 </View>
                                 <View style={styles.tempBlockElement}>
-                                    <Text style={[styles.tempBlockElementText, styles.bottomText]}>
+                                    <Text style={[
+                                        styles.tempBlockElementText,
+                                        styles.bottomText,
+                                        {opacity: !index ? 1 : 0.6},
+                                        boldStyleObject
+                                    ]}>
                                         {Math.round(parseInt(rowElement.day.mintemp_c, 10)).toString()}
                                     </Text>
                                 </View>
@@ -87,8 +104,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         paddingLeft  : 35,
         paddingRight : 25,
-        paddingTop   : 5,
-        paddingBottom: 5
+        paddingBottom: 10
     },
     row                 : {
         flex         : 1,
