@@ -3,9 +3,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Dimensions} from 'react-native';
 
 import Icon from '../Icons';
+
+const deviseScreen = Dimensions.get('window');
 
 @connect((store) => {
     return {
@@ -32,7 +34,7 @@ export default class extends React.Component {
             <View style={styles.topSection}>
                 <View style={styles.innerContainer}>
                     <View style={styles.locationBlock}>
-                        <View style={styles.locationBlockElement}>
+                        <View style={[styles.locationBlockElement, {maxWidth: 19, marginRight: 5}]}>
                             <Icon
                                 name="location"
                                 height="24"
@@ -44,7 +46,7 @@ export default class extends React.Component {
                         </View>
                         <View style={styles.locationBlockElement}>
                             <Text style={[styles.headerText, styles.locationText]} onPress={this.onLocationPress}>
-                                {location.country + ', ' + location.name}
+                                {`${location.name}, ${location.country}`}
                             </Text>
                         </View>
                     </View>
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     innerContainer      : {
-        flex     : 1,
+        flex     : 0.7,
         marginTop: 35
     },
     headerText          : {
@@ -84,10 +86,15 @@ const styles = StyleSheet.create({
         color     : '#fff'
     },
     locationBlock       : {
+        maxWidth      : deviseScreen.width,
+        paddingLeft   : 20,
+        paddingRight  : 20,
         flexDirection : 'row',
+        alignItems    : 'center',
         justifyContent: 'center'
     },
     locationBlockElement: {
+        flex          : 1,
         alignItems    : 'center',
         justifyContent: 'center'
     },
