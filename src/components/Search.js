@@ -194,17 +194,18 @@ const styles = StyleSheet.create({
         flex          : 1,
         flexDirection : 'row',
         justifyContent: 'center',
-        paddingTop    : 24
+        paddingTop    : 26
     },
     infoMsgText : {
         fontSize: 18
     },
     list        : {flex: 1},
     listItem    : {
-        flex        : 1,
-        paddingLeft : 22,
-        paddingRight: 22,
-        paddingTop  : 26
+        flex         : 1,
+        paddingLeft  : 22,
+        paddingRight : 22,
+        paddingTop   : 13,
+        paddingBottom: 13
     },
     listItemText: {
         fontSize  : 20,
