@@ -1,5 +1,5 @@
 const API_KEY = "948c1466aa944464a5c114236171104";
-const BASE_URL = "http://api.apixu.com/v1";
+const BASE_URL = "https://api.apixu.com/v1";
 const FORECAST = "/forecast.json";
 const SEARCH = "/search.json";
 
