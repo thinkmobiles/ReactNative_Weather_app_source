@@ -41,8 +41,14 @@ export default class Splash extends React.Component {
     }
 
     componentDidMount() {
-        initForecast('uzhhorod', response => {
-            this.props.dispatch(setWeather(response));
+        navigator.geolocation.getCurrentPosition(position => {
+            const {latitude, longitude} = position.coords;
+            const query = `${latitude},${longitude}`;
+
+            initForecast(query, response => {
+                this.props.dispatch(setWeather(response));
+            });
         });
+
     }
 }
