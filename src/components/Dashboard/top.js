@@ -71,13 +71,13 @@ export default class extends React.Component {
 
 const styles = StyleSheet.create({
     topSection          : {
-        flex          : 1,
+        flex          : 0.9,
         flexDirection : 'row',
         alignItems    : 'flex-start',
         justifyContent: 'center'
     },
     innerContainer      : {
-        flex     : 0.7,
+        flex     : 1,
         marginTop: 35
     },
     headerText          : {
