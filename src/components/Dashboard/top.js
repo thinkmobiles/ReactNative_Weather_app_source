@@ -38,7 +38,7 @@ export default class extends React.Component {
                 marginBottom: 20,
                 textAlign   : 'center',
             }} onPress={this.onLocationPress}>
-                {location.country + ', ' + location.name}
+                {`${location.name}, ${location.country}`}
             </Text>
             <Text style={{
                 fontSize    : 40,
