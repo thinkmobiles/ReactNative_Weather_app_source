@@ -33,7 +33,7 @@ export default class extends React.Component {
         return (
             <View style={styles.topSection}>
                 <View style={styles.innerContainer}>
-                    <View style={styles.locationBlock}>
+                    <View onPress={this.onLocationPress} style={styles.locationBlock}>
                         <View style={[styles.locationBlockElement, {maxWidth: 19, marginRight: 5}]}>
                             <Icon
                                 name="location"

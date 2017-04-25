@@ -106,10 +106,16 @@ export default class Search extends Component {
         return (
             <TouchableOpacity
                 onPress={() => this.onItemPress(item)}
-                style={{}}
+                style={{
+                    flex         : 1,
+                    paddingLeft  : 12,
+                    paddingRight : 8,
+                    paddingTop   : 6,
+                    paddingBottom: 6
+                }}
             >
                 <Text
-                    style={{fontSize: 17}}
+                    style={{fontSize: 16}}
                 >
                     {item.name}
                 </Text>
