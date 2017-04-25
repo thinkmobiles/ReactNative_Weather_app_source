@@ -21,6 +21,8 @@ import {
 import {setWeather} from '../actions/weatherActions';
 import {getCities, initForecast} from '../helpers/weatherAPI';
 
+import Icon from './Icons';
+
 const COLOR_IND_LONG = '#0054ff';
 const COLOR_IND_SHORT = '#ff5843';
 const COLOR_TOP_SEARCH = '#1cd6ff';
@@ -174,11 +176,15 @@ export default class Search extends Component {
                         flexDirection: 'row',
                         maxHeight    : 42
                     }}>
-                    <TouchableOpacity>
-                        <Button
-                            title='Back'
-                            onPress={this.onBackPress}
-                            color={COLOR_TOP_SEARCH}
+                    <TouchableOpacity
+                        onPress={this.onBackPress}
+                    >
+                        <Icon
+                            name="back"
+                            height="42"
+                            width="40"
+                            fill="white"
+                            stroke="none"
                         />
                     </TouchableOpacity>
                     <TextInput

@@ -55,7 +55,6 @@ export default class extends React.Component {
                             <View style={styles.iconBlock}>
                                 <Icon
                                     name={mapCodeToIcon(rowElement.day.condition.code)}
-                                    origin="2,2"
                                     height="30"
                                     width="30"
                                     fill="#C4C4C3"

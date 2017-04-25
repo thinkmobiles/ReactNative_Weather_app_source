@@ -1,3 +1,4 @@
+import Back from './back.js';
 import Location from './location.js';
 import Cloudy from './cloudy.js';
 import Sunny from './sunny.js';
@@ -7,6 +8,7 @@ import Snowy from './snowy.js';
 import Storm from './storm.js';
 
 export default {
+    back    : Back,
     location: Location,
     cloudy  : Cloudy,
     fog     : Fog,
