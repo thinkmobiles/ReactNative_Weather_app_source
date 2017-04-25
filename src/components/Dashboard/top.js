@@ -8,6 +8,7 @@ import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import Icon from '../Icons';
 
 const deviseScreen = Dimensions.get('window');
+const locationDefFont = 24;
 
 @connect((store) => {
     return {
@@ -26,15 +27,35 @@ export default class extends React.Component {
         this.props.navigator.replace({id: 'Search'});
     }
 
+    getRealFont(text) {
+        const length = text.length;
+
+        let fontSize = locationDefFont;
+        let width = () => {
+            return length / 2 * fontSize * 0.7;
+        };
+
+        while (width() > deviseScreen.width - 40) {
+            fontSize -= 2;
+        }
+
+        return fontSize;
+    }
+
     render() {
         let currentWeather = this.props.current || {};
         let location = this.props.location || {};
+
+        let locationText = `${location.name}, ${location.country}`;
+        let locationFontStyle = {
+            fontSize: this.getRealFont(locationText)
+        };
 
         return (
             <View style={styles.topSection}>
                 <View style={styles.innerContainer}>
                     <View onPress={this.onLocationPress} style={styles.locationBlock}>
-                        <View style={[styles.locationBlockElement, {maxWidth: 19, marginRight: 5}]}>
+                        <View>
                             <Icon
                                 name="location"
                                 height="24"
@@ -44,16 +65,15 @@ export default class extends React.Component {
                                 strokeWidth="1"
                             />
                         </View>
-                        <View style={styles.locationBlockElement}>
-                            <Text style={[styles.headerText, styles.locationText]} onPress={this.onLocationPress}>
-                                {`${location.name}, ${location.country}`}
-                            </Text>
-                        </View>
+                        <Text style={[styles.headerText, styles.locationText, locationFontStyle]}
+                              onPress={this.onLocationPress}>
+                            {locationText}
+                        </Text>
                     </View>
                     <View style={styles.tempBlock}>
                         <View>
                             <Text style={[styles.headerText, styles.tempText]}>
-                                {currentWeather.temp_c.toString()}
+                                {Math.round(parseInt(currentWeather.temp_c, 10)).toString()}
                             </Text>
                         </View>
                         <View>
@@ -70,22 +90,22 @@ export default class extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    topSection          : {
+    topSection       : {
         flex          : 0.9,
         flexDirection : 'row',
         alignItems    : 'flex-start',
         justifyContent: 'center'
     },
-    innerContainer      : {
+    innerContainer   : {
         flex     : 1,
         marginTop: 35
     },
-    headerText          : {
+    headerText       : {
         fontFamily: 'Muli-SemiBold',
         textAlign : 'center',
         color     : '#fff'
     },
-    locationBlock       : {
+    locationBlock    : {
         maxWidth      : deviseScreen.width,
         paddingLeft   : 20,
         paddingRight  : 20,
@@ -93,29 +113,24 @@ const styles = StyleSheet.create({
         alignItems    : 'center',
         justifyContent: 'center'
     },
-    locationBlockElement: {
-        flex          : 1,
-        alignItems    : 'center',
-        justifyContent: 'center'
+    locationText     : {
+        fontFamily: 'Muli-Regular'
     },
-    locationText        : {
-        fontFamily: 'Muli-Regular',
-        fontSize  : 24
-    },
-    tempBlock           : {
+    tempBlock        : {
         flexDirection : 'row',
         alignItems    : 'flex-start',
         justifyContent: 'center'
     },
-    tempText            : {
+    tempText         : {
         fontSize  : 120,
         lineHeight: 110
     },
-    tempTextDimension   : {
+    tempTextDimension: {
+        marginLeft: -7,
         fontSize  : 70,
-        lineHeight: 100
+        lineHeight: 75
     },
-    conditionText       : {
+    conditionText    : {
         paddingTop: 10,
         fontSize  : 25
     }
