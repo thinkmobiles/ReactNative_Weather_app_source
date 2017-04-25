@@ -83,12 +83,12 @@ export default class extends React.Component {
 
 const styles = StyleSheet.create({
     container           : {
-        flex         : 0.7,
+        flex         : 0.8,
         flexDirection: 'column',
         paddingLeft  : 35,
         paddingRight : 25,
         paddingTop   : 5,
-        paddingBottom: 5
+        paddingBottom: 10
     },
     row                 : {
         flex         : 1,
