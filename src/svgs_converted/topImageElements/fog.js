@@ -1,13 +1,13 @@
 import React from 'react';
 import Svg, {Defs, G, Path, LinearGradient, Stop} from 'react-native-svg';
 
-export default (width) => {
+export default (width, style) => {
     return (
         <Svg
             width={width}
             height={width * 373 / 375}
             viewBox="0 0 375 373"
-            style={{flex: 1, alignSelf: 'flex-end'}}
+            style={style}
         >
             <Defs>
                 <LinearGradient x1="-0.000479616307%" y1="50.0000656%" x2="100.000352%" y2="50.0000656%"

@@ -51,7 +51,7 @@ export default class extends React.Component {
                 <LinearGradient
                     {...gradientProps}
                 >
-                    <TopImage/>
+                    <TopImage />
                 </LinearGradient>
                 <View style={styles.contentSection}>
                     <Top navigator={this.props.navigator}/>

@@ -23,12 +23,14 @@ export default class extends React.Component {
         let code = this.props.current.condition.code;
         let imagesArray = getImages(code);
 
+        let bottomSvgStyle = {flex: 1, alignSelf: 'flex-end', marginBottom: -1};
+
         return (
             <View style={styles.container}>
                 <View style={{flex: 1}}>
                     {imagesArray[1] && imagesArray[1](width)}
                 </View>
-                {imagesArray[0](width)}
+                {imagesArray[0](width, bottomSvgStyle)}
             </View>
         );
     }
