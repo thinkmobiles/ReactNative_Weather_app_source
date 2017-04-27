@@ -90,7 +90,7 @@ const codesToProps = {
     [[1009, 1072]]                                    : {
         images        : {
             top   : [OvercastTop],
-            bottom: Snow
+            bottom: Overcast
         },
         gradientSearch: ['#839dae', '#A6CADF'],
         gradientImage : {
