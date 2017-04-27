@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         paddingLeft  : 35,
         paddingRight : 25,
-        paddingBottom: 10
+        paddingBottom: 15
     },
     row                 : {
         flex         : 1,

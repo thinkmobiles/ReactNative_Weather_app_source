@@ -1,3 +1,15 @@
+import Snow from '../svgs_converted/topImageElements/snow';
+import Overcast from '../svgs_converted/topImageElements/overcast';
+import Cloud from '../svgs_converted/topImageElements/cloud';
+import Fog from '../svgs_converted/topImageElements/fog';
+import Storm from '../svgs_converted/topImageElements/storm';
+import Rain from '../svgs_converted/topImageElements/rain';
+import Sunny from '../svgs_converted/topImageElements/sunny';
+
+import OvercastTop from '../svgs_converted/topImageElements/overcastTop';
+import SnowTop from '../svgs_converted/topImageElements/snowTop';
+import CloudTop from '../svgs_converted/topImageElements/cloudTop';
+
 const codesMap = {
     mist       : [1030, 1135, 1147],
     sunny      : [1000],
@@ -13,32 +25,32 @@ const codesMap = {
 };
 
 const images = {
-    mist       : require('./topImages/Mist.png'),
-    sunny      : require('./topImages/Sunny.png'),
-    snow       : require('./topImages/Snow.png'),
-    lightSnow  : require('./topImages/LightSnow.png'),
-    heavySnow  : require('./topImages/HeavySnow.png'),
-    thunderSnow: require('./topImages/SnowThunder.png'),
-    overcast   : require('./topImages/Overcast.png'),
-    cloud      : require('./topImages/Cloud.png'),
-    thunder    : require('./topImages/Thunder.png'),
-    rain       : require('./topImages/Rain.png'),
-    heavyRain  : require('./topImages/HeavyRain.png')
+    mist       : [Fog],
+    sunny      : [Sunny],
+    snow       : [Snow, SnowTop],
+    lightSnow  : [Snow],
+    heavySnow  : [Snow],
+    thunderSnow: [Snow],
+    overcast   : [Overcast, OvercastTop],
+    cloud      : [Cloud, CloudTop],
+    thunder    : [Storm],
+    rain       : [Rain],
+    heavyRain  : [Rain]
 };
 
 const gradColorsMap = {
-    mist       : ['#2990d2', '#69c2ee'],
-    sunny      : ['#ffa67e', '#f9d676'],
-    snow       : ['#2990d2', '#69c2ee'],
-    lightSnow  : ['#6e8290', '#a6cadf'],
-    heavySnow  : ['#2990d2', '#69c2ee'],
-    thunderSnow: ['#5f5f5f', '#b6bbbe'],
-    overcast   : ['#6e8290', '#a6cadf'],
-    cloud      : ['#ffa67e', '#f9d676'],
-    thunder    : ['#5f5f5f', '#b6bbbe'],
-    rain       : ['#6e8290', '#a6cadf'],
-    heavyRain  : ['#6e8290', '#a6cadf']
-}
+    mist       : ['#2187BE', '#72BFE5'],
+    sunny      : ['#F1AB65', '#F9D676'],
+    snow       : ['#48a4df', '#6ecaf8'],
+    lightSnow  : ['#919CA1', '#E4E9EC'],
+    heavySnow  : ['#48a4df', '#6ecaf8'],
+    thunderSnow: ['#2A3447', '#A4A9B0'],
+    overcast   : ['#839dae', '#A6CADF'],
+    cloud      : ['#f2ab60', '#FFFFFF'],
+    thunder    : ['#616876', '#A4A9B0'],
+    rain       : ['#919CA1', '#E4E9EC'],
+    heavyRain  : ['#919CA1', '#E4E9EC']
+};
 
 export const mapCode = (code) => {
     for (let key in codesMap) {
@@ -50,15 +62,15 @@ export const mapCode = (code) => {
     return 'sunny';
 }
 
-export const getImage = (code) => {
+export const getImages = (code) => {
     let key = mapCode(code);
 
-    return images[key];
+    return images[key].slice(0);
 }
 
 export const getGradColors = (code) => {
     let key = mapCode(code);
 
-    return gradColorsMap[key];
+    return gradColorsMap[key].slice(0);
 }
 export default images;

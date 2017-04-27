@@ -1,0 +1,102 @@
+import React from 'react';
+import Svg, {G, Ellipse} from 'react-native-svg';
+
+export default (width) => {
+    return (
+        <Svg
+            width={width}
+            height={width * 170 / 375}
+            viewBox="0 0 375 170"
+            style={{flex: 1, alignSelf: 'flex-start'}}
+        >
+            <G
+                id="layer1">
+                <G
+                    transform={{matrix: '1.2052603,0,0,1,-29.563587,873.19417'}}
+                    id="Page-1">
+                    <G
+                        fill="#ffffff"
+                        id="snow_element_2">
+                        <Ellipse
+                            id="Oval"
+                            cx="327.06424"
+                            cy="16.117674"
+                            rx="1.5216751"
+                            ry="1.5203876"/>
+                        <Ellipse
+                            id="ellipse3598"
+                            cx="44.032677"
+                            cy="109.5607"
+                            rx="1.5216751"
+                            ry="1.5203876"/>
+                        <Ellipse
+                            opacity="0.5"
+                            id="ellipse3600"
+                            cx="25.437807"
+                            cy="136.92767"
+                            rx="1.5216751"
+                            ry="1.5203876"/>
+                        <Ellipse
+                            id="ellipse3602"
+                            cx="51.945385"
+                            cy="39.257973"
+                            rx="1.5216751"
+                            ry="1.5203876"/>
+                        <Ellipse
+                            opacity="0.5"
+                            id="ellipse3604"
+                            cx="25.437807"
+                            cy="9.8232679"
+                            rx="1.5216751"
+                            ry="1.5203876"/>
+                        <Ellipse
+                            opacity="0.5"
+                            id="ellipse3606"
+                            cx="82.987556"
+                            cy="125.37273"
+                            rx="1.5216751"
+                            ry="1.5203876"/>
+                        <Ellipse
+                            opacity="0.5"
+                            id="ellipse3608"
+                            cx="311.90836"
+                            cy="97.093521"
+                            rx="1.5216751"
+                            ry="1.5203876"/>
+                        <Ellipse
+                            id="ellipse3610"
+                            cx="286.28336"
+                            cy="112.60148"
+                            rx="1.5216751"
+                            ry="1.5203876"/>
+                        <Ellipse
+                            id="ellipse3612"
+                            cx="335.5856"
+                            cy="125.37273"
+                            rx="1.5216751"
+                            ry="1.5203876"/>
+                        <Ellipse
+                            id="ellipse3614"
+                            cx="243.70688"
+                            cy="162.80467"
+                            rx="1.5216751"
+                            ry="1.5203876"/>
+                        <Ellipse
+                            id="ellipse3616"
+                            cx="93.547981"
+                            cy="161.28429"
+                            rx="1.5216751"
+                            ry="1.5203876"/>
+                        <Ellipse
+                            opacity="0.5"
+                            id="ellipse3618"
+                            cx="231.10741"
+                            cy="177.37"
+                            rx="1.5216751"
+                            ry="1.5203876"/>
+                    </G>
+                </G>
+            </G>
+        </Svg>
+    )
+};

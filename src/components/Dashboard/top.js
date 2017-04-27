@@ -92,14 +92,16 @@ export default class extends React.Component {
 
 const styles = StyleSheet.create({
     topSection       : {
-        flex          : 0.9,
-        flexDirection : 'row',
-        alignItems    : 'flex-start',
-        justifyContent: 'center'
+        flex           : 0.9,
+        flexDirection  : 'row',
+        alignItems     : 'flex-start',
+        justifyContent : 'center',
+        backgroundColor: 'transparent'
     },
     innerContainer   : {
         flex     : 1,
-        marginTop: 35
+        marginTop: 35,
+        backgroundColor: 'transparent'
     },
     headerText       : {
         fontFamily: 'Muli-SemiBold',

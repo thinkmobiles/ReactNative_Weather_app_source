@@ -6,6 +6,7 @@ import Fog from './fog.js';
 import Rainy from './rainy.js';
 import Snowy from './snowy.js';
 import Storm from './storm.js';
+import AppIcon from './appIcon.js';
 
 export default {
     back    : Back,
@@ -15,5 +16,6 @@ export default {
     rainy   : Rainy,
     snowy   : Snowy,
     storm   : Storm,
-    sunny   : Sunny
+    sunny   : Sunny,
+    appIcon : AppIcon
 }

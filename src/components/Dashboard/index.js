@@ -3,12 +3,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {StyleSheet, View, Navigator, Image} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 import Top from './top';
 import Bottom from './bottom';
+import TopImage from './topImage';
 
-import {getImage} from '../../images/topImages';
+import {mapCode, getGradColors} from '../../images/topImages';
+
+import {StyleSheet, View, Text, Navigator, Dimensions} from 'react-native';
+
+const deviseScreen = Dimensions.get('window');
 
 @connect((store) => {
     return {
@@ -22,20 +27,60 @@ export default class extends React.Component {
     }
 
     render() {
+        let code = this.props.current.condition.code;
+        let weather = mapCode(1003);
+        let gradColors = getGradColors(1003);
+
+        let gradientProps = {
+            style: styles.gradient
+        };
+
+        gradColors[1] = '#fff';
+
+        gradientProps.colors = gradColors;
+
+        if (weather === 'cloud') {
+            gradientProps.colors = gradientProps.colors.reverse();
+            gradientProps.start = {x: -0.3, y: 0};
+            gradientProps.end = {x: 0.7, y: 1};
+            gradientProps.locations = [0, 0.4]
+        }
+
         return (
-            <Image source={getImage(this.props.current.condition.code)} style={styles.container}>
-                <Top navigator={this.props.navigator}/>
-                <Bottom/>
-            </Image>
+            <View style={styles.fullScreen}>
+                <LinearGradient
+                    {...gradientProps}
+                >
+                    <TopImage/>
+                </LinearGradient>
+                <View style={styles.contentSection}>
+                    <Top navigator={this.props.navigator}/>
+                    <Bottom/>
+                </View>
+            </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
+    fullScreen    : {
         flex           : 1,
         width          : undefined,
         height         : undefined,
-        backgroundColor: 'transparent'
+        backgroundColor: 'white'
+    },
+    gradient      : {
+        height  : deviseScreen.height * 0.76,
+        position: 'absolute',
+        overflow: 'hidden',
+        top     : 0,
+        left    : 0,
+        right   : 0,
+        zIndex  : 1
+    },
+    contentSection: {
+        flex    : 1,
+        position: 'relative',
+        zIndex  : 2
     }
 });
