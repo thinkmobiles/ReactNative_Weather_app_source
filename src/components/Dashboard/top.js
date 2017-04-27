@@ -13,7 +13,7 @@ import {
     Animated
 } from 'react-native';
 
-const deviceScreen = Dimensions.get('window');
+const {height, width} = Dimensions.get('window');
 const locationDefFont = 24;
 
 @connect((store) => {
@@ -27,7 +27,6 @@ export default class extends React.Component {
         super(props);
 
         this.state = {
-            isSwiped        : false,
             bounceValueStart: new Animated.Value()
         };
 
@@ -56,36 +55,29 @@ export default class extends React.Component {
     }
 
     _onMoveStart(e) {
-        const {pageY, locationX} = e.nativeEvent;
+        const {pageY, locationY} = e.nativeEvent;
         this.startY = pageY;
-        return locationX > 80 && pageY > 80;
+
+        return locationY > 60;
     }
 
     _onMove(e) {
         const {pageY} = e.nativeEvent;
-        let diff = pageY - this.startY;
-        // diff += diff / 1.3;
-        if (diff < 0) {
-            diff = 0;
-        }
+        let diff;
+
+        diff = pageY - this.startY;
 
         this.props.changeMargin(-diff);
     }
 
     _onMoveEnd(e) {
         const {pageY} = e.nativeEvent;
-        if (this.state.isSwiped) {
-            this.setState({isSwiped: false});
+
+        if (pageY > this.startY)/*(pageY > height * 0.55)*/ {
+            this._createAnimation(-height * 0.4).start();
         }
         else {
-            if (pageY > deviceScreen.height * 0.55) {
-                this._createAnimation(-210).start();
-                this.setState({isSwiped: true});
-            }
-            else {
-                this._createAnimation(0).start();
-                this.setState({isSwiped: false});
-            }
+            this._createAnimation(0).start();
         }
 
     }
@@ -98,7 +90,7 @@ export default class extends React.Component {
             return length / 2 * fontSize * 0.7;
         };
 
-        while (width() > deviceScreen.width - 40) {
+        while (width() > width - 40) {
             fontSize -= 2;
         }
 
@@ -121,7 +113,7 @@ export default class extends React.Component {
                 onResponderMove={this.onMove}
                 onResponderRelease={this.onMoveEnd}
                 onMoveShouldSetResponderCapture={this.onMoveStart}
-                hitSlop={{top: 0, bottom: 45, left: 0, right: 0}}
+                hitSlop={{top: 0, bottom: 70, left: 0, right: 0}}
             >
                 <View style={styles.innerContainer}>
                     <View onPress={this.onLocationPress} style={styles.locationBlock}>
@@ -181,7 +173,7 @@ const styles = StyleSheet.create({
         color     : '#fff'
     },
     locationBlock    : {
-        maxWidth      : deviceScreen.width,
+        maxWidth      : width,
         paddingLeft   : 20,
         paddingRight  : 20,
         flexDirection : 'row',

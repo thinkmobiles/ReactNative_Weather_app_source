@@ -75,8 +75,8 @@ export default class extends React.Component {
 
 const styles = StyleSheet.create({
     container           : {
-        flex         : 0.7,
-        maxHeight    : height * 0.35,
+        flex         : 1,
+        maxHeight    : height * 0.47,
         flexDirection: 'column',
         paddingLeft  : 35,
         paddingRight : 25,

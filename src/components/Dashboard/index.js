@@ -47,19 +47,20 @@ export default class extends React.Component {
         let code = this.props.current.condition.code;
         let {images, gradientImage} = getProps(code);
 
-        gradientImage.style = [styles.gradient, {
-            height: (deviseScreen.height + -this.state.margin._value) * 0.76
-        }];
+        gradientImage.style = styles.gradient;
 
         return (
             <Animated.View style={[styles.fullScreen, {marginBottom: this.state.margin}]}>
-                <LinearGradient
-                    {...gradientImage}
-                >
-                    <TopImage
-                        images={images}
-                    />
-                </LinearGradient>
+                <Animated.View
+                    style={[styles.gradientContainer, {bottom: deviseScreen.height * 0.20 + this.state.margin._value}]}>
+                    <LinearGradient
+                        {...gradientImage}
+                    >
+                        <TopImage
+                            images={images}
+                        />
+                    </LinearGradient>
+                </Animated.View>
                 <View style={[styles.contentSection]}>
                     <Top
                         navigator={this.props.navigator}
@@ -74,21 +75,26 @@ export default class extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    fullScreen    : {
+    fullScreen       : {
         flex           : 1,
         width          : undefined,
         height         : undefined,
         backgroundColor: 'white'
     },
-    gradient      : {
-        position: 'absolute',
-        overflow: 'hidden',
-        top     : 0,
-        left    : 0,
-        right   : 0,
-        zIndex  : 1
+    gradientContainer: {
+        position : 'absolute',
+        overflow : 'hidden',
+        top      : 0,
+        left     : 0,
+        right    : 0,
+        maxHeight: deviseScreen.height * 1.05,
+        minHeight: deviseScreen.height * 0.5,
+        zIndex   : 1
     },
-    contentSection: {
+    gradient         : {
+        flex: 1
+    },
+    contentSection   : {
         flex    : 1,
         position: 'relative',
         zIndex  : 2
