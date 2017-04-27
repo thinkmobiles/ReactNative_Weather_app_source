@@ -9,7 +9,7 @@ import Top from './top';
 import Bottom from './bottom';
 import TopImage from './topImage';
 
-import {mapCode, getGradColors} from '../../images/topImages';
+import {mapCode, getGradColors} from '../../svgs_converted/topImageElements/';
 
 import {StyleSheet, View, Text, Navigator, Dimensions} from 'react-native';
 
@@ -28,8 +28,8 @@ export default class extends React.Component {
 
     render() {
         let code = this.props.current.condition.code;
-        let weather = mapCode(1003);
-        let gradColors = getGradColors(1003);
+        let weather = mapCode(code);
+        let gradColors = getGradColors(code);
 
         let gradientProps = {
             style: styles.gradient

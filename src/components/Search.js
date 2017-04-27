@@ -20,7 +20,7 @@ import {
 
 import {setWeather} from '../actions/weatherActions';
 import {getCities, initForecast} from '../helpers/weatherAPI';
-import {getGradColors} from '../images/topImages';
+import {getGradColors} from '../svgs_converted/topImageElements/';
 
 import Icon from './Icons';
 
