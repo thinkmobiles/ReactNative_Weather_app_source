@@ -11,7 +11,14 @@ import TopImage from './topImage';
 
 import {mapCode, getGradColors} from '../../svgs_converted/topImageElements/';
 
-import {StyleSheet, View, Text, Navigator, Dimensions} from 'react-native';
+import {
+    StyleSheet,
+    View,
+    Text,
+    Navigator,
+    Dimensions,
+    Animated
+} from 'react-native';
 
 const deviseScreen = Dimensions.get('window');
 
@@ -26,15 +33,16 @@ export default class extends React.Component {
         super(props);
 
         this.state = {
-            margin: 0
+            margin: new Animated.Value(1)
         };
 
         this.changeMargin = this._changeMargin.bind(this);
     }
 
     _changeMargin(margin) {
-        this.setState({margin: margin});
+        this.state.margin.setValue(margin);
     }
+
 
     render() {
         let code = this.props.current.condition.code;
@@ -63,13 +71,14 @@ export default class extends React.Component {
                 >
                     <TopImage/>
                 </LinearGradient>
-                <View style={[styles.contentSection, {marginBottom: this.state.margin}]}>
+                <Animated.View style={[styles.contentSection, {marginBottom: this.state.margin}]}>
                     <Top
                         navigator={this.props.navigator}
                         changeMargin={this.changeMargin}
+                        indexState={this.state}
                     />
                     <Bottom/>
-                </View>
+                </Animated.View>
             </View>
         );
     }

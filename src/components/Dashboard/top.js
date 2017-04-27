@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 
 
-const deviseScreen = Dimensions.get('window');
+const deviceScreen = Dimensions.get('window');
 const locationDefFont = 24;
 
 @connect((store) => {
@@ -27,6 +27,11 @@ const locationDefFont = 24;
 export default class extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            isSwiped        : false,
+            bounceValueStart: new Animated.Value()
+        };
 
         this.onLocationPress = this._onLocationPress.bind(this);
 
@@ -40,8 +45,9 @@ export default class extends React.Component {
     }
 
     _createAnimation(toValue) {
+        const start = this.props.indexState.margin;
         return Animated.spring(
-            new Animated.ValueXY,
+            start,
             {
                 toValue : toValue,
                 velocity: 3,
@@ -69,7 +75,21 @@ export default class extends React.Component {
     }
 
     _onMoveEnd(e) {
-        this._createAnimation(deviseScreen - this.startY)
+        const {pageY} = e.nativeEvent;
+        if(this.state.isSwiped){
+            this.setState({isSwiped: false});
+        }
+        else {
+            if (pageY > deviceScreen.height * 0.55) {
+                this._createAnimation(-360).start();
+                this.setState({isSwiped: true});
+            }
+            else {
+                this._createAnimation(0).start();
+                this.setState({isSwiped: false});
+            }
+        }
+
     }
 
     getRealFont(text) {
@@ -80,7 +100,7 @@ export default class extends React.Component {
             return length / 2 * fontSize * 0.7;
         };
 
-        while (width() > deviseScreen.width - 40) {
+        while (width() > deviceScreen.width - 40) {
             fontSize -= 2;
         }
 
@@ -162,7 +182,7 @@ const styles = StyleSheet.create({
         color     : '#fff'
     },
     locationBlock    : {
-        maxWidth      : deviseScreen.width,
+        maxWidth      : deviceScreen.width,
         paddingLeft   : 20,
         paddingRight  : 20,
         flexDirection : 'row',
