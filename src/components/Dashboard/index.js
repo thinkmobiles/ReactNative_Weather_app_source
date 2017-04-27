@@ -33,7 +33,7 @@ export default class extends React.Component {
         super(props);
 
         this.state = {
-            margin: new Animated.Value(1)
+            margin: new Animated.Value(0)
         };
 
         this.changeMargin = this._changeMargin.bind(this);
@@ -47,10 +47,12 @@ export default class extends React.Component {
         let code = this.props.current.condition.code;
         let {images, gradientImage} = getProps(code);
 
-        gradientImage.style = styles.gradient;
+        gradientImage.style = [styles.gradient, {
+            height: (deviseScreen.height + -this.state.margin._value) * 0.76
+        }];
 
         return (
-            <View style={styles.fullScreen}>
+            <Animated.View style={[styles.fullScreen, {marginBottom: this.state.margin}]}>
                 <LinearGradient
                     {...gradientImage}
                 >
@@ -58,15 +60,15 @@ export default class extends React.Component {
                         images={images}
                     />
                 </LinearGradient>
-                <Animated.View style={[styles.contentSection, {marginBottom: this.state.margin}]}>
+                <View style={[styles.contentSection]}>
                     <Top
                         navigator={this.props.navigator}
                         changeMargin={this.changeMargin}
                         indexState={this.state}
                     />
                     <Bottom/>
-                </Animated.View>
-            </View>
+                </View>
+            </Animated.View>
         );
     }
 }
@@ -79,7 +81,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     gradient      : {
-        height  : deviseScreen.height * 0.76,
         position: 'absolute',
         overflow: 'hidden',
         top     : 0,
