@@ -9,7 +9,7 @@ import Top from './top';
 import Bottom from './bottom';
 import TopImage from './topImage';
 
-import {getProps} from '../../svgs_converted/topImageElements/';
+import {getProps} from '../../helpers/getWeatherProps';
 
 import {
     StyleSheet,

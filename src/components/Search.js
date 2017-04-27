@@ -20,7 +20,7 @@ import {
 
 import {setWeather} from '../actions/weatherActions';
 import {getCities, initForecast} from '../helpers/weatherAPI';
-import {getProps} from '../svgs_converted/topImageElements/';
+import {getProps} from '../helpers/getWeatherProps';
 
 import Icon from './Icons';
 
