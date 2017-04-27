@@ -1,14 +1,17 @@
-import Snow from '../svgs_converted/topImageElements/snow';
-import Overcast from '../svgs_converted/topImageElements/overcast';
-import Cloud from '../svgs_converted/topImageElements/cloud';
-import Fog from '../svgs_converted/topImageElements/fog';
-import Storm from '../svgs_converted/topImageElements/storm';
-import Rain from '../svgs_converted/topImageElements/rain';
-import Sunny from '../svgs_converted/topImageElements/sunny';
+import Snow from './snow';
+import Overcast from './overcast';
+import Cloud from './cloud';
+import Fog from './fog';
+import Storm from './storm';
+import Rain from './rain';
+import Sunny from './sunny';
 
-import OvercastTop from '../svgs_converted/topImageElements/overcastTop';
-import SnowTop from '../svgs_converted/topImageElements/snowTop';
-import CloudTop from '../svgs_converted/topImageElements/cloudTop';
+import OvercastTop from './overcastTop';
+import SnowTop from './snowTop';
+import CloudTop from './cloudTop';
+import FogTop from './fogTop';
+import RainTop from './rainTop';
+import StormTop from './stormTop';
 
 const codesMap = {
     mist       : [1030, 1135, 1147],
@@ -25,7 +28,7 @@ const codesMap = {
 };
 
 const images = {
-    mist       : [Fog],
+    mist       : [Fog, FogTop],
     sunny      : [Sunny],
     snow       : [Snow, SnowTop],
     lightSnow  : [Snow],
@@ -33,8 +36,8 @@ const images = {
     thunderSnow: [Snow],
     overcast   : [Overcast, OvercastTop],
     cloud      : [Cloud, CloudTop],
-    thunder    : [Storm],
-    rain       : [Rain],
+    thunder    : [Storm, StormTop],
+    rain       : [Rain, RainTop],
     heavyRain  : [Rain]
 };
 
@@ -46,7 +49,7 @@ const gradColorsMap = {
     heavySnow  : ['#48a4df', '#6ecaf8'],
     thunderSnow: ['#2A3447', '#A4A9B0'],
     overcast   : ['#839dae', '#A6CADF'],
-    cloud      : ['#f2ab60', '#FFFFFF'],
+    cloud      : ['#f2ab60', '#f9d676'],
     thunder    : ['#616876', '#A4A9B0'],
     rain       : ['#919CA1', '#E4E9EC'],
     heavyRain  : ['#919CA1', '#E4E9EC']

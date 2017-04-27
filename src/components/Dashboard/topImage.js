@@ -3,7 +3,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {getImages} from '../../images/topImages';
+import {getImages} from '../../svgs_converted/topImageElements';
 
 import {View, Text, StyleSheet, Dimensions} from 'react-native';
 
@@ -21,7 +21,7 @@ export default class extends React.Component {
     render() {
         let {width} = Dimensions.get('window');
         let code = this.props.current.condition.code;
-        let imagesArray = getImages(1003);
+        let imagesArray = getImages(code);
 
         return (
             <View style={styles.container}>
