@@ -3,9 +3,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
 
 import Icon from '../Icons';
+
+import {
+    View,
+    Text,
+    StyleSheet,
+    Dimensions,
+    Animated
+} from 'react-native';
+
 
 const deviseScreen = Dimensions.get('window');
 const locationDefFont = 24;
@@ -21,10 +29,47 @@ export default class extends React.Component {
         super(props);
 
         this.onLocationPress = this._onLocationPress.bind(this);
+
+        this.onMoveStart = this._onMoveStart.bind(this);
+        this.onMove = this._onMove.bind(this);
+        this.onMoveEnd = this._onMoveEnd.bind(this);
     }
 
     _onLocationPress() {
         this.props.navigator.replace({id: 'Search'});
+    }
+
+    _createAnimation(toValue) {
+        return Animated.spring(
+            new Animated.ValueXY,
+            {
+                toValue : toValue,
+                velocity: 3,
+                tension : 2,
+                friction: 8
+            }
+        )
+    }
+
+    _onMoveStart(e) {
+        const {pageY, locationX} = e.nativeEvent;
+        this.startY = pageY;
+        return locationX > 80 && pageY > 80;
+    }
+
+    _onMove(e) {
+        const {pageY} = e.nativeEvent;
+        let diff = pageY - this.startY;
+        // diff += diff / 1.3;
+        if (diff < 0) {
+            diff = 0;
+        }
+
+        this.props.changeMargin(-diff);
+    }
+
+    _onMoveEnd(e) {
+        this._createAnimation(deviseScreen - this.startY)
     }
 
     getRealFont(text) {
@@ -53,7 +98,12 @@ export default class extends React.Component {
         };
 
         return (
-            <View style={styles.topSection}>
+            <Animated.View
+                style={styles.topSection}
+                onResponderMove={this.onMove}
+                onResponderRelease={this.onMoveEnd}
+                onMoveShouldSetResponderCapture={this.onMoveStart}
+            >
                 <View style={styles.innerContainer}>
                     <View onPress={this.onLocationPress} style={styles.locationBlock}>
                         <View style={{alignSelf: 'flex-start'}}>
@@ -81,11 +131,14 @@ export default class extends React.Component {
                             <Text style={[styles.tempTextDimension, styles.headerText]}>°</Text>
                         </View>
                     </View>
+
+
                     <Text style={[styles.headerText, styles.conditionText]}>
                         {currentWeather.condition && currentWeather.condition.text}
                     </Text>
                 </View>
-            </View>
+            </Animated.View>
+
         );
     }
 }
@@ -99,8 +152,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent'
     },
     innerContainer   : {
-        flex     : 1,
-        marginTop: 35,
+        flex           : 1,
+        marginTop      : 35,
         backgroundColor: 'transparent'
     },
     headerText       : {

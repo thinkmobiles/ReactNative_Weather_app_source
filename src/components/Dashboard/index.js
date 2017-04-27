@@ -24,6 +24,16 @@ const deviseScreen = Dimensions.get('window');
 export default class extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            margin: 0
+        };
+
+        this.changeMargin = this._changeMargin.bind(this);
+    }
+
+    _changeMargin(margin) {
+        this.setState({margin: margin});
     }
 
     render() {
@@ -53,8 +63,11 @@ export default class extends React.Component {
                 >
                     <TopImage/>
                 </LinearGradient>
-                <View style={styles.contentSection}>
-                    <Top navigator={this.props.navigator}/>
+                <View style={[styles.contentSection, {marginBottom: this.state.margin}]}>
+                    <Top
+                        navigator={this.props.navigator}
+                        changeMargin={this.changeMargin}
+                    />
                     <Bottom/>
                 </View>
             </View>
