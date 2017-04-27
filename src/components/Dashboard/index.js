@@ -69,7 +69,7 @@ export default class extends React.Component {
                 <LinearGradient
                     {...gradientProps}
                 >
-                    <TopImage/>
+                    <TopImage />
                 </LinearGradient>
                 <Animated.View style={[styles.contentSection, {marginBottom: this.state.margin}]}>
                     <Top
