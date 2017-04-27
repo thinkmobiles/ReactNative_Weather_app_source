@@ -9,7 +9,7 @@ import Top from './top';
 import Bottom from './bottom';
 import TopImage from './topImage';
 
-import {mapCode, getGradColors} from '../../svgs_converted/topImageElements/';
+import {getProps} from '../../svgs_converted/topImageElements/';
 
 import {
     StyleSheet,
@@ -43,33 +43,20 @@ export default class extends React.Component {
         this.state.margin.setValue(margin);
     }
 
-
     render() {
         let code = this.props.current.condition.code;
-        let weather = mapCode(code);
-        let gradColors = getGradColors(code);
+        let {images, gradientImage} = getProps(code);
 
-        let gradientProps = {
-            style: styles.gradient
-        };
-
-        gradColors[1] = '#fff';
-
-        gradientProps.colors = gradColors;
-
-        if (weather === 'cloud') {
-            gradientProps.colors = gradientProps.colors.reverse();
-            gradientProps.start = {x: -0.3, y: 0};
-            gradientProps.end = {x: 0.7, y: 1};
-            gradientProps.locations = [0, 0.4]
-        }
+        gradientImage.style = styles.gradient;
 
         return (
             <View style={styles.fullScreen}>
                 <LinearGradient
-                    {...gradientProps}
+                    {...gradientImage}
                 >
-                    <TopImage />
+                    <TopImage
+                        images={images}
+                    />
                 </LinearGradient>
                 <Animated.View style={[styles.contentSection, {marginBottom: this.state.margin}]}>
                     <Top

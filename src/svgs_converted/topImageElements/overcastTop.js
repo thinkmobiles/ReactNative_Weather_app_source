@@ -1,13 +1,14 @@
 import React from 'react';
 import Svg, {G, Path} from 'react-native-svg';
 
-export default (width) => {
+export default (width, index, style) => {
     return (
         <Svg
             width={width}
             height={width * 170 / 375}
             viewBox="0 0 375 170"
-            style={{flex: 1, alignSelf: 'flex-start'}}
+            style={style}
+            key={`svgTop-${index}`}
         >
             <G
                 transform={{translate: '0,-882.36223'}}

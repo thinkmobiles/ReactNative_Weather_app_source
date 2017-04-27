@@ -3,7 +3,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-
 import Icon from '../Icons';
 
 import {
@@ -13,7 +12,6 @@ import {
     Dimensions,
     Animated
 } from 'react-native';
-
 
 const deviceScreen = Dimensions.get('window');
 const locationDefFont = 24;
@@ -76,12 +74,12 @@ export default class extends React.Component {
 
     _onMoveEnd(e) {
         const {pageY} = e.nativeEvent;
-        if(this.state.isSwiped){
+        if (this.state.isSwiped) {
             this.setState({isSwiped: false});
         }
         else {
             if (pageY > deviceScreen.height * 0.55) {
-                this._createAnimation(-360).start();
+                this._createAnimation(-210).start();
                 this.setState({isSwiped: true});
             }
             else {
@@ -123,6 +121,7 @@ export default class extends React.Component {
                 onResponderMove={this.onMove}
                 onResponderRelease={this.onMoveEnd}
                 onMoveShouldSetResponderCapture={this.onMoveStart}
+                hitSlop={{top: 0, bottom: 45, left: 0, right: 0}}
             >
                 <View style={styles.innerContainer}>
                     <View onPress={this.onLocationPress} style={styles.locationBlock}>
@@ -165,7 +164,7 @@ export default class extends React.Component {
 
 const styles = StyleSheet.create({
     topSection       : {
-        flex           : 0.9,
+        flex           : 1,
         flexDirection  : 'row',
         alignItems     : 'flex-start',
         justifyContent : 'center',

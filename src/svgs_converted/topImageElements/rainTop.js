@@ -1,13 +1,14 @@
 import React from 'react';
 import Svg, {G, Polygon} from 'react-native-svg';
 
-export default (width) => {
+export default (width, index, style) => {
     return (
         <Svg
             width={width}
             height={width * 299 / 375}
             viewBox="0 0 375 299"
-            style={{flex: 1, alignSelf: 'flex-end'}}
+            style={style}
+            key={`svgTop-${index}`}
         >
             <G
                 transform={{translate: '0,-877.3623'}}

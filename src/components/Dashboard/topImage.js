@@ -3,8 +3,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {getImages} from '../../svgs_converted/topImageElements';
-
 import {View, Text, StyleSheet, Dimensions} from 'react-native';
 
 @connect((store) => {
@@ -20,26 +18,41 @@ export default class extends React.Component {
 
     render() {
         let {width} = Dimensions.get('window');
-        let code = this.props.current.condition.code;
-        let imagesArray = getImages(code);
+        let images = this.props.images || {};
 
-        let bottomSvgStyle = {flex: 1, alignSelf: 'flex-end', marginBottom: -1};
+        let topImages;
+
+        if (images.top && images.top.length) {
+            topImages = images.top.map((element, index) => {
+                return element(width, index, styles.topSvgStyle);
+            })
+        }
 
         return (
             <View style={styles.container}>
                 <View style={{flex: 1}}>
-                    {imagesArray[1] && imagesArray[1](width)}
+                    {topImages}
                 </View>
-                {imagesArray[0](width, bottomSvgStyle)}
+                {images.bottom(width, styles.bottomSvgStyle)}
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
+    container     : {
         display      : 'flex',
         flex         : 1,
         flexDirection: 'column'
+    },
+    bottomSvgStyle: {
+        flex        : 1,
+        alignSelf   : 'flex-end',
+        marginBottom: -1
+    },
+    topSvgStyle   : {
+        flex     : 1,
+        alignSelf: 'flex-start',
+        position : 'absolute'
     }
 });

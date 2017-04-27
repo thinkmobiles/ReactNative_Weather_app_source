@@ -13,67 +13,126 @@ import FogTop from './fogTop';
 import RainTop from './rainTop';
 import StormTop from './stormTop';
 
-const codesMap = {
-    mist       : [1030, 1135, 1147],
-    sunny      : [1000],
-    snow       : [1066, 1114, 1213, 1216, 1219, 1258, 1261],
-    lightSnow  : [1204, 1207, 1210, 1249, 1252, 1255],
-    heavySnow  : [1069, 1117, 1222, 1225, 1237, 1264],
-    thunderSnow: [1279, 1282],
-    overcast   : [1009, 1072],
-    cloud      : [1003, 1006, 1063],
-    thunder    : [1087, 1273, 1276],
-    rain       : [1150, 1153, 1168, 1180, 1183, 1198, 1240],
-    heavyRain  : [1171, 1186, 1189, 1192, 1195, 1201, 1243, 1246]
-};
-
-const images = {
-    mist       : [Fog, FogTop],
-    sunny      : [Sunny],
-    snow       : [Snow, SnowTop],
-    lightSnow  : [Snow],
-    heavySnow  : [Snow],
-    thunderSnow: [Snow],
-    overcast   : [Overcast, OvercastTop],
-    cloud      : [Cloud, CloudTop],
-    thunder    : [Storm, StormTop],
-    rain       : [Rain, RainTop],
-    heavyRain  : [Rain]
-};
-
-const gradColorsMap = {
-    mist       : ['#2187BE', '#72BFE5'],
-    sunny      : ['#F1AB65', '#F9D676'],
-    snow       : ['#48a4df', '#6ecaf8'],
-    lightSnow  : ['#919CA1', '#E4E9EC'],
-    heavySnow  : ['#48a4df', '#6ecaf8'],
-    thunderSnow: ['#2A3447', '#A4A9B0'],
-    overcast   : ['#839dae', '#A6CADF'],
-    cloud      : ['#f2ab60', '#f9d676'],
-    thunder    : ['#616876', '#A4A9B0'],
-    rain       : ['#919CA1', '#E4E9EC'],
-    heavyRain  : ['#919CA1', '#E4E9EC']
-};
-
-export const mapCode = (code) => {
-    for (let key in codesMap) {
-        if (~codesMap[key].indexOf(code)) {
-            return key;
+const codesToProps = {
+    [[1030, 1135, 1147]]                              : {
+        images        : {
+            top   : [FogTop],
+            bottom: Fog
+        },
+        gradientSearch: ['#2187BE', '#72BFE5'],
+        gradientImage : {
+            colors: ['#2187BE', '#FFFFFF']
+        }
+    },
+    [[1000]]                                          : {
+        images        : {
+            top   : [],
+            bottom: Sunny
+        },
+        gradientSearch: ['#F1AB65', '#F9D676'],
+        gradientImage : {
+            colors: ['#F1AB65', '#FFFFFF']
+        }
+    },
+    [[1003, 1006, 1063]]                              : {
+        images        : {
+            top   : [CloudTop],
+            bottom: Cloud
+        },
+        gradientSearch: ['#f9d676', '#f2ab60'],
+        gradientImage : {
+            colors   : ['#FFFFFF', '#f2ab60'],
+            start    : {x: -0.3, y: 0},
+            end      : {x: 0.7, y: 1},
+            locations: [0, 0.4]
+        }
+    },
+    [[1066, 1114, 1213, 1216, 1219, 1258, 1261]]      : {
+        images        : {
+            top   : [SnowTop],
+            bottom: Snow
+        },
+        gradientSearch: ['#48a4df', '#6ecaf8'],
+        gradientImage : {
+            colors: ['#48a4df', '#FFFFFF']
+        }
+    },
+    [[1204, 1207, 1210, 1249, 1252, 1255]]            : {
+        images        : {
+            top   : [SnowTop],
+            bottom: Snow
+        },
+        gradientSearch: ['#48a4df', '#6ecaf8'],
+        gradientImage : {
+            colors: ['#48a4df', '#FFFFFF']
+        }
+    },
+    [[1069, 1117, 1222, 1225, 1237, 1264]]            : {
+        images        : {
+            top   : [SnowTop],
+            bottom: Snow
+        },
+        gradientSearch: ['#48a4df', '#6ecaf8'],
+        gradientImage : {
+            colors: ['#48a4df', '#FFFFFF']
+        }
+    },
+    [[1279, 1282]]                                    : {
+        images        : {
+            top   : [SnowTop],
+            bottom: Snow
+        },
+        gradientSearch: ['#48a4df', '#6ecaf8'],
+        gradientImage : {
+            colors: ['#48a4df', '#FFFFFF']
+        }
+    },
+    [[1009, 1072]]                                    : {
+        images        : {
+            top   : [OvercastTop],
+            bottom: Snow
+        },
+        gradientSearch: ['#839dae', '#A6CADF'],
+        gradientImage : {
+            colors: ['#839dae', '#FFFFFF']
+        }
+    },
+    [[1087, 1273, 1276]]                              : {
+        images        : {
+            top   : [StormTop],
+            bottom: Storm
+        },
+        gradientSearch: ['#616876', '#A4A9B0'],
+        gradientImage : {
+            colors: ['#616876', '#FFFFFF']
+        }
+    },
+    [[1150, 1153, 1168, 1180, 1183, 1198, 1240]]      : {
+        images        : {
+            top   : [RainTop],
+            bottom: Rain
+        },
+        gradientSearch: ['#919CA1', '#E4E9EC'],
+        gradientImage : {
+            colors: ['#919CA1', '#FFFFFF']
+        }
+    },
+    [[1171, 1186, 1189, 1192, 1195, 1201, 1243, 1246]]: {
+        images        : {
+            top   : [RainTop],
+            bottom: Rain
+        },
+        gradientSearch: ['#919CA1', '#E4E9EC'],
+        gradientImage : {
+            colors: ['#919CA1', '#FFFFFF']
         }
     }
+};
 
-    return 'sunny';
-}
+export const getProps = (code) => {
+    const keys = Object.keys(codesToProps);
 
-export const getImages = (code) => {
-    let key = mapCode(code);
+    return codesToProps[keys.find((key) => key.indexOf(code) > -1)];
+};
 
-    return images[key].slice(0);
-}
-
-export const getGradColors = (code) => {
-    let key = mapCode(code);
-
-    return gradColorsMap[key].slice(0);
-}
-export default images;
+export default codesToProps;

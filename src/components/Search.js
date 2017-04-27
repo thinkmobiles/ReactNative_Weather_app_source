@@ -20,7 +20,7 @@ import {
 
 import {setWeather} from '../actions/weatherActions';
 import {getCities, initForecast} from '../helpers/weatherAPI';
-import {getGradColors} from '../svgs_converted/topImageElements/';
+import {getProps} from '../svgs_converted/topImageElements/';
 
 import Icon from './Icons';
 
@@ -32,7 +32,8 @@ export default class Search extends Component {
         super(props);
 
         let code = this.props.current.condition.code;
-        this.gradColors = getGradColors(code);
+        let {gradientSearch} = getProps(code);
+        this.gradColors = gradientSearch;
 
         this.state = {
             text      : '',

@@ -2,10 +2,12 @@
 
 import React from 'react';
 import moment from 'moment';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
 import {connect} from 'react-redux';
 
 import Icon from '../Icons';
+
+const {height} = Dimensions.get('window');
 
 const mapCodeToIcon = (code) => {
     const codesMap = {
@@ -101,6 +103,7 @@ export default class extends React.Component {
 const styles = StyleSheet.create({
     container           : {
         flex         : 0.7,
+        maxHeight    : height * 0.35,
         flexDirection: 'column',
         paddingLeft  : 35,
         paddingRight : 25,
