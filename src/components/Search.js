@@ -15,7 +15,8 @@ import {
     TouchableHighlight,
     ActivityIndicator,
     BackAndroid,
-    StyleSheet
+    StyleSheet,
+    Keyboard
 } from 'react-native';
 
 import {setWeather} from '../actions/weatherActions';
@@ -23,6 +24,8 @@ import {getCities, initForecast} from '../helpers/weatherAPI';
 import {getProps} from '../helpers/getWeatherProps';
 
 import Icon from './Icons';
+
+const isIos = Platform.OS === 'ios';
 
 @connect((store) => {
     return {...store.weather.weather};
@@ -111,6 +114,8 @@ export default class Search extends Component {
     }
 
     setWeather(query) {
+        Keyboard.dismiss();
+
         this.setState({
             loaderShow: true
         });
@@ -157,20 +162,22 @@ export default class Search extends Component {
                     >
                         <Icon
                             name="back"
-                            height="42"
-                            width="40"
+                            height={isIos ? 42 : 52}
+                            width={isIos ? 40 : 50}
                             fill="white"
                             stroke="none"
                         />
                     </TouchableOpacity>
                     <TextInput
-                        ref="textInput"
+                        ref={textInput => {
+                            this.textInput = textInput;
+                        }}
                         style={styles.textInput}
                         value={this.state.text}
                         onChangeText={this.onChangeText}
                         underlineColorAndroid={"transparent"}
                         placeholder={"Enter your location"}
-                        placeholderTextColor={'#fff'}
+                        placeholderTextColor={'#e3e3e3'}
                     />
                     {this.state.loaderShow && <ActivityIndicator
                         color={this.gradColors[0]}
@@ -180,6 +187,10 @@ export default class Search extends Component {
 
                 {bottomComponent}
             </View>)
+    }
+
+    componentDidMount() {
+        this.textInput.focus();
     }
 
     componentWillUnmount() {
@@ -217,13 +228,14 @@ const styles = StyleSheet.create({
     textInput   : {
         flex      : 1,
         color     : '#fff',
-        fontFamily: 'Muli-Bold'
+        fontFamily: 'Muli-Bold',
+        fontSize  : isIos ? 16 : 20
     },
     topBar      : {
         flex         : 1,
         flexDirection: 'row',
         alignItems   : 'center',
-        paddingTop   : Platform.OS === 'ios' ? 30 : 0,
-        maxHeight    : Platform.OS === 'ios' ? 42 : 72
+        paddingTop   : isIos ? 30 : 0,
+        maxHeight    : isIos ? 42 : 72
     }
 });
