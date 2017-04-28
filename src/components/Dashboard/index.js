@@ -17,10 +17,11 @@ import {
     Text,
     Navigator,
     Dimensions,
-    Animated
+    Animated,
+    PanResponder
 } from 'react-native';
 
-const deviseScreen = Dimensions.get('window');
+const {height} = Dimensions.get('window');
 
 @connect((store) => {
     return {
@@ -32,9 +33,32 @@ export default class extends React.Component {
     constructor(props) {
         super(props);
 
+        this.multiplyAnimated = new Animated.Value(-1);
+
         this.state = {
             margin: new Animated.Value(0)
         };
+
+        this.startY;
+
+        this.state.panResponder = PanResponder.create({
+            onStartShouldSetPanResponder: (e) => {
+                const {pageY} = e.nativeEvent;
+
+                this.startY = pageY;
+                return true
+            },
+            onPanResponderMove          : Animated.event([null, {dy: this.state.margin}]),
+            onPanResponderRelease       : (e) => {
+                const {pageY} = e.nativeEvent;
+                let end = (pageY > this.startY) ? height * 0.4 : 0;
+
+                Animated.spring(
+                    this.state.margin,
+                    {toValue: end}
+                ).start();
+            },
+        });
 
         this.changeMargin = this._changeMargin.bind(this);
     }
@@ -50,9 +74,11 @@ export default class extends React.Component {
         gradientImage.style = styles.gradient;
 
         return (
-            <Animated.View style={[styles.fullScreen, {marginBottom: this.state.margin}]}>
+            <Animated.View
+                {...this.state.panResponder.panHandlers}
+                style={[styles.fullScreen, {marginBottom: this.state.margin}]}>
                 <Animated.View
-                    style={[styles.gradientContainer, {bottom: deviseScreen.height * 0.20 + this.state.margin._value}]}>
+                    style={[styles.gradientContainer, {bottom: this.state.margin}]}>
                     <LinearGradient
                         {...gradientImage}
                     >
@@ -79,17 +105,19 @@ const styles = StyleSheet.create({
         flex           : 1,
         width          : undefined,
         height         : undefined,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        minHeight      : height
     },
     gradientContainer: {
-        position : 'absolute',
-        overflow : 'hidden',
-        top      : 0,
-        left     : 0,
-        right    : 0,
-        maxHeight: deviseScreen.height * 1.05,
-        minHeight: deviseScreen.height * 0.5,
-        zIndex   : 1
+        position    : 'absolute',
+        overflow    : 'hidden',
+        marginBottom: height * 0.2,
+        top         : 0,
+        left        : 0,
+        right       : 0,
+        maxHeight   : height * 1.3,
+        minHeight   : height,
+        zIndex      : 1
     },
     gradient         : {
         flex: 1

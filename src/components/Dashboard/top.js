@@ -26,22 +26,22 @@ export default class extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
+        /*this.state = {
             bounceValueStart: new Animated.Value()
-        };
+        };*/
 
         this.onLocationPress = this._onLocationPress.bind(this);
 
-        this.onMoveStart = this._onMoveStart.bind(this);
+        /*this.onMoveStart = this._onMoveStart.bind(this);
         this.onMove = this._onMove.bind(this);
-        this.onMoveEnd = this._onMoveEnd.bind(this);
+        this.onMoveEnd = this._onMoveEnd.bind(this);*/
     }
 
     _onLocationPress() {
         this.props.navigator.replace({id: 'Search'});
     }
 
-    _createAnimation(toValue) {
+    /*_createAnimation(toValue) {
         const start = this.props.indexState.margin;
         return Animated.spring(
             start,
@@ -73,14 +73,14 @@ export default class extends React.Component {
     _onMoveEnd(e) {
         const {pageY} = e.nativeEvent;
 
-        if (pageY > this.startY)/*(pageY > height * 0.55)*/ {
+        if (pageY > this.startY)/!*(pageY > height * 0.55)*!/ {
             this._createAnimation(-height * 0.4).start();
         }
         else {
             this._createAnimation(0).start();
         }
 
-    }
+    }*/
 
     getRealFont(text) {
         const length = text.length;
@@ -115,7 +115,7 @@ export default class extends React.Component {
                 onMoveShouldSetResponderCapture={this.onMoveStart}
                 hitSlop={{top: 0, bottom: 70, left: 0, right: 0}}
             >
-                <View style={styles.innerContainer}>
+                <View onResponderTerminate={() => false} style={styles.innerContainer}>
                     <View onPress={this.onLocationPress} style={styles.locationBlock}>
                         <View style={{alignSelf: 'flex-start'}}>
                             <Icon
@@ -142,11 +142,16 @@ export default class extends React.Component {
                             <Text style={[styles.tempTextDimension, styles.headerText]}>°</Text>
                         </View>
                     </View>
-
-
                     <Text style={[styles.headerText, styles.conditionText]}>
                         {currentWeather.condition && currentWeather.condition.text}
                     </Text>
+                    {/*<View style={styles.moreInfo}>
+                        <Text>dsfdsfdsf</Text>
+                        <Text>dsfdsfdsf</Text>
+                        <Text>dsfdsfdsf</Text>
+                        <Text>dsfdsfdsf</Text>
+                        <Text>dsfdsfdsf</Text>
+                    </View>*/}
                 </View>
             </Animated.View>
 
@@ -201,5 +206,8 @@ const styles = StyleSheet.create({
     conditionText    : {
         paddingTop: 5,
         fontSize  : 25
+    },
+    moreInfo         : {
+        flex: 0.2
     }
 });
