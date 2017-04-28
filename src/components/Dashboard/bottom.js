@@ -15,17 +15,22 @@ const {height} = Dimensions.get('window');
 })
 
 export default class extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 {this.props.collection.map((rowElement, index) => {
                     let iconName = getProps(rowElement.day.condition.code, 'icon');
                     let boldStyleObject = {
-                        fontFamily: !index ? 'Muli-SemiBold' : 'Muli-Light',
+                        fontFamily: !index ? 'Muli-SemiBold' : 'Muli-Light'
                     };
 
                     return (
-                        <View key={'element-' + index} style={styles.row}>
+                        <View key={'element-' + index}
+                              style={[styles.row]}>
                             <View style={[styles.rowElement, styles.dayElement]}>
                                 <Text style={[
                                     styles.dayElementText,
@@ -76,11 +81,11 @@ export default class extends React.Component {
 const styles = StyleSheet.create({
     container           : {
         flex         : 1,
-        maxHeight    : height * 0.47,
+        maxHeight    : height * 0.4,
         flexDirection: 'column',
         paddingLeft  : 35,
         paddingRight : 25,
-        paddingBottom: 15
+        marginBottom : 15
     },
     row                 : {
         flex         : 1,

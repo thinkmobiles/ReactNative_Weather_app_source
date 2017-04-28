@@ -92,13 +92,13 @@ export default class extends React.Component {
                     <Text style={[styles.headerText, styles.conditionText]}>
                         {currentWeather.condition && currentWeather.condition.text}
                     </Text>
-                    <View style={styles.moreInfo}>
+                    {/*<View style={styles.moreInfo}>
                         <Text>dsfdsfdsf</Text>
                         <Text>dsfdsfdsf</Text>
                         <Text>dsfdsfdsf</Text>
                         <Text>dsfdsfdsf</Text>
                         <Text>dsfdsfdsf</Text>
-                    </View>
+                    </View>*/}
                 </View>
             </View>
 
