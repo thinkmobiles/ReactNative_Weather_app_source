@@ -12,6 +12,7 @@ import TopImage from './topImage';
 import {getProps} from '../../helpers/getWeatherProps';
 
 import {
+    Platform,
     StyleSheet,
     View,
     Text,
@@ -22,6 +23,7 @@ import {
 } from 'react-native';
 
 const {height} = Dimensions.get('window');
+const isIos = Platform.OS === 'ios';
 
 @connect((store) => {
     return {
@@ -32,6 +34,7 @@ const {height} = Dimensions.get('window');
 export default class extends React.Component {
     constructor(props) {
         super(props);
+        let self = this;
 
         this.state = {
             margin: new Animated.Value(0)
@@ -48,7 +51,7 @@ export default class extends React.Component {
             },
             onPanResponderMove          : (e, gestureState) => {
                 const {pageY} = e.nativeEvent;
-                let maxMargin = height * 0.35;
+                let maxMargin = height * 0.32;
                 let diff;
 
                 diff = pageY - this.startY;
@@ -62,7 +65,7 @@ export default class extends React.Component {
             onPanResponderRelease       : (e) => {
                 const {pageY} = e.nativeEvent;
 
-                let end = (pageY > this.startY) ? -(height * 0.35) : 0;
+                let end = (pageY > this.startY) ? -(height * 0.32) : 0;
 
                 Animated.spring(
                     this.state.margin,
@@ -104,7 +107,7 @@ export default class extends React.Component {
                         changeMargin={this.changeMargin}
                         indexState={this.state}
                     />
-                    <Bottom/>
+                    <Bottom />
                 </View>
             </Animated.View>
         );
@@ -113,6 +116,7 @@ export default class extends React.Component {
 
 const styles = StyleSheet.create({
     fullScreen       : {
+        paddingTop     : isIos ? 20 : 0,
         flex           : 1,
         width          : undefined,
         height         : undefined,
