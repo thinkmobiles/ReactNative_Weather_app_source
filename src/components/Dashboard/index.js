@@ -12,6 +12,7 @@ import TopImage from './topImage';
 import {getProps} from '../../helpers/getWeatherProps';
 
 import {
+    Platform,
     StyleSheet,
     View,
     Text,
@@ -22,6 +23,7 @@ import {
 } from 'react-native';
 
 const {height} = Dimensions.get('window');
+const isIos = Platform.OS === 'ios';
 
 @connect((store) => {
     return {
@@ -114,6 +116,7 @@ export default class extends React.Component {
 
 const styles = StyleSheet.create({
     fullScreen       : {
+        paddingTop     : isIos ? 20 : 0,
         flex           : 1,
         width          : undefined,
         height         : undefined,

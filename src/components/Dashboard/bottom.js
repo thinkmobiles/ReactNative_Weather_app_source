@@ -97,9 +97,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     bottomText          : {
-        fontFamily: 'Muli-Light',
-        fontSize  : 18,
-        color     : '#979797'
+        fontFamily     : 'Muli-Light',
+        fontSize       : 18,
+        color          : '#979797',
+        backgroundColor: 'transparent'
     },
     dayElement          : {
         flex: 1

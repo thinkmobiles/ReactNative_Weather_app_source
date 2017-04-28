@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
         flex         : 1,
         flexDirection: 'row',
         alignItems   : 'center',
-        paddingTop   : isIos ? 30 : 0,
-        maxHeight    : isIos ? 42 : 72
+        paddingTop   : isIos ? 20 : 0,
+        maxHeight    : isIos ? 92 : 72
     }
 });
