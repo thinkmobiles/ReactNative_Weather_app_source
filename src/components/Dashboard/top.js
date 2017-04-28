@@ -26,61 +26,12 @@ export default class extends React.Component {
     constructor(props) {
         super(props);
 
-        /*this.state = {
-            bounceValueStart: new Animated.Value()
-        };*/
-
         this.onLocationPress = this._onLocationPress.bind(this);
-
-        /*this.onMoveStart = this._onMoveStart.bind(this);
-        this.onMove = this._onMove.bind(this);
-        this.onMoveEnd = this._onMoveEnd.bind(this);*/
     }
 
     _onLocationPress() {
         this.props.navigator.replace({id: 'Search'});
     }
-
-    /*_createAnimation(toValue) {
-        const start = this.props.indexState.margin;
-        return Animated.spring(
-            start,
-            {
-                toValue : toValue,
-                velocity: 3,
-                tension : 2,
-                friction: 8
-            }
-        )
-    }
-
-    _onMoveStart(e) {
-        const {pageY, locationY} = e.nativeEvent;
-        this.startY = pageY;
-
-        return locationY > 60;
-    }
-
-    _onMove(e) {
-        const {pageY} = e.nativeEvent;
-        let diff;
-
-        diff = pageY - this.startY;
-
-        this.props.changeMargin(-diff);
-    }
-
-    _onMoveEnd(e) {
-        const {pageY} = e.nativeEvent;
-
-        if (pageY > this.startY)/!*(pageY > height * 0.55)*!/ {
-            this._createAnimation(-height * 0.4).start();
-        }
-        else {
-            this._createAnimation(0).start();
-        }
-
-    }*/
 
     getRealFont(text) {
         const length = text.length;
@@ -108,12 +59,8 @@ export default class extends React.Component {
         };
 
         return (
-            <Animated.View
+            <View
                 style={styles.topSection}
-                onResponderMove={this.onMove}
-                onResponderRelease={this.onMoveEnd}
-                onMoveShouldSetResponderCapture={this.onMoveStart}
-                hitSlop={{top: 0, bottom: 70, left: 0, right: 0}}
             >
                 <View onResponderTerminate={() => false} style={styles.innerContainer}>
                     <View onPress={this.onLocationPress} style={styles.locationBlock}>
@@ -145,15 +92,15 @@ export default class extends React.Component {
                     <Text style={[styles.headerText, styles.conditionText]}>
                         {currentWeather.condition && currentWeather.condition.text}
                     </Text>
-                    {/*<View style={styles.moreInfo}>
+                    <View style={styles.moreInfo}>
                         <Text>dsfdsfdsf</Text>
                         <Text>dsfdsfdsf</Text>
                         <Text>dsfdsfdsf</Text>
                         <Text>dsfdsfdsf</Text>
                         <Text>dsfdsfdsf</Text>
-                    </View>*/}
+                    </View>
                 </View>
-            </Animated.View>
+            </View>
 
         );
     }

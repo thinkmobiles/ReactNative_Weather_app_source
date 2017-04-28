@@ -33,8 +33,6 @@ export default class extends React.Component {
     constructor(props) {
         super(props);
 
-        this.multiplyAnimated = new Animated.Value(-1);
-
         this.state = {
             margin: new Animated.Value(0)
         };
@@ -48,10 +46,23 @@ export default class extends React.Component {
                 this.startY = pageY;
                 return true
             },
-            onPanResponderMove          : Animated.event([null, {dy: this.state.margin}]),
+            onPanResponderMove          : (e, gestureState) => {
+                const {pageY} = e.nativeEvent;
+                let maxMargin = height * 0.35;
+                let diff;
+
+                diff = pageY - this.startY;
+
+                if (diff < 0 && maxMargin - gestureState.dy >= 0) {
+                    return this.state.margin.setValue(-maxMargin - gestureState.dy);
+                } else if (diff > 0 && gestureState.dy <= maxMargin) {
+                    return this.state.margin.setValue(-gestureState.dy);
+                }
+            },
             onPanResponderRelease       : (e) => {
                 const {pageY} = e.nativeEvent;
-                let end = (pageY > this.startY) ? height * 0.4 : 0;
+
+                let end = (pageY > this.startY) ? -(height * 0.35) : 0;
 
                 Animated.spring(
                     this.state.margin,
