@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         paddingLeft  : 35,
         paddingRight : 25,
-        marginBottom : 15
+        marginBottom : 15,
+        zIndex       : 3
     },
     row                 : {
         flex         : 1,

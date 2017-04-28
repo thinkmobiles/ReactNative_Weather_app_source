@@ -27,20 +27,18 @@ const isIos = Platform.OS === 'ios';
 
 @connect((store) => {
     return {
-        ...store.weather.weather
+        ...store.weather.weather,
+        ...store.customVars.customVars
     };
 })
 
 export default class extends React.Component {
     constructor(props) {
         super(props);
-        let self = this;
 
         this.state = {
-            margin: new Animated.Value(0)
+            margin: this.props.dashBoardAnimatedValue
         };
-
-        this.startY;
 
         this.state.panResponder = PanResponder.create({
             onStartShouldSetPanResponder: (e) => {

@@ -4,6 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import Icon from '../Icons';
+import TopBottomPart from './topBottomPart';
 
 import {
     View,
@@ -13,8 +14,8 @@ import {
     Animated
 } from 'react-native';
 
-const {height, width} = Dimensions.get('window');
-const locationDefFont = 24;
+const {width} = Dimensions.get('window');
+const locationDefFont = 19;
 
 @connect((store) => {
     return {
@@ -51,11 +52,8 @@ export default class extends React.Component {
     render() {
         const {
             location = {},
-            current = {},
-            forecast = {}
+            current = {}
         } = this.props;
-
-        const forecastToday = forecast.forecastday && forecast.forecastday[0] || {};
 
         let locationText = `${location.name}, ${location.country}`;
         let fontSize = this.getRealFont(locationText);
@@ -63,30 +61,7 @@ export default class extends React.Component {
             fontSize: fontSize
         };
 
-        const {
-            temp_c,
-            feelslike_c,
-            humidity,
-            vis_km
-        } = current;
-
-        const {
-            maxtemp_c,
-            maxtemp_f,
-            maxwind_mph,
-            maxwind_kph
-        } = forecastToday.day;
-
-        const {
-            temp_c: overnightTempC,
-            temp_f: overnightTempF
-        } = forecastToday.hour[23];
-
         const condText = current.condition && current.condition.text || '';
-        const minWind_kph = Math.min(...forecastToday.hour.map(h => h.wind_kph)).toFixed(2);
-        const minWind_mph = (minWind_kph * 0.621371).toFixed(2);
-
-        const moreInfoText = `Today - ${condText} with a high of ${maxtemp_f} F (${maxtemp_c} C). Winds variable at ${minWind_mph} to ${maxwind_mph} mph (${minWind_kph} to ${maxwind_kph} kph). The overnight ${overnightTempC < temp_c ? 'low' : 'high'} to ${overnightTempF} F (${overnightTempC} C)`;
 
         return (
             <View
@@ -122,34 +97,7 @@ export default class extends React.Component {
                     <Text style={[styles.headerText, styles.conditionText]}>
                         {condText}
                     </Text>
-                    <View style={styles.moreInfo}>
-                        <View style={styles.moreInfoTop}>
-                            <View style={styles.moreInfoTopElement}>
-                                <Text style={styles.moreInfoTopElementDesc}>Feels like</Text>
-                                <Text
-                                    style={styles.moreInfoTopElementValue}>{`${Math.round(parseInt(feelslike_c, 10))}`}</Text>
-                            </View>
-                            <View style={styles.moreInfoSeparator}>
-                                <Text style={styles.moreInfoSeparatorText}>|</Text>
-                            </View>
-                            <View style={styles.moreInfoTopElement}>
-                                <Text style={styles.moreInfoTopElementDesc}>Humidity</Text>
-                                <Text style={styles.moreInfoTopElementValue}>{`${humidity}%`}</Text>
-                            </View>
-                            <View style={styles.moreInfoSeparator}>
-                                <Text style={styles.moreInfoSeparatorText}>|</Text>
-                            </View>
-                            <View style={styles.moreInfoTopElement}>
-                                <Text style={styles.moreInfoTopElementDesc}>Visibility</Text>
-                                <Text style={styles.moreInfoTopElementValue}>{`${vis_km} km`}</Text>
-                            </View>
-                        </View>
-                        <View style={styles.moreInfoBottom}>
-                            <Text style={styles.moreInfoBottomText}>
-                                {moreInfoText}
-                            </Text>
-                        </View>
-                    </View>
+                    <TopBottomPart/>
                 </View>
             </View>
         );
@@ -157,24 +105,24 @@ export default class extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    topSection             : {
+    topSection       : {
         flex           : 1,
         flexDirection  : 'row',
         alignItems     : 'flex-start',
         justifyContent : 'center',
         backgroundColor: 'transparent'
     },
-    innerContainer         : {
+    innerContainer   : {
         flex           : 1,
         marginTop      : 35,
         backgroundColor: 'transparent'
     },
-    headerText             : {
+    headerText       : {
         fontFamily: 'Muli-SemiBold',
         textAlign : 'center',
         color     : '#fff'
     },
-    locationBlock          : {
+    locationBlock    : {
         maxWidth      : width,
         paddingLeft   : 20,
         paddingRight  : 20,
@@ -182,70 +130,26 @@ const styles = StyleSheet.create({
         alignItems    : 'center',
         justifyContent: 'center'
     },
-    locationText           : {
+    locationText     : {
         fontFamily: 'Muli-Regular'
     },
-    tempBlock              : {
+    tempBlock        : {
         flexDirection : 'row',
         alignItems    : 'flex-start',
         justifyContent: 'center'
     },
-    tempText               : {
-        fontSize     : 120,
-        lineHeight   : 110,
+    tempText         : {
+        fontSize     : 90,
+        lineHeight   : 80,
         paddingBottom: 5,
     },
-    tempTextDimension      : {
+    tempTextDimension: {
         marginLeft: -7,
         fontSize  : 70,
         lineHeight: 75
     },
-    conditionText          : {
+    conditionText    : {
         paddingTop: 5,
-        fontSize  : 25
-    },
-    moreInfo               : {
-        flex: 0.2
-    },
-    moreInfoTop            : {
-        flexDirection : 'row',
-        justifyContent: 'center'
-    },
-    moreInfoTopElement     : {
-        alignItems: 'center',
-        marginTop : 52
-    },
-    moreInfoTopElementDesc : {
-        fontFamily: 'Muli-Regular',
-        fontSize  : 12,
-        color     : '#fff'
-    },
-    moreInfoTopElementValue: {
-        fontFamily: 'Muli-SemiBold',
-        fontSize  : 21,
-        color     : '#fff'
-    },
-    moreInfoSeparator      : {
-        marginLeft : 10,
-        marginRight: 10,
-        marginTop  : 52
-    },
-    moreInfoSeparatorText  : {
-        fontSize: 24,
-        color   : '#fff'
-    },
-    moreInfoBottom         : {
-        flexDirection : 'row',
-        justifyContent: 'center',
-        marginLeft    : 25,
-        marginRight   : 24,
-        marginTop     : 34
-    },
-    moreInfoBottomText     : {
-        color        : '#fff',
-        fontSize     : 16,
-        fontFamily   : 'Muli-Regular',
-        lineHeight   : 21,
-        letterSpacing: 0.8
+        fontSize  : 21
     }
 });
