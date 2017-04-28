@@ -34,21 +34,21 @@ const codesToProps = {
         gradientImage : {
             colors: ['#F1AB65', '#FFFFFF']
         },
-        icon: 'sunny'
+        icon          : 'sunny'
     },
     [[1003, 1006, 1063]]                              : {
         images        : {
             top   : [CloudTop],
             bottom: Cloud
         },
-        gradientSearch: ['#f9d676', '#f2ab60'],
+        gradientSearch: ['#f2ab60', '#f9d676'],
         gradientImage : {
             colors   : ['#FFFFFF', '#f2ab60'],
             start    : {x: -0.3, y: 0},
             end      : {x: 0.7, y: 1},
             locations: [0, 0.4]
         },
-        icon: 'cloudy'
+        icon          : 'cloudy'
     },
     [[1066, 1114, 1213, 1216, 1219, 1258, 1261]]      : {
         images        : {
@@ -59,7 +59,7 @@ const codesToProps = {
         gradientImage : {
             colors: ['#48a4df', '#FFFFFF']
         },
-        icon: 'snowy'
+        icon          : 'snowy'
     },
     [[1204, 1207, 1210, 1249, 1252, 1255]]            : {
         images        : {
@@ -70,7 +70,7 @@ const codesToProps = {
         gradientImage : {
             colors: ['#48a4df', '#FFFFFF']
         },
-        icon: 'snowy'
+        icon          : 'snowy'
     },
     [[1069, 1117, 1222, 1225, 1237, 1264]]            : {
         images        : {
@@ -81,7 +81,7 @@ const codesToProps = {
         gradientImage : {
             colors: ['#48a4df', '#FFFFFF']
         },
-        icon: 'snowy'
+        icon          : 'snowy'
     },
     [[1279, 1282]]                                    : {
         images        : {
@@ -92,7 +92,7 @@ const codesToProps = {
         gradientImage : {
             colors: ['#48a4df', '#FFFFFF']
         },
-        icon: 'snowy'
+        icon          : 'snowy'
     },
     [[1009, 1072]]                                    : {
         images        : {
@@ -103,7 +103,7 @@ const codesToProps = {
         gradientImage : {
             colors: ['#839dae', '#FFFFFF']
         },
-        icon: 'cloudy'
+        icon          : 'cloudy'
     },
     [[1087, 1273, 1276]]                              : {
         images        : {
@@ -114,7 +114,7 @@ const codesToProps = {
         gradientImage : {
             colors: ['#616876', '#FFFFFF']
         },
-        icon: 'storm'
+        icon          : 'storm'
     },
     [[1150, 1153, 1168, 1180, 1183, 1198, 1240]]      : {
         images        : {
@@ -125,7 +125,7 @@ const codesToProps = {
         gradientImage : {
             colors: ['#919CA1', '#FFFFFF']
         },
-        icon: 'rainy'
+        icon          : 'rainy'
     },
     [[1171, 1186, 1189, 1192, 1195, 1201, 1243, 1246]]: {
         images        : {
@@ -136,7 +136,7 @@ const codesToProps = {
         gradientImage : {
             colors: ['#919CA1', '#FFFFFF']
         },
-        icon: 'rainy'
+        icon          : 'rainy'
     }
 };
 
