@@ -81,10 +81,14 @@ export default class extends React.Component {
     _scrollTo(direction) {
         let end = direction ? -(height * 0.32) : 0;
 
-        Animated.spring(
-            this.state.margin,
-            {toValue: end}
-        ).start();
+        if (this.state.margin._value !== end) {
+            Animated.spring(
+                this.state.margin,
+                {
+                    toValue: end
+                }
+            ).start();
+        }
     }
 
     _setModalVisible(state) {
