@@ -59,7 +59,7 @@ export default class Search extends Component {
     }
 
     _onBackPress() {
-        this.props.navigator.replace({id: 'Dashboard'});
+        this.props.setModalVisible(false);
         return true;
     }
 
@@ -122,7 +122,7 @@ export default class Search extends Component {
 
         initForecast(query, r => {
             this.props.dispatch(setWeather(r));
-            this.props.navigator.replace({id: 'Dashboard'});
+            this.props.setModalVisible(false);
         });
     }
 

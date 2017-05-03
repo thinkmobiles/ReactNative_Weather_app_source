@@ -8,6 +8,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Top from './top';
 import Bottom from './bottom';
 import TopImage from './topImage';
+import Search from '../Search';
 
 import {getProps} from '../../helpers/getWeatherProps';
 
@@ -15,11 +16,10 @@ import {
     Platform,
     StyleSheet,
     View,
-    Text,
-    Navigator,
     Dimensions,
     Animated,
-    PanResponder
+    PanResponder,
+    Modal
 } from 'react-native';
 
 const {height} = Dimensions.get('window');
@@ -37,10 +37,12 @@ export default class extends React.Component {
         super(props);
 
         this.state = {
-            margin: this.props.dashBoardAnimatedValue
+            margin      : this.props.dashBoardAnimatedValue,
+            modalVisible: false
         };
 
         this.scrollTo = this._scrollTo.bind(this);
+        this.setModalVisible = this._setModalVisible.bind(this);
 
         this.state.panResponder = PanResponder.create({
             onStartShouldSetPanResponder: (e) => {
@@ -49,7 +51,7 @@ export default class extends React.Component {
                 this.startY = pageY;
                 this.startYMargin = pageY > height / 2 ? height : 0;
 
-                return true
+                return true;
             },
             onPanResponderMove          : (e, gestureState) => {
                 const {pageY} = e.nativeEvent;
@@ -90,6 +92,12 @@ export default class extends React.Component {
         }
     }
 
+    _setModalVisible(state) {
+        this.setState({
+            modalVisible: state
+        });
+    }
+
     render() {
         let code = this.props.current.condition.code;
         let {images, gradientImage} = getProps(code);
@@ -97,28 +105,39 @@ export default class extends React.Component {
         gradientImage.style = styles.gradient;
 
         return (
-            <Animated.View
-                {...this.state.panResponder.panHandlers}
-                style={[styles.fullScreen, {marginBottom: this.state.margin}]}>
+            <View>
+                <Modal
+                    animationType={"slide"}
+                    transparent={false}
+                    visible={this.state.modalVisible}
+                    onRequestClose={() => {
+                        this.setModalVisible(false)
+                    }}
+                >
+                    <Search setModalVisible={this.setModalVisible}/>
+                </Modal>
                 <Animated.View
-                    style={[styles.gradientContainer, {bottom: this.state.margin}]}>
-                    <LinearGradient
-                        {...gradientImage}
-                    >
-                        <TopImage
-                            images={images}
+                    {...this.state.panResponder.panHandlers}
+                    style={[styles.fullScreen, {marginBottom: this.state.margin}]}>
+                    <Animated.View
+                        style={[styles.gradientContainer, {bottom: this.state.margin}]}>
+                        <LinearGradient
+                            {...gradientImage}
+                        >
+                            <TopImage
+                                images={images}
+                            />
+                        </LinearGradient>
+                    </Animated.View>
+                    <View style={[styles.contentSection]}>
+                        <Top
+                            setModalVisible={this.setModalVisible}
+                            scrollTo={this.scrollTo}
                         />
-                    </LinearGradient>
+                        <Bottom />
+                    </View>
                 </Animated.View>
-                <View style={[styles.contentSection]}>
-                    <Top
-                        navigator={this.props.navigator}
-                        scrollTo={this.scrollTo}
-                        indexState={this.state}
-                    />
-                    <Bottom />
-                </View>
-            </Animated.View>
+            </View>
         );
     }
 }

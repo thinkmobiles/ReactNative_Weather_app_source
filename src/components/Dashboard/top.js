@@ -34,7 +34,7 @@ export default class extends React.Component {
     }
 
     _onLocationPress() {
-        this.props.navigator.replace({id: 'Search'});
+        this.props.setModalVisible(true);
     }
 
     _onTouchablePress() {
