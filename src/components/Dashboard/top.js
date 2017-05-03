@@ -11,7 +11,8 @@ import {
     Text,
     StyleSheet,
     Dimensions,
-    Animated
+    Animated,
+    TouchableOpacity
 } from 'react-native';
 
 const {width} = Dimensions.get('window');
@@ -19,7 +20,8 @@ const locationDefFont = 19;
 
 @connect((store) => {
     return {
-        ...store.weather.weather
+        ...store.weather.weather,
+        ...store.customVars.customVars
     };
 })
 
@@ -28,10 +30,15 @@ export default class extends React.Component {
         super(props);
 
         this.onLocationPress = this._onLocationPress.bind(this);
+        this.onTouchablePress = this._onTouchablePress.bind(this);
     }
 
     _onLocationPress() {
         this.props.setModalVisible(true);
+    }
+
+    _onTouchablePress() {
+        return this.props.scrollTo(this.props.dashBoardAnimatedValue._value >= 0);
     }
 
     getRealFont(text) {
@@ -84,19 +91,23 @@ export default class extends React.Component {
                             {locationText}
                         </Text>
                     </View>
-                    <View style={styles.tempBlock}>
+                    <TouchableOpacity onPress={this.onTouchablePress}>
                         <View>
-                            <Text style={[styles.headerText, styles.tempText]}>
-                                {Math.round(parseInt(current.temp_c, 10)).toString()}
+                            <View style={styles.tempBlock}>
+                                <View>
+                                    <Text style={[styles.headerText, styles.tempText]}>
+                                        {Math.round(parseInt(current.temp_c, 10)).toString()}
+                                    </Text>
+                                </View>
+                                <View>
+                                    <Text style={[styles.tempTextDimension, styles.headerText]}>°</Text>
+                                </View>
+                            </View>
+                            <Text style={[styles.headerText, styles.conditionText]}>
+                                {condText}
                             </Text>
                         </View>
-                        <View>
-                            <Text style={[styles.tempTextDimension, styles.headerText]}>°</Text>
-                        </View>
-                    </View>
-                    <Text style={[styles.headerText, styles.conditionText]}>
-                        {condText}
-                    </Text>
+                    </TouchableOpacity>
                     <TopBottomPart/>
                 </View>
             </View>

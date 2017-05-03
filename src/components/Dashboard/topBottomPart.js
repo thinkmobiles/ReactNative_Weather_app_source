@@ -53,9 +53,7 @@ export default class extends React.Component {
         const minWind_kph = Math.min(...forecastToday.hour.map(h => h.wind_kph)).toFixed(2);
         const minWind_mph = (minWind_kph * 0.621371).toFixed(2);
 
-        const moreInfoText = `Today - ${condText} with a high of ${maxtemp_c} C (${maxtemp_f} F). 
-        Winds variable at ${minWind_kph} to ${maxwind_kph} kph (${minWind_mph} to ${maxwind_mph} mph). 
-        The overnight ${overnightTempC < temp_c ? 'low' : 'high'} to ${overnightTempC} C (${overnightTempF} F)`;
+        const moreInfoText = `Today - ${condText} with a high of ${maxtemp_c} C (${maxtemp_f} F). Winds variable at ${minWind_kph} to ${maxwind_kph} kph (${minWind_mph} to ${maxwind_mph} mph). The overnight ${overnightTempC < temp_c ? 'low' : 'high'} to ${overnightTempC} C (${overnightTempF} F)`;
 
         return (
             <Animated.View
