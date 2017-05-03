@@ -23,7 +23,7 @@ export default class extends React.Component {
         return (
             <View style={styles.container}>
                 {this.props.collection.map((rowElement, index) => {
-                    let iconName = getProps(rowElement.day.condition.code, 'icon');
+                    let {icon} = getProps(rowElement.day.condition.code);
                     let boldStyleObject = {
                         fontFamily: !index ? 'Muli-SemiBold' : 'Muli-Light'
                     };
@@ -41,8 +41,8 @@ export default class extends React.Component {
                                 </Text>
                             </View>
                             <View style={styles.iconBlock}>
-                                {iconName && (<Icon
-                                    name={iconName}
+                                {icon && (<Icon
+                                    name={icon}
                                     height="30"
                                     width="30"
                                     fill="#C4C4C3"

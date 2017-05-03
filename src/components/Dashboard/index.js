@@ -100,9 +100,9 @@ export default class extends React.Component {
 
     render() {
         let code = this.props.current.condition.code;
-        let {images, gradientImage} = getProps(code);
+        let {images, gradient: {background}} = getProps(code);
 
-        gradientImage.style = styles.gradient;
+        background.style = styles.gradient;
 
         return (
             <View>
@@ -122,7 +122,7 @@ export default class extends React.Component {
                     <Animated.View
                         style={[styles.gradientContainer, {bottom: this.state.margin}]}>
                         <LinearGradient
-                            {...gradientImage}
+                            {...background}
                         >
                             <TopImage
                                 images={images}

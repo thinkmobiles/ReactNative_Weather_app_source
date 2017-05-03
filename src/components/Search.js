@@ -35,8 +35,8 @@ export default class Search extends Component {
         super(props);
 
         let code = this.props.current.condition.code;
-        let {gradientSearch} = getProps(code);
-        this.gradColors = gradientSearch;
+        let {gradient: {search}} = getProps(code);
+        this.gradColors = search;
 
         this.state = {
             text      : '',
