@@ -13,7 +13,6 @@ const {height} = Dimensions.get('window');
 @connect((store) => {
     return {collection: store.weather.weather.forecast.forecastday};
 })
-
 export default class extends React.Component {
     constructor(props) {
         super(props);

@@ -12,7 +12,7 @@ export function initForecast(query, cb) {
         .then(r => {
             if (r.error) {
                 console.log(r.error);
-                Alert.alert(r.error.code.toString(), r.error.message);
+                Alert.alert(`Error #${r.error.code.toString()}`, r.error.message);
             }
 
             if (cb && typeof cb === 'function') {

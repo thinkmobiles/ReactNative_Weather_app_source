@@ -11,7 +11,6 @@ import {
     Text,
     StyleSheet,
     Dimensions,
-    Animated,
     TouchableOpacity
 } from 'react-native';
 
@@ -24,7 +23,6 @@ const locationDefFont = 19;
         ...store.customVars.customVars
     };
 })
-
 export default class extends React.Component {
     constructor(props) {
         super(props);

@@ -31,7 +31,6 @@ const isIos = Platform.OS === 'ios';
         ...store.customVars.customVars
     };
 })
-
 export default class extends React.Component {
     constructor(props) {
         super(props);

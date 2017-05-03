@@ -2,9 +2,14 @@
 
 import React from 'react';
 import {connect} from 'react-redux';
-import {View, Text, Image, StyleSheet} from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
+
+import {
+    View,
+    Text,
+    StyleSheet
+} from 'react-native';
 
 import {setWeather} from '../actions/weatherActions';
 import {initForecast} from '../helpers/weatherAPI';
@@ -14,7 +19,6 @@ import Icon from './Icons';
 @connect(store => {
     return {...store.weather};
 })
-
 export default class Splash extends React.Component {
     nav() {
         this.props.navigator.replace({
@@ -79,7 +83,7 @@ const styles = StyleSheet.create({
         flex          : 1,
         alignItems    : 'center',
         justifyContent: 'flex-start',
-        paddingTop: 75
+        paddingTop    : 75
     }
 });
 
