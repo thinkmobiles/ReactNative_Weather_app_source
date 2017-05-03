@@ -20,7 +20,6 @@ const maxMargin = new Animated.Value(height * 0.32);
         ...store.customVars.customVars
     };
 })
-
 export default class extends React.Component {
     render() {
         const {

@@ -3,14 +3,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {
+    View,
+    StyleSheet,
+    Dimensions
+} from 'react-native';
 
 @connect((store) => {
     return {
         ...store.weather.weather
     };
 })
-
 export default class extends React.Component {
     constructor(props) {
         super(props);
