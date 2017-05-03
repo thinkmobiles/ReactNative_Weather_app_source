@@ -23,6 +23,7 @@ export default class extends React.Component {
             <View style={styles.container}>
                 {this.props.collection.map((rowElement, index) => {
                     let {icon} = getProps(rowElement.day.condition.code);
+                    icon = Math.round(Math.random()*10) >5 ? '1204':'1279';
                     let boldStyleObject = {
                         fontFamily: !index ? 'Muli-SemiBold' : 'Muli-Light'
                     };

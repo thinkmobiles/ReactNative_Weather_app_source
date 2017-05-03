@@ -146,23 +146,23 @@ const icons = {
     [[1000]]                              : 'sunny',
     [[1003, 1006, 1009, 1063, 1072]]      : 'cloudy',
     [[1030, 1135, 1147]]                  : 'fog',
-    [[1066, 1210, 1216, 1255]]            : 'snowy', /*TODO cloud, little snow and sun*/
-    [[1069, 1249, 1252]]                  : 'snowy', /*TODO rain and snow and sun*/
+    [[1066, 1210, 1216, 1255]]            : 'cloudyLittleSnow', /*TODO cloud, little snow and sun*/
+    [[1069, 1249, 1252]]                  : 'rainSnowSun', /*TODO rain and snow and sun*/
     [[1114, 1117, 1213, 1219, 1225]]      : 'snowy',
-    [[1204, 1207]]                        : 'snowy', /*TODO rain and snow*/
+    [[1204, 1207]]                        : 'rainSnow', /*TODO rain and snow*/
     [[1216, 1222, 1258]]                  : 'snowy', /*TODO cloud, more snow and sun*/
-    [[1237, 1261]]                        : 'snowy', /*TODO ice cloud*/
-    [[1264]]                              : 'snowy', /*TODO ice ice cloud*/
-    [[1087, 1273]]                        : 'storm', /*TODO sun, cloud and thunder*/
-    [[1276]]                              : 'storm', /*TODO cloud and thunder*/
-    [[1279]]                              : 'storm', /*TODO sun, cloud, snow and thunder*/
-    [[1282]]                              : 'storm', /*TODO cloud, snow and thunder*/
+    [[1237, 1261]]                        : 'iceCloudy', /*TODO ice cloud*/
+    [[1264]]                              : 'bigIceCloudy', /*TODO ice ice cloud*/
+    [[1087, 1273]]                        : 'thunder', /*TODO sun, cloud and thunder*/
+    [[1276]]                              : 'cloudyThunder', /*TODO cloud and thunder*/
+    [[1279]]                              : 'snowThunder', /*TODO sun, cloud, snow and thunder*/
+    [[1282]]                              : 'cloudySnowThunder', /*TODO cloud, snow and thunder*/
     [[
         1150, 1153, 1168, 1171, 1183,
         1189, 1195, 1198, 1201
 
     ]]                                    : 'rainy',
-    [[1240, 1243, 1246, 1180, 1186, 1192]]: 'rainy', /*TODO rain, cloud and sun*/
+    [[1240, 1243, 1246, 1180, 1186, 1192]]: 'rainCloudy', /*TODO rain, cloud and sun*/
 
 };
 
