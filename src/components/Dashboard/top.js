@@ -75,22 +75,24 @@ export default class extends React.Component {
                 style={styles.topSection}
             >
                 <View onResponderTerminate={() => false} style={styles.innerContainer}>
-                    <View onPress={this.onLocationPress} style={styles.locationBlock}>
-                        <View style={{alignSelf: 'flex-start'}}>
-                            <Icon
-                                name="location"
-                                height={fontSize}
-                                width={fontSize}
-                                fill="transparent"
-                                stroke="#fff"
-                                strokeWidth="1"
-                            />
+                    <TouchableOpacity onPress={this.onLocationPress}>
+                        <View style={styles.locationBlock}>
+                            <View style={{alignSelf: 'flex-start'}}>
+                                <Icon
+                                    name="location"
+                                    height={fontSize}
+                                    width={fontSize}
+                                    fill="transparent"
+                                    stroke="#fff"
+                                    strokeWidth="1"
+                                />
+                            </View>
+                            <Text style={[styles.headerText, styles.locationText, locationFontStyle]}
+                                  onPress={this.onLocationPress}>
+                                {locationText}
+                            </Text>
                         </View>
-                        <Text style={[styles.headerText, styles.locationText, locationFontStyle]}
-                              onPress={this.onLocationPress}>
-                            {locationText}
-                        </Text>
-                    </View>
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={this.onTouchablePress}>
                         <View>
                             <View style={styles.tempBlock}>
