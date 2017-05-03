@@ -56,7 +56,9 @@ export default class extends React.Component {
 
         return (
             <Animated.View
-                style={[styles.moreInfo, {marginTop: Animated.add(maxMargin, this.props.dashBoardAnimatedValue)}]}>
+                style={[styles.moreInfo, {
+                    marginTop: Animated.add(maxMargin, this.props.dashBoardAnimatedValue)
+                }]}>
                 <View style={styles.moreInfoTop}>
                     <View style={styles.moreInfoTopElement}>
                         <Text style={styles.moreInfoTopElementDesc}>Feels like</Text>
