@@ -39,44 +39,49 @@ export default class extends React.Component {
         this.state = {
             margin: this.props.dashBoardAnimatedValue
         };
+        this.scrollTo = this._scrollTo.bind(this);
 
         this.state.panResponder = PanResponder.create({
             onStartShouldSetPanResponder: (e) => {
                 const {pageY} = e.nativeEvent;
 
-                this.startY = pageY;
+                this.startY = pageY > height / 2 ? height : 0;
+
                 return true
             },
             onPanResponderMove          : (e, gestureState) => {
                 const {pageY} = e.nativeEvent;
+                const {dy} = gestureState;
                 let maxMargin = height * 0.32;
                 let diff;
+                let value;
 
-                diff = pageY - this.startY;
+                if (maxMargin - dy >= 0 && dy <= maxMargin) {
+                    diff = pageY - this.startY;
 
-                if (diff < 0 && maxMargin - gestureState.dy >= 0) {
-                    return this.state.margin.setValue(-maxMargin - gestureState.dy);
-                } else if (diff > 0 && gestureState.dy <= maxMargin) {
-                    return this.state.margin.setValue(-gestureState.dy);
+                    value = diff < 0 ? -maxMargin - dy : -dy;
+
+                    return this.state.margin.setValue(value);
                 }
+
+                return this.state.margin.setValue(this.state.margin._value);
             },
             onPanResponderRelease       : (e) => {
                 const {pageY} = e.nativeEvent;
+                let direction = (pageY > height / 2 ? height : 0);
 
-                let end = (pageY > this.startY) ? -(height * 0.32) : 0;
-
-                Animated.spring(
-                    this.state.margin,
-                    {toValue: end}
-                ).start();
+                this.scrollTo(direction);
             },
         });
-
-        this.changeMargin = this._changeMargin.bind(this);
     }
 
-    _changeMargin(margin) {
-        this.state.margin.setValue(margin);
+    _scrollTo(direction) {
+        let end = direction ? -(height * 0.32) : 0;
+
+        Animated.spring(
+            this.state.margin,
+            {toValue: end}
+        ).start();
     }
 
     render() {
@@ -102,7 +107,7 @@ export default class extends React.Component {
                 <View style={[styles.contentSection]}>
                     <Top
                         navigator={this.props.navigator}
-                        changeMargin={this.changeMargin}
+                        scrollTo={this.scrollTo}
                         indexState={this.state}
                     />
                     <Bottom />
