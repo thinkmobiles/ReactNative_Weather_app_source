@@ -191,12 +191,18 @@ export const getProps = (code) => {
     const iconsKeys = Object.keys(icons);
     const topImagesKeys = Object.keys(topImages);
 
+    let gradient = gradients[gradientKeys.find((key) => key.indexOf(code) > -1)];
+
+    gradient.background.start = gradient.background.start || {x: 0, y: 0};
+    gradient.background.end = gradient.background.end || {x: 0, y: 1};
+    gradient.background.locations = gradient.background.locations || [0, 1];
+
     return {
         images  : {
             top   : topImages[topImagesKeys.find((key) => key.indexOf(code) > -1)],
             bottom: bottomImages[bottomImagesKeys.find((key) => key.indexOf(code) > -1)]
         },
-        gradient: gradients[gradientKeys.find((key) => key.indexOf(code) > -1)],
+        gradient: gradient,
         icon    : icons[iconsKeys.find((key) => key.indexOf(code) > -1)]
     };
 

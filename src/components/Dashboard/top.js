@@ -7,6 +7,7 @@ import Icon from '../Icons';
 import TopBottomPart from './topBottomPart';
 
 import {
+    Platform,
     View,
     Text,
     StyleSheet,
@@ -16,6 +17,7 @@ import {
 
 const {width} = Dimensions.get('window');
 const locationDefFont = 19;
+const isIos = Platform.OS === 'ios';
 
 @connect((store) => {
     return {
@@ -90,7 +92,7 @@ export default class extends React.Component {
                         </Text>
                     </View>
                     <TouchableOpacity onPress={this.onTouchablePress}>
-                        <View>
+                        <View style={styles.touchableContainer}>
                             <View style={styles.tempBlock}>
                                 <View>
                                     <Text style={[styles.headerText, styles.tempText]}>
@@ -142,6 +144,9 @@ const styles = StyleSheet.create({
     locationText     : {
         fontFamily: 'Muli-Regular'
     },
+    touchableContainer: {
+        paddingTop: isIos ? 20 : 0
+    },
     tempBlock        : {
         flexDirection : 'row',
         alignItems    : 'flex-start',
@@ -149,13 +154,13 @@ const styles = StyleSheet.create({
     },
     tempText         : {
         fontSize     : 90,
-        lineHeight   : 80,
+        lineHeight   : 90,
         paddingBottom: 5,
     },
     tempTextDimension: {
-        marginLeft: -7,
-        fontSize  : 70,
-        lineHeight: 75
+        marginLeft: -3,
+        fontSize  : 50,
+        lineHeight: 55
     },
     conditionText    : {
         paddingTop: 5,
