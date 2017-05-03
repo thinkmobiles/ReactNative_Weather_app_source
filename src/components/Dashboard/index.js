@@ -46,7 +46,8 @@ export default class extends React.Component {
             onStartShouldSetPanResponder: (e) => {
                 const {pageY} = e.nativeEvent;
 
-                this.startY = pageY > height / 2 ? height : 0;
+                this.startY = pageY;
+                this.startYMargin = pageY > height / 2 ? height : 0;
 
                 return true
             },
@@ -57,8 +58,8 @@ export default class extends React.Component {
                 let diff;
                 let value;
 
-                if (maxMargin - dy >= 0 && dy <= maxMargin) {
-                    diff = pageY - this.startY;
+                if (this.startYMargin + dy >= 0 && this.startYMargin + dy <= height) {
+                    diff = pageY - this.startYMargin;
 
                     value = diff < 0 ? -maxMargin - dy : -dy;
 
@@ -69,7 +70,7 @@ export default class extends React.Component {
             },
             onPanResponderRelease       : (e) => {
                 const {pageY} = e.nativeEvent;
-                let direction = (pageY > height / 2 ? height : 0);
+                let direction = (pageY > this.startY ? height : 0);
 
                 this.scrollTo(direction);
             },
