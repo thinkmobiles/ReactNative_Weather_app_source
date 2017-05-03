@@ -100,7 +100,7 @@ export default class extends React.Component {
 
     render() {
         let code = this.props.current.condition.code;
-        let {images, gradient: {background}} = getProps(code);
+        let {images, gradient: {background}} = getProps(1279);
 
         background.style = styles.gradient;
 

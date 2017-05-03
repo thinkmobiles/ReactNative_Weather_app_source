@@ -1,7 +1,7 @@
 import React from 'react';
 import Svg, {G, Ellipse} from 'react-native-svg';
 
-export default (width, index, style) => {
+export default (width, index, style, convertToWhite, translate) => {
     return (
         <Svg
             width={width}
@@ -13,88 +13,24 @@ export default (width, index, style) => {
             <G
                 id="layer1">
                 <G
-                    transform={{matrix: '1.2052603,0,0,1,-29.563587,873.19417'}}
+                    transform={{translate: translate || '0,0', scale: '1.2052603, 1'}}
                     id="Page-1">
                     <G
                         fill="#ffffff"
                         id="snow_element_2">
-                        <Ellipse
-                            id="Oval"
-                            cx="327.06424"
-                            cy="16.117674"
-                            rx="1.5216751"
-                            ry="1.5203876"/>
-                        <Ellipse
-                            id="ellipse3598"
-                            cx="44.032677"
-                            cy="109.5607"
-                            rx="1.5216751"
-                            ry="1.5203876"/>
-                        <Ellipse
-                            opacity="0.5"
-                            id="ellipse3600"
-                            cx="25.437807"
-                            cy="136.92767"
-                            rx="1.5216751"
-                            ry="1.5203876"/>
-                        <Ellipse
-                            id="ellipse3602"
-                            cx="51.945385"
-                            cy="39.257973"
-                            rx="1.5216751"
-                            ry="1.5203876"/>
-                        <Ellipse
-                            opacity="0.5"
-                            id="ellipse3604"
-                            cx="25.437807"
-                            cy="9.8232679"
-                            rx="1.5216751"
-                            ry="1.5203876"/>
-                        <Ellipse
-                            opacity="0.5"
-                            id="ellipse3606"
-                            cx="82.987556"
-                            cy="125.37273"
-                            rx="1.5216751"
-                            ry="1.5203876"/>
-                        <Ellipse
-                            opacity="0.5"
-                            id="ellipse3608"
-                            cx="311.90836"
-                            cy="97.093521"
-                            rx="1.5216751"
-                            ry="1.5203876"/>
-                        <Ellipse
-                            id="ellipse3610"
-                            cx="286.28336"
-                            cy="112.60148"
-                            rx="1.5216751"
-                            ry="1.5203876"/>
-                        <Ellipse
-                            id="ellipse3612"
-                            cx="335.5856"
-                            cy="125.37273"
-                            rx="1.5216751"
-                            ry="1.5203876"/>
-                        <Ellipse
-                            id="ellipse3614"
-                            cx="243.70688"
-                            cy="162.80467"
-                            rx="1.5216751"
-                            ry="1.5203876"/>
-                        <Ellipse
-                            id="ellipse3616"
-                            cx="93.547981"
-                            cy="161.28429"
-                            rx="1.5216751"
-                            ry="1.5203876"/>
-                        <Ellipse
-                            opacity="0.5"
-                            id="ellipse3618"
-                            cx="231.10741"
-                            cy="177.37"
-                            rx="1.5216751"
-                            ry="1.5203876"/>
+                        <Ellipse id="Oval" cx="327.064237" cy="16.1176732" rx="1.52167506" ry="1.52038767"/>
+                        <Ellipse id="Oval" opacity="0.5" cx="25.4378067" cy="136.927678" rx="1.52167506"
+                                 ry="1.52038767"/>
+                        <Ellipse id="Oval" cx="51.9453863" cy="39.2579736" rx="1.52167506" ry="1.52038767"/>
+                        <Ellipse id="Oval" opacity="0.5" cx="25.4378067" cy="9.82326821" rx="1.52167506"
+                                 ry="1.52038767"/>
+                        <Ellipse id="Oval" opacity="0.5" cx="23.5216751" cy="55.5203877" rx="1.52167506"
+                                 ry="1.52038767"/>
+                        <Ellipse id="Oval" opacity="0.5" cx="336.521675" cy="78.5203877" rx="1.52167506"
+                                 ry="1.52038767"/>
+                        <Ellipse id="Oval" cx="264.521675" cy="115.520388" rx="1.52167506" ry="1.52038767"/>
+                        <Ellipse id="Oval" cx="142.521675" cy="156.520388" rx="1.52167506" ry="1.52038767"/>
+                        <Ellipse id="Oval" cx="286.521675" cy="150.520388" rx="1.52167506" ry="1.52038767"/>
                     </G>
                 </G>
             </G>

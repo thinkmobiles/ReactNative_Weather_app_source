@@ -18,22 +18,26 @@ export default class extends React.Component {
 
     render() {
         let {width} = Dimensions.get('window');
-        let images = this.props.images || {};
+        let originImages = this.props.images || {};
 
-        let topImages;
+        let topImagesComponents;
 
-        if (images.top && images.top.length) {
-            topImages = images.top.map((element, index) => {
-                return element(width, index, styles.topSvgStyle);
+        let {images = originImages.top, convertToWhite = false} = originImages.top;
+
+        if (images && images.length) {
+            topImagesComponents = images.map((image, index) => {
+                let {element = image, translate} = image;
+
+                return element(width, index, styles.topSvgStyle, convertToWhite, translate);
             })
         }
 
         return (
             <View style={styles.container}>
                 <View style={{flex: 1}}>
-                    {topImages}
+                    {topImagesComponents}
                 </View>
-                {images.bottom(width, styles.bottomSvgStyle)}
+                {originImages.bottom(width, styles.bottomSvgStyle)}
             </View>
         );
     }

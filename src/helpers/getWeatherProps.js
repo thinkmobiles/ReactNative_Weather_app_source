@@ -14,23 +14,74 @@ import RainTop from '../svgs_converted/topImageElements/rainTop';
 import StormTop from '../svgs_converted/topImageElements/stormTop';
 
 const topImages = {
-    [[1030]]            : [FogTop],
-    [[1135]]            : [FogTop],
-    [[1147]]            : [FogTop],
+    [[1030, 1135, 1147]]: [FogTop],
     [[1000]]            : [],
-    [[1003, 1006, 1063]]: [CloudTop],
+    [[1003]]            : [CloudTop],
+    [[1006]]            : [OvercastTop],
+    [[1063, 1180, 1186]]: [CloudTop, RainTop],
+    [[1192]]            : {
+        images        : [
+            CloudTop,
+            RainTop,
+            {element: RainTop, translate: "0, -60"}
+        ],
+        convertToWhite: true
+    },
+    [[1195, 1246]]      : {
+        images        : [
+            OvercastTop,
+            RainTop,
+            {element: RainTop, translate: "0, -60"}
+        ],
+        convertToWhite: true
+    },
+    [[1069]]            : {
+        images        : [CloudTop, RainTop, SnowTop],
+        convertToWhite: true
+    },
+    [[1066]]            : [OvercastTop, SnowTop],
+    [[1222]]            : [
+        OvercastTop,
+        SnowTop,
+        {element: SnowTop, translate: "-60, -30"}
+    ],
+    [[1225, 1258]]      : [
+        SnowTop,
+        {element: SnowTop, translate: "-60, -30"}
+    ],
+    [[1072, 1189]]      : [RainTop],
     [[
-        1066, 1114, 1213, 1216, 1219, 1258,
-        1204, 1207, 1210, 1249, 1252, 1255,
-        1069, 1117, 1222, 1225, 1237, 1264,
-        1279, 1282, 1261
+        1171, 1201, 1204, 1207,
+        1237, 1249, 1252, 1261,
+        1264
+    ]]                  : [RainTop, SnowTop],
+    [[1210]]            : {
+        images        : [CloudTop, SnowTop],
+        convertToWhite: true
+    },
+    [[1273]]            : [StormTop, RainTop],
+    [[1279]]            : [StormTop, SnowTop],
+    [[1276]]            : [
+        StormTop,
+        RainTop,
+        {element: RainTop, translate: "0, -60"}
+    ],
+    [[1282]]            : [
+        StormTop,
+        SnowTop,
+        {element: SnowTop, translate: "-60, -30"}
+    ],
+    [[
+        1114, 1213, 1216, 1219,
+        1258, 1255, 1069, 1117,
+        1282, 1261
     ]]                  : [SnowTop],
-    [[1009, 1072]]      : [OvercastTop],
-    [[1087, 1273, 1276]]: [StormTop],
+    [[1009]]            : [OvercastTop],
+    [[1087]]            : [StormTop],
     [[
-        1150, 1153, 1168, 1180, 1183, 1198,
-        1171, 1186, 1189, 1192, 1195, 1201,
-        1243, 1246, 1240
+        1150, 1153, 1168, 1183,
+        1198, 1189, 1195, 1243,
+        1246, 1240
     ]]                  : [RainTop]
 };
 
@@ -47,7 +98,7 @@ const gradients = {
             colors: ['#F1AB65', '#FFFFFF']
         }
     },
-    [[1003, 1006, 1063]]: {
+    [[1003, 1063, 1186]]: {
         search    : ['#f2ab60', '#f9d676'],
         background: {
             colors   : ['#FFFFFF', '#f2ab60'],
@@ -59,15 +110,15 @@ const gradients = {
     [[
         1066, 1114, 1213, 1216, 1219, 1258,
         1204, 1207, 1210, 1249, 1252, 1255,
-        1069, 1117, 1222, 1225, 1237, 1264,
-        1279, 1282, 1261
+        1117, 1222, 1225, 1237, 1264,
+        1279, 1282, 1261, 1171
     ]]                  : {
         search    : ['#48a4df', '#6ecaf8'],
         background: {
             colors: ['#48a4df', '#FFFFFF']
         },
     },
-    [[1009, 1072]]      : {
+    [[1009, 1006, 1069]]: {
         search    : ['#839dae', '#A6CADF'],
         background: {
             colors: ['#839dae', '#FFFFFF']
@@ -81,8 +132,8 @@ const gradients = {
     },
     [[
         1150, 1153, 1168, 1180, 1183, 1198,
-        1171, 1186, 1189, 1192, 1195, 1201,
-        1243, 1246, 1240
+        1189, 1192, 1195, 1201,
+        1243, 1246, 1240, 1072
     ]]                  : {
         search    : ['#919CA1', '#E4E9EC'],
         background: {
@@ -111,23 +162,22 @@ const icons = {
 };
 
 const bottomImages = {
-    [[1030, 1135, 1147]]                        : Fog,
-    [[1000]]                                    : Sunny,
-    [[1003, 1006, 1063]]                        : Cloud,
-    [[1066, 1114, 1213, 1216, 1219, 1258, 1261]]: Snow,
+    [[1030, 1135, 1147]]: Fog,
+    [[1000]]            : Sunny,
+    [[1003, 1063, 1186]]: Cloud,
     [[
         1066, 1114, 1213, 1216, 1219, 1258,
         1204, 1207, 1210, 1249, 1252, 1255,
-        1069, 1117, 1222, 1225, 1237, 1264,
-        1279, 1282, 1261
-    ]]                                          : Snow,
-    [[1009, 1072]]                              : Overcast,
-    [[1087, 1273, 1276]]                        : Storm,
+        1117, 1222, 1225, 1237, 1264,
+        1279, 1282, 1261, 1171
+    ]]                  : Snow,
+    [[1009, 1006, 1069]]: Overcast,
+    [[1087, 1273, 1276]]: Storm,
     [[
         1150, 1153, 1168, 1180, 1183, 1198,
-        1171, 1186, 1189, 1192, 1195, 1201,
-        1243, 1246, 1240
-    ]]                                          : Rain
+        1189, 1192, 1195, 1201,
+        1243, 1246, 1240, 1072
+    ]]                  : Rain
 };
 
 export const getProps = (code) => {

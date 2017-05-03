@@ -1,7 +1,7 @@
 import React from 'react';
 import Svg, {G, Defs, Path, LinearGradient, Stop, Ellipse} from 'react-native-svg';
 
-export default (width, index, style) => {
+export default (width, index, style, changeToWhite) => {
     return (
         <Svg
             width={width}
@@ -13,13 +13,13 @@ export default (width, index, style) => {
             <Defs>
                 <LinearGradient x1="-0.0203036053%" y1="49.9863694%" x2="100.010816%" y2="49.9863694%"
                                 id="linearGradient-1">
-                    <Stop stopColor="#F5AC4B" offset="0%"/>
-                    <Stop stopColor="#F2A959" offset="100%"/>
+                    <Stop stopColor={!changeToWhite ? "#F5AC4B" : "#FFFFFF"} offset="0%"/>
+                    <Stop stopColor={!changeToWhite ? "#F2A959" : "#FFFFFF"} offset="100%"/>
                 </LinearGradient>
                 <LinearGradient x1="-0.0262899263%" y1="49.9823505%" x2="100.014005%" y2="49.9823505%"
                                 id="linearGradient-2">
-                    <Stop stopColor="#F5AC4B" offset="0%"/>
-                    <Stop stopColor="#F2A959" offset="100%"/>
+                    <Stop stopColor={!changeToWhite ? "#F5AC4B" : "#FFFFFF"} offset="0%"/>
+                    <Stop stopColor={!changeToWhite ? "#F2A959" : "#FFFFFF"} offset="100%"/>
                 </LinearGradient>
             </Defs>
             <G
@@ -39,7 +39,7 @@ export default (width, index, style) => {
                                 cy="33.527794"
                                 rx="33.542095"
                                 ry="33.527794"
-                                opacity="0.2"
+                                opacity={!changeToWhite ? "0.2": "0.1"}
                                 fill="url(#linearGradient-2)"/>
                             <Ellipse
                                 id="ellipse3776"
@@ -47,7 +47,7 @@ export default (width, index, style) => {
                                 cy="33.893383"
                                 rx="25.904427"
                                 ry="25.893381"
-                                opacity="0.4"
+                                opacity={!changeToWhite ? "0.4": "0.3"}
                                 fill="url(#linearGradient-1)"/>
                             <Path
                                 opacity="0.4"
