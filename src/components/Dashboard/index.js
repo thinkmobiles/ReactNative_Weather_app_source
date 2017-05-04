@@ -40,6 +40,8 @@ export default class extends React.Component {
             modalVisible: false
         };
 
+        this.modalAnimType = isIos ? 'slide' : 'fade';
+
         this.scrollTo = this._scrollTo.bind(this);
         this.setModalVisible = this._setModalVisible.bind(this);
 
@@ -110,7 +112,7 @@ export default class extends React.Component {
         return (
             <View>
                 <Modal
-                    animationType={"slide"}
+                    animationType={this.modalAnimType}
                     transparent={false}
                     visible={this.state.modalVisible}
                     onRequestClose={() => {

@@ -46,11 +46,11 @@ export default class Search extends Component {
             infoMsg   : ''
         };
 
-        this.onChangeText = this._onChangeText.bind(this);
-        this.renderItem = this._renderItem.bind(this);
-        this.onItemPress = this._onItemPress.bind(this);
         this.onBackPress = this._onBackPress.bind(this);
+        this.onChangeText = this._onChangeText.bind(this);
+        this.onItemPress = this._onItemPress.bind(this);
         this.search = this._search.bind(this);
+        this.renderItem = this._renderItem.bind(this);
 
         this.debounceSearch = debounce((text) => {
             this._search(text);
@@ -65,9 +65,17 @@ export default class Search extends Component {
     }
 
     _onChangeText(text) {
-        this.setState({
-            text: text
-        });
+        if (text.length < 3) {
+            this.setState({
+                text  : text,
+                cities: []
+            });
+        } else {
+            this.setState({
+                text: text
+            });
+        }
+
         this.debounceSearch(text);
     }
 
@@ -88,30 +96,22 @@ export default class Search extends Component {
             infoMsg   : ''
         });
 
-        getCities(text, r => {
-            let cities = r && !r.error ? r : [];
+        getCities(text, (err, r) => {
+            let cities = [];
+            let infoMsg = 'no cities found';
+
+            if (err) {
+                infoMsg = 'Request failed. Please, check your connection and try again.'
+            } else if (!r.error) {
+                cities = r;
+            }
+
             this.setState({
                 cities    : cities,
                 loaderShow: false,
-                infoMsg   : 'no cities found'
+                infoMsg   : infoMsg
             });
         });
-    }
-
-    _renderItem({item}) {
-        return (
-            <TouchableHighlight
-                underlayColor={this.gradColors[1]}
-                onPress={() => this.onItemPress(item)}
-                style={styles.listItem}
-            >
-                <Text
-                    style={styles.listItemText}
-                >
-                    {item.name}
-                </Text>
-            </TouchableHighlight>
-        )
     }
 
     setWeather(query) {
@@ -122,25 +122,46 @@ export default class Search extends Component {
         });
 
         initForecast(query, (err, response) => {
+            this.setState({
+                loaderShow: false
+            });
             if (err) {
                 Alert.alert(
                     'Error',
                     `Can't fetch weather. Please try later.`,
                     [
-                        {text: 'OK', onPress: this.nav},
+                        {text: 'OK'},
                     ],
                     {cancelable: false}
                 );
             }
-
-            this.props.dispatch(setWeather(response));
-            this.props.setModalVisible(false);
+            else {
+                this.props.setModalVisible(false);
+                this.props.dispatch(setWeather(response));
+            }
         });
+    }
+
+    _renderItem({item}) {
+        return (
+            <TouchableHighlight
+                underlayColor={this.gradColors[1]}
+                onPress={() => this.onItemPress(item)}
+                style={styles.listItem}
+            >
+                <Text style={styles.listItemText}>
+                    {item.name}
+                </Text>
+            </TouchableHighlight>
+        )
     }
 
     render() {
         const cities = this.state.cities.map((item, index) => {
-            return {...item, key: `item-${index}`}
+            return {
+                name: item.name,
+                key : `item-${index}`
+            }
         });
 
         const bottomComponent = cities.length ? (
@@ -150,15 +171,11 @@ export default class Search extends Component {
                 renderItem={this.renderItem}
                 keyboardShouldPersistTaps="always"
             />) : (
-            <View style={styles.infoMsg}
-            >
-                <Text
-                    style={styles.infoMsgText}
-                >
+            <View style={styles.infoMsg}>
+                <Text style={styles.infoMsgText}>
                     {this.state.infoMsg}
                 </Text>
             </View>);
-
         return (
             <View
                 style={styles.mainView}
@@ -187,8 +204,8 @@ export default class Search extends Component {
                         style={styles.textInput}
                         value={this.state.text}
                         onChangeText={this.onChangeText}
-                        underlineColorAndroid={"transparent"}
-                        placeholder={"Enter your location"}
+                        underlineColorAndroid={'transparent'}
+                        placeholder={'Enter your location'}
                         placeholderTextColor={'#e3e3e3'}
                     />
                     {this.state.loaderShow && <ActivityIndicator
@@ -215,7 +232,9 @@ const styles = StyleSheet.create({
         flex          : 1,
         flexDirection : 'row',
         justifyContent: 'center',
-        paddingTop    : 26
+        paddingTop    : 26,
+        marginLeft    : 15,
+        marginRight   : 15
     },
     infoMsgText : {
         fontSize: 18
@@ -240,7 +259,7 @@ const styles = StyleSheet.create({
     textInput   : {
         flex      : 1,
         color     : '#fff',
-        fontFamily: 'Muli-Bold',
+        fontFamily: 'Muli-SemiBold',
         fontSize  : isIos ? 16 : 20
     },
     topBar      : {
