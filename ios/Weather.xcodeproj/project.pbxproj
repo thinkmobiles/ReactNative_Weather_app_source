@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -41,16 +42,9 @@
 		86EF525FF2CF461B89E6A9F5 /* Muli-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7E5FD2104EC47B2B5A62BF5 /* Muli-Light.ttf */; };
 		9DD7849E1EB37DD90074708E /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD7848F1EB3799C0074708E /* libBVLinearGradient.a */; };
 		AC9ED884FAE740A78E6CA295 /* Muli-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21875076D2AF4DC6ABF72197 /* Muli-Italic.ttf */; };
+		B59C3B8BE2196D29E96E0C18 /* Pods_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A946D8B36C79399D0C3E606 /* Pods_Weather.framework */; };
 		C3BB344AA7C5443C816D3F12 /* Muli-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4172E2165D747998F930D06 /* Muli-Bold.ttf */; };
 		FA0C3DF52AD1452CBE512999 /* Muli-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB341F4842004E08A1D7C8BF /* Muli-Regular.ttf */; };
-		B889D16C5CAD4023BD9F63DE /* Muli-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A4046F01C74E54B5CAC56D /* Muli-Black.ttf */; };
-		2EA7863B922240EB92536BFE /* Muli-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9805CEB2057A47C59EB66F15 /* Muli-BlackItalic.ttf */; };
-		618407115E49451D928B201F /* Muli-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FE9133070DC14C9EB9366230 /* Muli-BoldItalic.ttf */; };
-		C14E1D4AF6BB4773A74B26C1 /* Muli-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C87DDF925EAD4704ABA2D75A /* Muli-ExtraBold.ttf */; };
-		84027E7DD41F48B4BE782051 /* Muli-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 78F1640D1ECF4FA19FE2B43F /* Muli-ExtraBoldItalic.ttf */; };
-		FAEC0C9C5F1549ADB8F869FE /* Muli-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D49DD2EAAF6D4E8DBE3A8004 /* Muli-ExtraLight.ttf */; };
-		2595FF03F88A4E7392669762 /* Muli-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18AADB88A5884C11A7F56E39 /* Muli-ExtraLightItalic.ttf */; };
-		7499EE1EC7254A33896C6A3A /* Muli-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 907AAD613DAE4B3AB8DB1959 /* Muli-SemiBoldItalic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -269,6 +263,7 @@
 		00E356EE1AD99517003FC87E /* WeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* WeatherTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherTests.m; sourceTree = "<group>"; };
+		0659A89D4F7BC5EF132FF706 /* Pods-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weather/Pods-Weather.release.xcconfig"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -282,6 +277,7 @@
 		21875076D2AF4DC6ABF72197 /* Muli-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-Italic.ttf"; path = "../src/fonts/Muli-Italic.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* Weather-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* Weather-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Weather-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A946D8B36C79399D0C3E606 /* Pods_Weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5346A6394B0545CC953C7A30 /* Muli-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-SemiBold.ttf"; path = "../src/fonts/Muli-SemiBold.ttf"; sourceTree = "<group>"; };
 		5859A55EA9114240A3675831 /* Muli-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-LightItalic.ttf"; path = "../src/fonts/Muli-LightItalic.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -293,14 +289,7 @@
 		C7E5FD2104EC47B2B5A62BF5 /* Muli-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-Light.ttf"; path = "../src/fonts/Muli-Light.ttf"; sourceTree = "<group>"; };
 		D29BDF64DE17466EB41CA85F /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSVG.a; sourceTree = "<group>"; };
 		DB341F4842004E08A1D7C8BF /* Muli-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-Regular.ttf"; path = "../src/fonts/Muli-Regular.ttf"; sourceTree = "<group>"; };
-		88A4046F01C74E54B5CAC56D /* Muli-Black.ttf */ = {isa = PBXFileReference; name = "Muli-Black.ttf"; path = "../src/fonts/Muli-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9805CEB2057A47C59EB66F15 /* Muli-BlackItalic.ttf */ = {isa = PBXFileReference; name = "Muli-BlackItalic.ttf"; path = "../src/fonts/Muli-BlackItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		FE9133070DC14C9EB9366230 /* Muli-BoldItalic.ttf */ = {isa = PBXFileReference; name = "Muli-BoldItalic.ttf"; path = "../src/fonts/Muli-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		C87DDF925EAD4704ABA2D75A /* Muli-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Muli-ExtraBold.ttf"; path = "../src/fonts/Muli-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		78F1640D1ECF4FA19FE2B43F /* Muli-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; name = "Muli-ExtraBoldItalic.ttf"; path = "../src/fonts/Muli-ExtraBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D49DD2EAAF6D4E8DBE3A8004 /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; name = "Muli-ExtraLight.ttf"; path = "../src/fonts/Muli-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		18AADB88A5884C11A7F56E39 /* Muli-ExtraLightItalic.ttf */ = {isa = PBXFileReference; name = "Muli-ExtraLightItalic.ttf"; path = "../src/fonts/Muli-ExtraLightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		907AAD613DAE4B3AB8DB1959 /* Muli-SemiBoldItalic.ttf */ = {isa = PBXFileReference; name = "Muli-SemiBoldItalic.ttf"; path = "../src/fonts/Muli-SemiBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F6C04246D9DF7F587B15DC5B /* Pods-Weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weather/Pods-Weather.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -329,6 +318,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				5E60575EABEB459A97D0D52F /* libRNSVG.a in Frameworks */,
+				B59C3B8BE2196D29E96E0C18 /* Pods_Weather.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +508,8 @@
 				00E356EF1AD99517003FC87E /* WeatherTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				A57FD5A46DEA4588B94759F8 /* Resources */,
+				AA9DFAAED58DF68781765F9D /* Pods */,
+				F6F85AFBF0BC56106F2CD7CE /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -559,16 +551,25 @@
 				5859A55EA9114240A3675831 /* Muli-LightItalic.ttf */,
 				DB341F4842004E08A1D7C8BF /* Muli-Regular.ttf */,
 				5346A6394B0545CC953C7A30 /* Muli-SemiBold.ttf */,
-				88A4046F01C74E54B5CAC56D /* Muli-Black.ttf */,
-				9805CEB2057A47C59EB66F15 /* Muli-BlackItalic.ttf */,
-				FE9133070DC14C9EB9366230 /* Muli-BoldItalic.ttf */,
-				C87DDF925EAD4704ABA2D75A /* Muli-ExtraBold.ttf */,
-				78F1640D1ECF4FA19FE2B43F /* Muli-ExtraBoldItalic.ttf */,
-				D49DD2EAAF6D4E8DBE3A8004 /* Muli-ExtraLight.ttf */,
-				18AADB88A5884C11A7F56E39 /* Muli-ExtraLightItalic.ttf */,
-				907AAD613DAE4B3AB8DB1959 /* Muli-SemiBoldItalic.ttf */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		AA9DFAAED58DF68781765F9D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F6C04246D9DF7F587B15DC5B /* Pods-Weather.debug.xcconfig */,
+				0659A89D4F7BC5EF132FF706 /* Pods-Weather.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F6F85AFBF0BC56106F2CD7CE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3A946D8B36C79399D0C3E606 /* Pods_Weather.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -596,10 +597,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Weather" */;
 			buildPhases = (
+				391AE75F33869398DF5ED64D /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				365A67B9C57D3CEBCA50CE89 /* [CP] Embed Pods Frameworks */,
+				757ADE42C25346D2B4CAA373 /* [CP] Copy Pods Resources */,
+				9D35B3E31EBB26650025B47D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -657,18 +662,21 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 7JSQETKKF7;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 4E7UQ9G3LU;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = 7JSQETKKF7;
+						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 7JSQETKKF7;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E48F1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 7JSQETKKF7;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
@@ -961,14 +969,6 @@
 				0C1826B15B064E0D9EB0C3A3 /* Muli-LightItalic.ttf in Resources */,
 				FA0C3DF52AD1452CBE512999 /* Muli-Regular.ttf in Resources */,
 				7E32EE83D463452C83302B10 /* Muli-SemiBold.ttf in Resources */,
-				B889D16C5CAD4023BD9F63DE /* Muli-Black.ttf in Resources */,
-				2EA7863B922240EB92536BFE /* Muli-BlackItalic.ttf in Resources */,
-				618407115E49451D928B201F /* Muli-BoldItalic.ttf in Resources */,
-				C14E1D4AF6BB4773A74B26C1 /* Muli-ExtraBold.ttf in Resources */,
-				84027E7DD41F48B4BE782051 /* Muli-ExtraBoldItalic.ttf in Resources */,
-				FAEC0C9C5F1549ADB8F869FE /* Muli-ExtraLight.ttf in Resources */,
-				2595FF03F88A4E7392669762 /* Muli-ExtraLightItalic.ttf in Resources */,
-				7499EE1EC7254A33896C6A3A /* Muli-SemiBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1017,6 +1017,64 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
+		};
+		365A67B9C57D3CEBCA50CE89 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Weather/Pods-Weather-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		391AE75F33869398DF5ED64D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		757ADE42C25346D2B4CAA373 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Weather/Pods-Weather-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9D35B3E31EBB26650025B47D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 23a45e7c9f262856f02ca7ccb579c333f2524841 711fd1d9b6e7b2080bf90c34587bbcb6032ee3a808544f677ee3fc507a6ff915";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1138,51 +1196,59 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6C04246D9DF7F587B15DC5B /* Pods-Weather.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: christian.rusin@mev.com (3NUWM7C3KV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Chris Rusin (6DZ8B3ZD6D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 4E7UQ9G3LU;
+				DEVELOPMENT_TEAM = 7JSQETKKF7;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 				INFOPLIST_FILE = Weather/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = think.reactjs.native.example.Weather;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkmobiles.reactnative.weather;
 				PRODUCT_NAME = Weather;
+				PROVISIONING_PROFILE = "8e2a45a0-eb42-4370-88cc-f5f954c0b7ef";
+				PROVISIONING_PROFILE_SPECIFIER = ReactNativeWeatherAdHock;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0659A89D4F7BC5EF132FF706 /* Pods-Weather.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: christian.rusin@mev.com (3NUWM7C3KV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Chris Rusin (6DZ8B3ZD6D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4E7UQ9G3LU;
+				DEVELOPMENT_TEAM = 7JSQETKKF7;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 				INFOPLIST_FILE = Weather/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = think.reactjs.native.example.Weather;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkmobiles.reactnative.weather;
 				PRODUCT_NAME = Weather;
+				PROVISIONING_PROFILE = "8e2a45a0-eb42-4370-88cc-f5f954c0b7ef";
+				PROVISIONING_PROFILE_SPECIFIER = ReactNativeWeatherAdHock;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1322,9 +1388,10 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: christian.rusin@mev.com (3NUWM7C3KV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Chris Rusin (6DZ8B3ZD6D)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: christian.rusin@mev.com (3NUWM7C3KV)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 7JSQETKKF7;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1364,9 +1431,10 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: christian.rusin@mev.com (3NUWM7C3KV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: christian.rusin@mev.com (3NUWM7C3KV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Chris Rusin (6DZ8B3ZD6D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Chris Rusin (6DZ8B3ZD6D)";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 7JSQETKKF7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
