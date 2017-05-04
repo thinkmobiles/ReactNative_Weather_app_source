@@ -64,9 +64,17 @@ export default class Search extends Component {
     }
 
     _onChangeText(text) {
-        this.setState({
-            text: text
-        });
+        if (text.length < 3) {
+            this.setState({
+                text  : text,
+                cities: []
+            });
+        } else {
+            this.setState({
+                text: text
+            });
+        }
+
         this.debounceSearch(text);
     }
 
@@ -104,9 +112,7 @@ export default class Search extends Component {
                 onPress={() => this.onItemPress(item)}
                 style={styles.listItem}
             >
-                <Text
-                    style={styles.listItemText}
-                >
+                <Text style={styles.listItemText}>
                     {item.name}
                 </Text>
             </TouchableHighlight>
@@ -128,7 +134,10 @@ export default class Search extends Component {
 
     render() {
         const cities = this.state.cities.map((item, index) => {
-            return {...item, key: `item-${index}`}
+            return {
+                name: item.name,
+                key : `item-${index}`
+            }
         });
 
         const bottomComponent = cities.length ? (
@@ -138,15 +147,11 @@ export default class Search extends Component {
                 renderItem={this.renderItem}
                 keyboardShouldPersistTaps="always"
             />) : (
-            <View style={styles.infoMsg}
-            >
-                <Text
-                    style={styles.infoMsgText}
-                >
+            <View style={styles.infoMsg}>
+                <Text style={styles.infoMsgText}>
                     {this.state.infoMsg}
                 </Text>
             </View>);
-
         return (
             <View
                 style={styles.mainView}
@@ -175,8 +180,8 @@ export default class Search extends Component {
                         style={styles.textInput}
                         value={this.state.text}
                         onChangeText={this.onChangeText}
-                        underlineColorAndroid={"transparent"}
-                        placeholder={"Enter your location"}
+                        underlineColorAndroid={'transparent'}
+                        placeholder={'Enter your location'}
                         placeholderTextColor={'#e3e3e3'}
                     />
                     {this.state.loaderShow && <ActivityIndicator
@@ -228,7 +233,7 @@ const styles = StyleSheet.create({
     textInput   : {
         flex      : 1,
         color     : '#fff',
-        fontFamily: 'Muli-Bold',
+        fontFamily: 'Muli-SemiBold',
         fontSize  : isIos ? 16 : 20
     },
     topBar      : {
