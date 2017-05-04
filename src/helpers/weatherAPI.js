@@ -3,23 +3,20 @@ const BASE_URL = "https://api.apixu.com/v1";
 const FORECAST = "/forecast.json";
 const SEARCH = "/search.json";
 
-import {Alert} from 'react-native';
-
 export function initForecast(query, cb) {
     const url = `${BASE_URL + FORECAST}?key=${API_KEY}&q=${query}&days=${7}`;
     fetch(url)
         .then(r => r.json())
         .then(r => {
             if (r.error) {
-                console.log(r.error);
-                Alert.alert(`Error #${r.error.code.toString()}`, r.error.message);
+                return cb(r.error);
             }
 
             if (cb && typeof cb === 'function') {
-                cb(r);
+                cb(null, r);
             }
         })
-        .catch(err => {console.log(err);});
+        .catch(err => {cb(err)});
 }
 
 

@@ -8,7 +8,10 @@ import LinearGradient from 'react-native-linear-gradient';
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    Platform,
+    PermissionsAndroid,
+    Alert
 } from 'react-native';
 
 import {setWeather} from '../actions/weatherActions';
@@ -20,6 +23,13 @@ import Icon from './Icons';
     return {...store.weather};
 })
 export default class Splash extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this._locationReceived = false;
+        this._locationWatchID = null;
+    }
+
     nav() {
         this.props.navigator.replace({
             id: 'Dashboard'
@@ -55,15 +65,92 @@ export default class Splash extends React.Component {
     }
 
     componentDidMount() {
-        navigator.geolocation.getCurrentPosition(position => {
-            const {latitude, longitude} = position.coords;
-            const query = `${latitude},${longitude}`;
+        this._locationReceived = false;
 
-            initForecast(query, response => {
-                this.props.dispatch(setWeather(response));
+        if (Platform.OS == 'android' && Platform.Version >= 23) {
+            this._getInitialAndroid23Location();
+        } else {
+            this._getInitialLocation();
+        }
+    }
+
+    _getInitialAndroid23Location = async() => {
+        try {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                {
+                    'title'  : 'Location',
+                    'message': 'Application needs your location ' +
+                    'for getting weather by it.'
+                }
+            );
+
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                this._getInitialLocation();
+            } else {
+                console.log("Location permission denied")
+            }
+        } catch (err) {
+            Alert.alert(
+                'Error',
+                err,
+                [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')}
+                ],
+                {cancelable: false}
+            )
+        }
+    };
+
+    _getInitialLocation = () => {
+        navigator.geolocation.getCurrentPosition((position) => {
+                this._setLocation(position);
+            },
+            () => {
+                Alert.alert(
+                    'Error',
+                    `Can't get your current location`,
+                    [
+                        {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    ],
+                    { cancelable: false }
+                );
+            },
+            {
+                enableHighAccuracy: false,
+                timeout           : 20000,
+                maximumAge        : 1000
+            }
+        );
+
+        if (Platform.OS == 'android' && !this._locationReceived) {
+            this._locationWatchID = navigator.geolocation.watchPosition((position) => {
+                this._setLocation(position);
+                navigator.geolocation.clearWatch(this._locationWatchID);
             });
-        });
+        }
+    };
 
+    _setLocation = (position) => {
+        this._locationReceived = true;
+
+        const {latitude, longitude} = position.coords;
+        const query = `${latitude},${longitude}`;
+
+        initForecast(query, (err, response) => {
+            if (err) {
+                Alert.alert(
+                    'Error',
+                    err.message,
+                    [
+                        {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    ],
+                    { cancelable: false }
+                );
+            }
+
+            this.props.dispatch(setWeather(response));
+        });
     }
 }
 
