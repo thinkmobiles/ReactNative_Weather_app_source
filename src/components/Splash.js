@@ -75,9 +75,10 @@ export default class Splash extends React.Component {
             const granted = await PermissionsAndroid.request(
                 PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
                 {
-                    'title'  : 'Location',
-                    'message': 'Application needs your location ' +
-                    'for getting weather by it.'
+                    'title'  : 'Location Permission',
+                    'message': 'Application needs permissions to get your location ' +
+                    'for displaying current weather. You can deny it and chose location ' +
+                    'manually.'
                 }
             );
 
