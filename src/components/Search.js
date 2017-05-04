@@ -46,11 +46,11 @@ export default class Search extends Component {
             infoMsg   : ''
         };
 
-        this.onChangeText = this._onChangeText.bind(this);
-        this.renderItem = this._renderItem.bind(this);
-        this.onItemPress = this._onItemPress.bind(this);
         this.onBackPress = this._onBackPress.bind(this);
+        this.onChangeText = this._onChangeText.bind(this);
+        this.onItemPress = this._onItemPress.bind(this);
         this.search = this._search.bind(this);
+        this.renderItem = this._renderItem.bind(this);
 
         this.debounceSearch = debounce((text) => {
             this._search(text);
@@ -96,13 +96,49 @@ export default class Search extends Component {
             infoMsg   : ''
         });
 
-        getCities(text, r => {
-            let cities = r && !r.error ? r : [];
+        getCities(text, (err, r) => {
+            let cities = [];
+            let infoMsg = 'no cities found';
+
+            if (err) {
+                infoMsg = 'Request failed. Please, check your connection and try again.'
+            } else if (!r.error) {
+                cities = r;
+            }
+
             this.setState({
                 cities    : cities,
                 loaderShow: false,
-                infoMsg   : 'no cities found'
+                infoMsg   : infoMsg
             });
+        });
+    }
+
+    setWeather(query) {
+        Keyboard.dismiss();
+
+        this.setState({
+            loaderShow: true
+        });
+
+        initForecast(query, (err, response) => {
+            this.setState({
+                loaderShow: false
+            });
+            if (err) {
+                Alert.alert(
+                    'Error',
+                    `Can't fetch weather. Please try later.`,
+                    [
+                        {text: 'OK'},
+                    ],
+                    {cancelable: false}
+                );
+            }
+            else {
+                this.props.setModalVisible(false);
+                this.props.dispatch(setWeather(response));
+            }
         });
     }
 
@@ -118,30 +154,6 @@ export default class Search extends Component {
                 </Text>
             </TouchableHighlight>
         )
-    }
-
-    setWeather(query) {
-        Keyboard.dismiss();
-
-        this.setState({
-            loaderShow: true
-        });
-
-        initForecast(query, (err, response) => {
-            if (err) {
-                Alert.alert(
-                    'Error',
-                    `Can't fetch weather. Please try later.`,
-                    [
-                        {text: 'OK', onPress: this.nav},
-                    ],
-                    {cancelable: false}
-                );
-            }
-
-            this.props.dispatch(setWeather(response));
-            this.props.setModalVisible(false);
-        });
     }
 
     render() {
@@ -220,7 +232,9 @@ const styles = StyleSheet.create({
         flex          : 1,
         flexDirection : 'row',
         justifyContent: 'center',
-        paddingTop    : 26
+        paddingTop    : 26,
+        marginLeft    : 15,
+        marginRight   : 15
     },
     infoMsgText : {
         fontSize: 18

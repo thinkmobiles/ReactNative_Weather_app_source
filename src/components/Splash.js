@@ -76,7 +76,7 @@ export default class Splash extends React.Component {
         }
     }
 
-    _getInitialAndroid23Location = async() => {
+    _getInitialAndroid23Location = async () => {
         try {
             const granted = await PermissionsAndroid.request(
                 PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -142,7 +142,7 @@ export default class Splash extends React.Component {
 
         initForecast(query, (err, response) => {
             if (err) {
-                Alert.alert(
+                return Alert.alert(
                     'Error',
                     err.message,
                     [
