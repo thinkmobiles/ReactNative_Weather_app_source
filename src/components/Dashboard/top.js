@@ -58,17 +58,18 @@ export default class extends React.Component {
 
     render() {
         const {
-            location = {},
-            current = {}
+            location,
+            current,
+            forecast
         } = this.props;
 
-        let locationText = `${location.name}, ${location.country}`;
+        let locationText = location ? `${location.name}, ${location.country}` : 'Change location';
         let fontSize = this.getRealFont(locationText);
         let locationFontStyle = {
             fontSize: fontSize
         };
 
-        const condText = current.condition && current.condition.text || '';
+        const condText = current.condition && current.condition.text || 'No location selected';
 
         return (
             <View
@@ -96,19 +97,26 @@ export default class extends React.Component {
                             <View style={styles.tempBlock}>
                                 <View>
                                     <Text style={[styles.headerText, styles.tempText]}>
-                                        {Math.round(parseInt(current.temp_c, 10)).toString()}
+                                        {current.temp_c ? Math.round(parseInt(current.temp_c, 10)).toString() : '--'}
                                     </Text>
                                 </View>
-                                <View>
+                                {current.temp_c && (<View>
                                     <Text style={[styles.tempTextDimension, styles.headerText]}>°</Text>
-                                </View>
+                                </View>)}
                             </View>
                             <Text style={[styles.headerText, styles.conditionText]}>
                                 {condText}
                             </Text>
                         </View>
                     </TouchableOpacity>
-                    <TopBottomPart/>
+                    {forecast ? <TopBottomPart/> :
+                        (<View style={styles.moreInfoBottom}>
+                            <Text style={styles.moreInfoBottomText}>
+                                You need to go to the phone’s settings screen and enable geolocation or select a
+                                location
+                                manually.
+                            </Text>
+                        </View>)}
                 </View>
             </View>
         );
@@ -116,24 +124,24 @@ export default class extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    topSection       : {
+    topSection        : {
         flex           : 1,
         flexDirection  : 'row',
         alignItems     : 'flex-start',
         justifyContent : 'center',
         backgroundColor: 'transparent'
     },
-    innerContainer   : {
+    innerContainer    : {
         flex           : 1,
         marginTop      : 35,
         backgroundColor: 'transparent'
     },
-    headerText       : {
+    headerText        : {
         fontFamily: 'Muli-SemiBold',
         textAlign : 'center',
         color     : '#fff'
     },
-    locationBlock    : {
+    locationBlock     : {
         maxWidth      : width,
         paddingLeft   : 20,
         paddingRight  : 20,
@@ -141,29 +149,43 @@ const styles = StyleSheet.create({
         alignItems    : 'center',
         justifyContent: 'center'
     },
-    locationText     : {
+    locationText      : {
         fontFamily: 'Muli-Regular'
     },
     touchableContainer: {
         paddingTop: isIos ? 20 : 0
     },
-    tempBlock        : {
+    tempBlock         : {
         flexDirection : 'row',
         alignItems    : 'flex-start',
         justifyContent: 'center'
     },
-    tempText         : {
+    tempText          : {
         fontSize     : 90,
         lineHeight   : 90,
         paddingBottom: 5,
     },
-    tempTextDimension: {
+    tempTextDimension : {
         marginLeft: -3,
         fontSize  : 50,
         lineHeight: 55
     },
-    conditionText    : {
+    conditionText     : {
         paddingTop: 5,
         fontSize  : 21
+    },
+    moreInfoBottom    : {
+        flexDirection : 'row',
+        justifyContent: 'center',
+        marginLeft    : 25,
+        marginRight   : 24,
+        marginTop     : 100
+    },
+    moreInfoBottomText: {
+        color        : '#fff',
+        fontSize     : 16,
+        fontFamily   : 'Muli-Regular',
+        lineHeight   : 21,
+        letterSpacing: 0.8
     }
 });
