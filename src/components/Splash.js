@@ -4,6 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import LinearGradient from 'react-native-linear-gradient';
+import SplashSvg from '../svgs_converted/splash';
 
 import {
     View,
@@ -11,13 +12,14 @@ import {
     StyleSheet,
     Platform,
     PermissionsAndroid,
-    Alert
+    Alert,
+    Dimensions
 } from 'react-native';
 
 import {setWeather} from '../actions/weatherActions';
 import {initForecast} from '../helpers/weatherAPI';
 
-import Icon from './Icons';
+const {width, height} = Dimensions.get('window');
 
 @connect(store => {
     return {...store.weather};
@@ -52,15 +54,7 @@ export default class Splash extends React.Component {
                 end={{x: 0.3, y: 1}}
                 style={styles.container}>
                 <View style={styles.contentBlock}>
-                    <Icon
-                        name="appIcon"
-                        height="150"
-                        width="150"
-                        fill="#FFF"
-                        stroke="none"
-                    />
-                    <Text style={styles.text}>React Native</Text>
-                    <Text style={styles.text}>Weather</Text>
+                    {SplashSvg(width, height)}
                 </View>
             </LinearGradient>
         );
@@ -109,7 +103,7 @@ export default class Splash extends React.Component {
             (position) => {
                 this._setLocation(position);
             },
-            (error) => {
+            () => {
                 Alert.alert(
                     'Error',
                     `Can't get your current location`,
@@ -164,16 +158,10 @@ const styles = StyleSheet.create({
         height    : undefined,
         alignItems: 'center'
     },
-    text        : {
-        fontFamily: 'Muli-Bold',
-        fontSize  : 30,
-        color     : 'white'
-    },
     contentBlock: {
         flex          : 1,
         alignItems    : 'center',
-        justifyContent: 'flex-start',
-        paddingTop    : 75
+        justifyContent: 'flex-start'
     }
 });
 
