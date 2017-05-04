@@ -30,7 +30,7 @@ export default {
                     </G>
                 </G>
             </G>
-            <G id="Group-2" transform="translate(6.000000, 25.000000)" stroke="#C4C4C3" stroke-linecap="round">
+            <G id="Group-2" transform={{translate: "6.000000, 251.000000"}} stroke="#C4C4C3" stroke-linecap="round">
                 <Path d="M1.5,0.25 L1.5,2.75" id="Line"/>
                 <Path d="M9.5,0.25 L9.5,2.75" id="Line"/>
                 <Path d="M5.5,0.25 L5.5,2.75" id="Line"/>
