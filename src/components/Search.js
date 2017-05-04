@@ -16,7 +16,8 @@ import {
     ActivityIndicator,
     BackAndroid,
     StyleSheet,
-    Keyboard
+    Keyboard,
+    Alert
 } from 'react-native';
 
 import {setWeather} from '../actions/weatherActions';
@@ -126,8 +127,19 @@ export default class Search extends Component {
             loaderShow: true
         });
 
-        initForecast(query, r => {
-            this.props.dispatch(setWeather(r));
+        initForecast(query, (err, response) => {
+            if (err) {
+                Alert.alert(
+                    'Error',
+                    `Can't fetch weather. Please try later.`,
+                    [
+                        {text: 'OK', onPress: this.nav},
+                    ],
+                    {cancelable: false}
+                );
+            }
+
+            this.props.dispatch(setWeather(response));
             this.props.setModalVisible(false);
         });
     }

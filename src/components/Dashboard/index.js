@@ -99,6 +99,10 @@ export default class extends React.Component {
         });
     }
 
+    componentWillMount() {
+        this.scrollTo(!this.props.forecast);
+    }
+
     render() {
         let code = this.props.current.condition.code;
         let {images, gradient: {background}} = getProps(code);
@@ -135,7 +139,7 @@ export default class extends React.Component {
                             setModalVisible={this.setModalVisible}
                             scrollTo={this.scrollTo}
                         />
-                        <Bottom />
+                        {this.props.forecast && <Bottom />}
                     </View>
                 </Animated.View>
             </View>
