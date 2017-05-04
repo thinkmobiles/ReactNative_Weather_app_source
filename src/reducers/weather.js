@@ -3,7 +3,7 @@ import * as types from '../actions/actionTypes';
 export default function reducer(state = {
                                     weather: {
                                         current: {},
-                                        location: {},
+                                        location: null,
                                         forecast: {}
                                     }
                                 }, action) {

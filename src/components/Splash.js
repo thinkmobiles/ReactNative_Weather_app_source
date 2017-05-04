@@ -28,9 +28,11 @@ export default class Splash extends React.Component {
 
         this._locationReceived = false;
         this._locationWatchID = null;
+
+        this.nav = this._nav.bind(this);
     }
 
-    nav() {
+    _nav() {
         this.props.navigator.replace({
             id: 'Dashboard'
         });
@@ -88,14 +90,14 @@ export default class Splash extends React.Component {
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
                 this._getInitialLocation();
             } else {
-                console.log("Location permission denied")
+                this.nav();
             }
         } catch (err) {
             Alert.alert(
                 'Error',
                 err,
                 [
-                    {text: 'OK', onPress: () => console.log('OK Pressed')}
+                    {text: 'OK', onPress: this.nav}
                 ],
                 {cancelable: false}
             )
@@ -103,21 +105,22 @@ export default class Splash extends React.Component {
     };
 
     _getInitialLocation = () => {
-        navigator.geolocation.getCurrentPosition((position) => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
                 this._setLocation(position);
             },
-            () => {
+            (error) => {
                 Alert.alert(
                     'Error',
                     `Can't get your current location`,
                     [
-                        {text: 'OK', onPress: () => console.log('OK Pressed')},
+                        {text: 'OK', onPress: this.nav},
                     ],
-                    { cancelable: false }
+                    {cancelable: false}
                 );
             },
             {
-                enableHighAccuracy: false,
+                enableHighAccuracy: true,
                 timeout           : 20000,
                 maximumAge        : 1000
             }
@@ -143,9 +146,9 @@ export default class Splash extends React.Component {
                     'Error',
                     err.message,
                     [
-                        {text: 'OK', onPress: () => console.log('OK Pressed')},
+                        {text: 'OK', onPress: this.nav},
                     ],
-                    { cancelable: false }
+                    {cancelable: false}
                 );
             }
 
