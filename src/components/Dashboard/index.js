@@ -45,6 +45,8 @@ export default class extends React.Component {
         this.scrollTo = this._scrollTo.bind(this);
         this.setModalVisible = this._setModalVisible.bind(this);
 
+        this.collapsed = false;
+
         this.state.panResponder = PanResponder.create({
             onStartShouldSetPanResponder: (e) => {
                 const {pageY} = e.nativeEvent;
@@ -59,14 +61,16 @@ export default class extends React.Component {
                 const {dy} = gestureState;
                 let maxMargin = height * 0.32;
                 let diff;
-                let value;
+                const collapsedState = this.collapsed;
 
                 if (this.startYMargin + dy >= 0 && this.startYMargin + dy <= height) {
                     diff = pageY - this.startYMargin;
 
-                    value = diff < 0 ? -maxMargin - dy : -dy;
-
-                    return this.state.margin.setValue(value);
+                    if (diff < 0 && !collapsedState) {
+                        return this.state.margin.setValue(-maxMargin - dy);
+                    } else if (diff > 0 && collapsedState) {
+                        return this.state.margin.setValue(-dy);
+                    }
                 }
 
                 return this.state.margin.setValue(this.state.margin._value);
@@ -81,7 +85,10 @@ export default class extends React.Component {
     }
 
     _scrollTo(direction) {
-        let end = direction ? -(height * 0.32) : 0;
+        let checkState = typeof direction !== 'undefined' ? direction : this.collapsed;
+        let end = checkState ? -(height * 0.32) : 0;
+
+        this.collapsed = !end;
 
         if (this.state.margin._value !== end) {
             Animated.spring(

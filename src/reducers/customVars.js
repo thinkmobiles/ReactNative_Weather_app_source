@@ -1,3 +1,4 @@
+import * as types from '../actions/actionTypes';
 import {
     Animated
 } from 'react-native';

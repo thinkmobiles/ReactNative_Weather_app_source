@@ -21,10 +21,10 @@ const isIos = Platform.OS === 'ios';
 
 @connect((store) => {
     return {
-        ...store.weather.weather,
-        ...store.customVars.customVars
+        ...store.weather.weather
     };
 })
+
 export default class extends React.Component {
     constructor(props) {
         super(props);
@@ -38,7 +38,7 @@ export default class extends React.Component {
     }
 
     _onTouchablePress() {
-        return this.props.scrollTo(this.props.dashBoardAnimatedValue._value >= 0);
+        return this.props.scrollTo();
     }
 
     getRealFont(text) {
