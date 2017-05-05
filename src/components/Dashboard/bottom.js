@@ -2,11 +2,18 @@
 
 import React from 'react';
 import moment from 'moment';
-import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
 import {connect} from 'react-redux';
 
 import Icon from '../Icons';
 import {getProps} from '../../helpers/getWeatherProps';
+
+import {
+    View,
+    Text,
+    StyleSheet,
+    Dimensions
+} from 'react-native';
+
 
 const {height} = Dimensions.get('window');
 
