@@ -15,14 +15,18 @@ import {
     TouchableHighlight,
     ActivityIndicator,
     BackAndroid,
-    StyleSheet
+    StyleSheet,
+    Keyboard,
+    Alert
 } from 'react-native';
 
 import {setWeather} from '../actions/weatherActions';
 import {getCities, initForecast} from '../helpers/weatherAPI';
-import {getGradColors} from '../images/topImages';
+import {getProps} from '../helpers/getWeatherProps';
 
 import Icon from './Icons';
+
+const isIos = Platform.OS === 'ios';
 
 @connect((store) => {
     return {...store.weather.weather};
@@ -32,7 +36,8 @@ export default class Search extends Component {
         super(props);
 
         let code = this.props.current.condition.code;
-        this.gradColors = getGradColors(code);
+        let {gradient: {search}} = getProps(code);
+        this.gradColors = search;
 
         this.state = {
             text      : '',
@@ -41,11 +46,11 @@ export default class Search extends Component {
             infoMsg   : ''
         };
 
-        this.onChangeText = this._onChangeText.bind(this);
-        this.renderItem = this._renderItem.bind(this);
-        this.onItemPress = this._onItemPress.bind(this);
         this.onBackPress = this._onBackPress.bind(this);
+        this.onChangeText = this._onChangeText.bind(this);
+        this.onItemPress = this._onItemPress.bind(this);
         this.search = this._search.bind(this);
+        this.renderItem = this._renderItem.bind(this);
 
         this.debounceSearch = debounce((text) => {
             this._search(text);
@@ -55,15 +60,24 @@ export default class Search extends Component {
     }
 
     _onBackPress() {
-        this.props.navigator.replace({id: 'Dashboard'});
+        this.props.setModalVisible(false);
         return true;
     }
 
     _onChangeText(text) {
-        this.setState({
-            text: text
-        });
-        this.debounceSearch(text);
+        if (text.length < 3) {
+            this.setState({
+                text      : text,
+                cities    : [],
+                infoMsg   : 'type 3 or more symbols',
+                loaderShow: false
+            });
+        } else {
+            this.setState({
+                text: text
+            });
+            this.debounceSearch(text);
+        }
     }
 
     _onItemPress(item) {
@@ -71,25 +85,54 @@ export default class Search extends Component {
     }
 
     _search(text) {
-        if (text.length < 3) {
-            this.setState({
-                infoMsg: 'type 3 or more symbols'
-            });
-            return;
-        }
-
         this.setState({
             loaderShow: true,
             infoMsg   : ''
         });
 
-        getCities(text, r => {
-            let cities = r && !r.error ? r : [];
+        getCities(text, (err, r) => {
+            let cities = [];
+            let infoMsg = 'no cities found';
+
+            if (err) {
+                infoMsg = 'Request failed. Please, check your connection and try again.'
+            } else if (!r.error) {
+                cities = r;
+            }
+
             this.setState({
                 cities    : cities,
                 loaderShow: false,
-                infoMsg   : 'no cities found'
+                infoMsg   : infoMsg
             });
+        });
+    }
+
+    setWeather(query) {
+        Keyboard.dismiss();
+
+        this.setState({
+            loaderShow: true
+        });
+
+        initForecast(query, (err, response) => {
+            this.setState({
+                loaderShow: false
+            });
+            if (err) {
+                Alert.alert(
+                    'Error',
+                    `Can't fetch weather. Please try later.`,
+                    [
+                        {text: 'OK'},
+                    ],
+                    {cancelable: false}
+                );
+            }
+            else {
+                this.props.setModalVisible(false);
+                this.props.dispatch(setWeather(response));
+            }
         });
     }
 
@@ -100,29 +143,19 @@ export default class Search extends Component {
                 onPress={() => this.onItemPress(item)}
                 style={styles.listItem}
             >
-                <Text
-                    style={styles.listItemText}
-                >
+                <Text style={styles.listItemText}>
                     {item.name}
                 </Text>
             </TouchableHighlight>
         )
     }
 
-    setWeather(query) {
-        this.setState({
-            loaderShow: true
-        });
-
-        initForecast(query, r => {
-            this.props.dispatch(setWeather(r));
-            this.props.navigator.replace({id: 'Dashboard'});
-        });
-    }
-
     render() {
         const cities = this.state.cities.map((item, index) => {
-            return {...item, key: `item-${index}`}
+            return {
+                name: item.name,
+                key : `item-${index}`
+            }
         });
 
         const bottomComponent = cities.length ? (
@@ -132,15 +165,11 @@ export default class Search extends Component {
                 renderItem={this.renderItem}
                 keyboardShouldPersistTaps="always"
             />) : (
-            <View style={styles.infoMsg}
-            >
-                <Text
-                    style={styles.infoMsgText}
-                >
+            <View style={styles.infoMsg}>
+                <Text style={styles.infoMsgText}>
                     {this.state.infoMsg}
                 </Text>
             </View>);
-
         return (
             <View
                 style={styles.mainView}
@@ -156,29 +185,37 @@ export default class Search extends Component {
                     >
                         <Icon
                             name="back"
-                            height="42"
-                            width="40"
+                            height={isIos ? 42 : 52}
+                            width={isIos ? 40 : 50}
                             fill="white"
                             stroke="none"
                         />
                     </TouchableOpacity>
                     <TextInput
-                        ref="textInput"
+                        ref={textInput => {
+                            this.textInput = textInput;
+                        }}
                         style={styles.textInput}
                         value={this.state.text}
                         onChangeText={this.onChangeText}
-                        underlineColorAndroid={"transparent"}
-                        placeholder={"Enter your location"}
-                        placeholderTextColor={'#fff'}
+                        underlineColorAndroid={'transparent'}
+                        placeholder={'Enter your location'}
+                        placeholderTextColor={'#e3e3e3'}
+                        returnKeyType={'search'}
                     />
                     {this.state.loaderShow && <ActivityIndicator
                         color={this.gradColors[0]}
                         size={'large'}
+                        style={styles.indicator}
                     />}
                 </LinearGradient>
 
                 {bottomComponent}
             </View>)
+    }
+
+    componentDidMount() {
+        this.textInput.focus();
     }
 
     componentWillUnmount() {
@@ -187,11 +224,16 @@ export default class Search extends Component {
 }
 
 const styles = StyleSheet.create({
+    indicator   : {
+        marginRight: 10
+    },
     infoMsg     : {
         flex          : 1,
         flexDirection : 'row',
         justifyContent: 'center',
-        paddingTop    : 26
+        paddingTop    : 26,
+        marginLeft    : 15,
+        marginRight   : 15
     },
     infoMsgText : {
         fontSize: 18
@@ -216,13 +258,14 @@ const styles = StyleSheet.create({
     textInput   : {
         flex      : 1,
         color     : '#fff',
-        fontFamily: 'Muli-Bold'
+        fontFamily: 'Muli-SemiBold',
+        fontSize  : isIos ? 16 : 20
     },
     topBar      : {
         flex         : 1,
         flexDirection: 'row',
         alignItems   : 'center',
-        paddingTop   : Platform.OS === 'ios' ? 30 : 0,
-        maxHeight    : Platform.OS === 'ios' ? 42 : 72
+        paddingTop   : isIos ? 20 : 0,
+        maxHeight    : isIos ? 92 : 72
     }
 });

@@ -3,39 +3,183 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {StyleSheet, View, Navigator, Image} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 import Top from './top';
 import Bottom from './bottom';
+import TopImage from './topImage';
+import Search from '../Search';
 
-import {getImage} from '../../images/topImages';
+import {getProps} from '../../helpers/getWeatherProps';
+
+import {
+    Platform,
+    StyleSheet,
+    View,
+    Dimensions,
+    Animated,
+    PanResponder,
+    Modal
+} from 'react-native';
+
+const {height} = Dimensions.get('window');
+const isIos = Platform.OS === 'ios';
 
 @connect((store) => {
     return {
-        ...store.weather.weather
+        ...store.weather.weather,
+        ...store.customVars.customVars
     };
 })
-
 export default class extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            margin      : this.props.dashBoardAnimatedValue,
+            modalVisible: false
+        };
+
+        this.modalAnimType = isIos ? 'slide' : 'fade';
+
+        this.scrollTo = this._scrollTo.bind(this);
+        this.setModalVisible = this._setModalVisible.bind(this);
+
+        this.collapsed = false;
+
+        this.state.panResponder = PanResponder.create({
+            onStartShouldSetPanResponder: (e) => {
+                const {pageY} = e.nativeEvent;
+
+                this.startY = pageY;
+                this.startYMargin = pageY > height / 2 ? height : 0;
+
+                return true;
+            },
+            onPanResponderMove          : (e, gestureState) => {
+                const {pageY} = e.nativeEvent;
+                const {dy} = gestureState;
+                let maxMargin = height * 0.32;
+                let diff;
+                const collapsedState = this.collapsed;
+
+                if (this.startYMargin + dy >= 0 && this.startYMargin + dy <= height) {
+                    diff = pageY - this.startYMargin;
+
+                    if (diff < 0 && !collapsedState) {
+                        return this.state.margin.setValue(-maxMargin - dy);
+                    } else if (diff > 0 && collapsedState) {
+                        return this.state.margin.setValue(-dy);
+                    }
+                }
+
+                return this.state.margin.setValue(this.state.margin._value);
+            },
+            onPanResponderRelease       : (e) => {
+                const {pageY} = e.nativeEvent;
+                let direction = (pageY > this.startY ? height : 0);
+
+                this.scrollTo(direction);
+            },
+        });
+    }
+
+    _scrollTo(direction) {
+        let checkState = typeof direction !== 'undefined' ? direction : this.collapsed;
+        let end = checkState ? -(height * 0.32) : 0;
+
+        this.collapsed = !end;
+
+        if (this.state.margin._value !== end) {
+            Animated.spring(
+                this.state.margin,
+                {
+                    toValue: end
+                }
+            ).start();
+        }
+    }
+
+    _setModalVisible(state) {
+        this.setState({
+            modalVisible: state
+        });
+    }
+
+    componentWillMount() {
+        this.scrollTo(!this.props.forecast);
     }
 
     render() {
+        let code = this.props.current.condition.code;
+        let {images, gradient: {background}} = getProps(code);
+
+        background.style = styles.gradient;
+
         return (
-            <Image source={getImage(this.props.current.condition.code)} style={styles.container}>
-                <Top navigator={this.props.navigator}/>
-                <Bottom/>
-            </Image>
+            <View>
+                <Modal
+                    animationType={this.modalAnimType}
+                    transparent={false}
+                    visible={this.state.modalVisible}
+                    onRequestClose={() => {
+                        this.setModalVisible(false)
+                    }}
+                >
+                    <Search setModalVisible={this.setModalVisible}/>
+                </Modal>
+                <Animated.View
+                    {...this.state.panResponder.panHandlers}
+                    style={[styles.fullScreen, {marginBottom: this.state.margin}]}>
+                    <Animated.View
+                        style={[styles.gradientContainer, {bottom: this.state.margin}]}>
+                        <LinearGradient
+                            {...background}
+                        >
+                            <TopImage
+                                images={images}
+                            />
+                        </LinearGradient>
+                    </Animated.View>
+                    <View style={[styles.contentSection]}>
+                        <Top
+                            setModalVisible={this.setModalVisible}
+                            scrollTo={this.scrollTo}
+                        />
+                        {this.props.forecast && <Bottom />}
+                    </View>
+                </Animated.View>
+            </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
+    fullScreen       : {
+        paddingTop     : isIos ? 20 : 0,
         flex           : 1,
         width          : undefined,
         height         : undefined,
-        backgroundColor: 'transparent'
+        backgroundColor: 'white',
+        minHeight      : height
+    },
+    gradientContainer: {
+        position    : 'absolute',
+        overflow    : 'hidden',
+        marginBottom: height * 0.2,
+        top         : 0,
+        left        : 0,
+        right       : 0,
+        maxHeight   : height * 1.3,
+        minHeight   : height,
+        zIndex      : 1
+    },
+    gradient         : {
+        flex: 1
+    },
+    contentSection   : {
+        flex    : 1,
+        position: 'relative',
+        zIndex  : 2
     }
 });

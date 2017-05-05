@@ -1,11 +1,14 @@
 'use strict';
 
 import React from 'react';
-import {View, Navigator} from 'react-native';
 
 import Splash from './Splash';
 import Dashboard from './Dashboard/';
-import Search from './Search';
+
+import {
+    View,
+    Navigator
+} from 'react-native';
 
 export default class RootRouter extends React.Component {
     renderScene(route, navigator) {
@@ -17,12 +20,6 @@ export default class RootRouter extends React.Component {
                 <Splash
                     {...this.props}
                     navigator={navigator}/>
-            );
-        }
-
-        if (routeId === 'Search') {
-            return (
-                <Search navigator={navigator}/>
             );
         }
 

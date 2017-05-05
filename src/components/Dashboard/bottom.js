@@ -2,55 +2,41 @@
 
 import React from 'react';
 import moment from 'moment';
-import {View, Text, Image, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 
 import Icon from '../Icons';
+import {getProps} from '../../helpers/getWeatherProps';
 
-const mapCodeToIcon = (code) => {
-    const codesMap = {
-        fog   : [1030, 1135, 1147],
-        sunny : [1000],
-        snowy : [
-            1066, 1114, 1213, 1216, 1219,
-            1258, 1261, 1069, 1117, 1222,
-            1225, 1237, 1264
-        ],
-        cloudy: [1009, 1072, 1003, 1006, 1063],
-        storm : [1087, 1273, 1276, 1279, 1282],
-        rainy : [
-            1150, 1153, 1168, 1180, 1183,
-            1198, 1240, 1171, 1186, 1189,
-            1192, 1195, 1201, 1243, 1246,
-            /* lightSnow */
-            1204, 1207, 1210, 1249, 1252, 1255
-        ]
-    };
+import {
+    View,
+    Text,
+    StyleSheet,
+    Dimensions
+} from 'react-native';
 
-    for (let key in codesMap) {
-        if (~codesMap[key].indexOf(code)) {
-            return key;
-        }
-    }
 
-    return 'sunny';
-};
+const {height} = Dimensions.get('window');
 
 @connect((store) => {
     return {collection: store.weather.weather.forecast.forecastday};
 })
-
 export default class extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 {this.props.collection.map((rowElement, index) => {
+                    let {icon} = getProps(rowElement.day.condition.code);
                     let boldStyleObject = {
-                        fontFamily: !index ? 'Muli-SemiBold' : 'Muli-Light',
+                        fontFamily: !index ? 'Muli-SemiBold' : 'Muli-Light'
                     };
 
                     return (
-                        <View key={'element-' + index} style={styles.row}>
+                        <View key={'element-' + index}
+                              style={[styles.row]}>
                             <View style={[styles.rowElement, styles.dayElement]}>
                                 <Text style={[
                                     styles.dayElementText,
@@ -61,13 +47,13 @@ export default class extends React.Component {
                                 </Text>
                             </View>
                             <View style={styles.iconBlock}>
-                                <Icon
-                                    name={mapCodeToIcon(rowElement.day.condition.code)}
+                                {icon && (<Icon
+                                    name={icon}
                                     height="30"
                                     width="30"
                                     fill="#C4C4C3"
                                     stroke="none"
-                                />
+                                />)}
                             </View>
                             <View style={styles.tempBlock}>
                                 <View style={styles.tempBlockElement}>
@@ -100,11 +86,13 @@ export default class extends React.Component {
 
 const styles = StyleSheet.create({
     container           : {
-        flex         : 0.7,
+        flex         : 1,
+        maxHeight    : height * 0.4,
         flexDirection: 'column',
         paddingLeft  : 35,
         paddingRight : 25,
-        paddingBottom: 10
+        marginBottom : 15,
+        zIndex       : 3
     },
     row                 : {
         flex         : 1,
@@ -116,9 +104,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     bottomText          : {
-        fontFamily: 'Muli-Light',
-        fontSize  : 18,
-        color     : '#979797'
+        fontFamily     : 'Muli-Light',
+        fontSize       : 18,
+        color          : '#979797',
+        backgroundColor: 'transparent'
     },
     dayElement          : {
         flex: 1

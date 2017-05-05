@@ -2,9 +2,13 @@ import * as types from '../actions/actionTypes';
 
 export default function reducer(state = {
                                     weather: {
-                                        current: {},
-                                        location: {},
-                                        forecast: {}
+                                        current: {
+                                            condition: {
+                                                code: 1000
+                                            }
+                                        },
+                                        location: null,
+                                        forecast: null
                                     }
                                 }, action) {
 
