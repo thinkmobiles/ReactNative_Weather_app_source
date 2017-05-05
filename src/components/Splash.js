@@ -63,7 +63,7 @@ export default class Splash extends React.Component {
     componentDidMount() {
         this._locationReceived = false;
 
-        if (Platform.OS == 'android' && Platform.Version >= 23) {
+        if (Platform.OS === 'android' && Platform.Version >= 23) {
             this._getInitialAndroid23Location();
         } else {
             this._getInitialLocation();
@@ -112,6 +112,12 @@ export default class Splash extends React.Component {
                     ],
                     {cancelable: false}
                 );
+                if (Platform.OS === 'android' && !this._locationReceived) {
+                    this._locationWatchID = navigator.geolocation.watchPosition((position) => {
+                        this._setLocation(position);
+                        navigator.geolocation.clearWatch(this._locationWatchID);
+                    });
+                }
             },
             {
                 enableHighAccuracy: true,
@@ -119,13 +125,6 @@ export default class Splash extends React.Component {
                 maximumAge        : 1000
             }
         );
-
-        if (Platform.OS == 'android' && !this._locationReceived) {
-            this._locationWatchID = navigator.geolocation.watchPosition((position) => {
-                this._setLocation(position);
-                navigator.geolocation.clearWatch(this._locationWatchID);
-            });
-        }
     };
 
     _setLocation = (position) => {
