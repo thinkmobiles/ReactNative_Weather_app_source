@@ -67,16 +67,17 @@ export default class Search extends Component {
     _onChangeText(text) {
         if (text.length < 3) {
             this.setState({
-                text  : text,
-                cities: []
+                text      : text,
+                cities    : [],
+                infoMsg   : 'type 3 or more symbols',
+                loaderShow: false
             });
         } else {
             this.setState({
                 text: text
             });
+            this.debounceSearch(text);
         }
-
-        this.debounceSearch(text);
     }
 
     _onItemPress(item) {
@@ -84,13 +85,6 @@ export default class Search extends Component {
     }
 
     _search(text) {
-        if (text.length < 3) {
-            this.setState({
-                infoMsg: 'type 3 or more symbols'
-            });
-            return;
-        }
-
         this.setState({
             loaderShow: true,
             infoMsg   : ''
@@ -207,10 +201,12 @@ export default class Search extends Component {
                         underlineColorAndroid={'transparent'}
                         placeholder={'Enter your location'}
                         placeholderTextColor={'#e3e3e3'}
+                        returnKeyType={'search'}
                     />
                     {this.state.loaderShow && <ActivityIndicator
                         color={this.gradColors[0]}
                         size={'large'}
+                        style={styles.indicator}
                     />}
                 </LinearGradient>
 
@@ -228,6 +224,9 @@ export default class Search extends Component {
 }
 
 const styles = StyleSheet.create({
+    indicator   : {
+        marginRight: 10
+    },
     infoMsg     : {
         flex          : 1,
         flexDirection : 'row',
