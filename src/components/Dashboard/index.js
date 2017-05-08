@@ -9,6 +9,7 @@ import Top from './top';
 import Bottom from './bottom';
 import TopImage from './topImage';
 import Search from '../Search';
+import Refresh from '../RefreshElement';
 
 import {getProps} from '../../helpers/getWeatherProps';
 
@@ -19,11 +20,14 @@ import {
     Dimensions,
     Animated,
     PanResponder,
-    Modal
+    Modal,
+    Text
 } from 'react-native';
 
 const {height} = Dimensions.get('window');
 const isIos = Platform.OS === 'ios';
+
+const refreshHeight = 40;
 
 @connect((store) => {
     return {
@@ -52,32 +56,32 @@ export default class extends React.Component {
                 const {pageY} = e.nativeEvent;
 
                 this.startY = pageY;
-                this.startYMargin = pageY > height / 2 ? height : 0;
 
                 return true;
             },
             onPanResponderMove          : (e, gestureState) => {
                 const {pageY} = e.nativeEvent;
                 const {dy} = gestureState;
-                let maxMargin = height * 0.32;
-                let diff;
                 const collapsedState = this.collapsed;
 
-                if (this.startYMargin + dy >= 0 && this.startYMargin + dy <= height) {
-                    diff = pageY - this.startYMargin;
+                let maxMargin = height * 0.32;
+                let diff;
 
-                    if (diff < 0 && !collapsedState) {
-                        return this.state.margin.setValue(-maxMargin - dy);
-                    } else if (diff > 0 && collapsedState) {
-                        return this.state.margin.setValue(-dy);
-                    }
+                diff = pageY - this.startY;
+
+                if (diff < 0 && !collapsedState && (-maxMargin - dy <= 0)) {
+                    return this.state.margin.setValue(-maxMargin - dy);
+                } else if (diff > 0 && collapsedState && (dy <= maxMargin)) {
+                    return this.state.margin.setValue(-dy);
+                } else if (pageY > this.startY && !collapsedState) {
+                    return this.refreshElement.handleScroll(dy);
                 }
-
-                return this.state.margin.setValue(this.state.margin._value);
             },
             onPanResponderRelease       : (e) => {
                 const {pageY} = e.nativeEvent;
                 let direction = (pageY > this.startY ? height : 0);
+
+                return this.refreshElement.handleRelease();
 
                 this.scrollTo(direction);
             },
@@ -107,7 +111,7 @@ export default class extends React.Component {
     }
 
     componentWillMount() {
-        this.scrollTo(!this.props.forecast);
+        this.scrollTo(1);
     }
 
     render() {
@@ -128,6 +132,12 @@ export default class extends React.Component {
                 >
                     <Search setModalVisible={this.setModalVisible}/>
                 </Modal>
+                <Refresh
+                    ref={(component) => {
+                        this.refreshElement = component
+                    }}
+                    height={refreshHeight}
+                />
                 <Animated.View
                     {...this.state.panResponder.panHandlers}
                     style={[styles.fullScreen, {marginBottom: this.state.margin}]}>
