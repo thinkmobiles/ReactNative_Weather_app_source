@@ -66,7 +66,7 @@ export default class RefreshElement extends Component {
                     [
                         {text: 'OK'},
                     ],
-                    {cancelable: false})
+                    {cancelable: false});
             }
 
             this.props.dispatch(setWeather(res));

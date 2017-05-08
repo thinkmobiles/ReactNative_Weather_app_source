@@ -70,7 +70,7 @@ export default class Splash extends React.Component {
         }
     }
 
-    _getInitialAndroid23Location = async () => {
+    _getInitialAndroid23Location = async() => {
         try {
             const granted = await PermissionsAndroid.request(
                 PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -100,6 +100,12 @@ export default class Splash extends React.Component {
     };
 
     _getInitialLocation = () => {
+        const getCurrentPositionOptions = {
+            enableHighAccuracy: true,
+            timeout           : 20000,
+            maximumAge        : 1000
+        };
+
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 this._setLocation(position);
@@ -113,18 +119,18 @@ export default class Splash extends React.Component {
                     ],
                     {cancelable: false}
                 );
-                if (Platform.OS === 'android' && !this._locationReceived) {
-                    this._locationWatchID = navigator.geolocation.watchPosition((position) => {
-                        this._setLocation(position);
-                        navigator.geolocation.clearWatch(this._locationWatchID);
-                    });
+
+                if (!this._locationReceived) {
+                    this._locationWatchID = navigator.geolocation.watchPosition(
+                        (position) => {
+                            this._setLocation(position);
+                            navigator.geolocation.clearWatch(this._locationWatchID);
+                        },
+                        getCurrentPositionOptions
+                    );
                 }
             },
-            {
-                enableHighAccuracy: true,
-                timeout           : 1000,
-                maximumAge        : 1000
-            }
+            getCurrentPositionOptions
         );
     };
 
