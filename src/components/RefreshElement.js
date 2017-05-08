@@ -17,6 +17,10 @@ export default class Search extends Component {
             readyToRefresh: false,
             refreshTop    : new Animated.Value(-this.height)
         }
+
+        this.handleRelease = this._handleRelease.bind(this);
+        this.handleScroll = this._handleScroll.bind(this);
+
     }
 
     hideRefreshTool() {
@@ -28,24 +32,23 @@ export default class Search extends Component {
         ).start();
     }
 
-    handleScroll(value) {
+    _handleScroll(value) {
         var animatedValue = value < 3 * this.height ? -this.height + value : 2 * this.height;
 
         this.state.refreshTop.setValue(animatedValue);
     }
 
-    handleRelease() {
+    _handleRelease() {
         if (this.state.refreshTop._value !== 2 * this.height) {
             return this.hideRefreshTool();
         }
-
 
     }
 
     render() {
         return (
             <Animated.View
-                style={[styles.mainView, {maxHeight: this.height, top: this.state.refreshTop}]}>
+                style={[styles.mainView, {height: this.height, top: this.state.refreshTop}]}>
                 <Animated.Image
                     style={[
                         styles.element,
@@ -64,6 +67,7 @@ export default class Search extends Component {
 
 const styles = StyleSheet.create({
     mainView: {
+        flex    : 1,
         position: 'absolute',
         left    : 0,
         right   : 0,

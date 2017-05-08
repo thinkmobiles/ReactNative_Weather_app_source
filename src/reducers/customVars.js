@@ -5,7 +5,8 @@ import {
 
 export default function reducer(state = {
     customVars: {
-        dashBoardAnimatedValue: new Animated.Value(0)
+        dashBoardAnimatedValue: new Animated.Value(0),
+        refreshAnimatedValue: new Animated.Value(0),
     }
 }, action) {
     return state;

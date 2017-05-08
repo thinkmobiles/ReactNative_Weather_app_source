@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {connect} from 'react-redux';
+import {series} from 'async';
 
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -132,15 +133,15 @@ export default class extends React.Component {
                 >
                     <Search setModalVisible={this.setModalVisible}/>
                 </Modal>
-                <Refresh
-                    ref={(component) => {
-                        this.refreshElement = component
-                    }}
-                    height={refreshHeight}
-                />
                 <Animated.View
                     {...this.state.panResponder.panHandlers}
                     style={[styles.fullScreen, {marginBottom: this.state.margin}]}>
+                    <Refresh
+                        ref={(component) => {
+                            this.refreshElement = component
+                        }}
+                        height={refreshHeight}
+                    />
                     <Animated.View
                         style={[styles.gradientContainer, {bottom: this.state.margin}]}>
                         <LinearGradient
@@ -189,7 +190,6 @@ const styles = StyleSheet.create({
     },
     contentSection   : {
         flex    : 1,
-        position: 'relative',
         zIndex  : 2
     }
 });
