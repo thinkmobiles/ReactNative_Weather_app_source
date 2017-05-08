@@ -116,6 +116,7 @@ export default class Search extends Component {
     }
 
     setWeather(query) {
+        this.onItemPress = () => false;
         Keyboard.dismiss();
 
         this.setState({

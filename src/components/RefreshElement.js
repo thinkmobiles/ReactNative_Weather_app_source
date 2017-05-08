@@ -42,7 +42,7 @@ export default class RefreshElement extends Component {
     }
 
     handleRelease() {
-        if (this.state.refreshTop._value !== 2 * this.height) {
+        if (this.state.refreshTop._value !== 2 * this.height || !this.props.location) {
             return this.hideRefreshTool();
         }
 
@@ -51,7 +51,7 @@ export default class RefreshElement extends Component {
         initForecast(`${lat},${lon}`, (err, res) => {
             this.hideRefreshTool();
 
-            if(err){
+            if (err) {
                 return Alert.alert(
                     'Error',
                     err.message,
@@ -62,8 +62,7 @@ export default class RefreshElement extends Component {
             }
 
             this.props.dispatch(setWeather(res));
-        })
-
+        });
     }
 
     render() {
