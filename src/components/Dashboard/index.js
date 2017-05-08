@@ -29,6 +29,7 @@ const {height} = Dimensions.get('window');
 const isIos = Platform.OS === 'ios';
 
 const refreshHeight = 40;
+const basePadding = new Animated.Value(isIos ? 20 : 0);
 
 @connect((store) => {
     return {
@@ -36,12 +37,14 @@ const refreshHeight = 40;
         ...store.customVars.customVars
     };
 })
+
 export default class extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             margin      : this.props.dashBoardAnimatedValue,
+            padding     : this.props.refreshAnimatedValue,
             modalVisible: false
         };
 
@@ -51,7 +54,6 @@ export default class extends React.Component {
         this.setModalVisible = this._setModalVisible.bind(this);
 
         this.collapsed = false;
-
 
         this.state.panResponder = PanResponder.create({
             onStartShouldSetPanResponder: (e) => {
@@ -135,7 +137,10 @@ export default class extends React.Component {
                 </Modal>
                 <Animated.View
                     {...this.state.panResponder.panHandlers}
-                    style={[styles.fullScreen, {marginBottom: this.state.margin}]}>
+                    style={[styles.fullScreen, {
+                        paddingTop  : Animated.add(this.state.padding, basePadding),
+                        marginBottom: this.state.margin
+                    }]}>
                     <Refresh
                         ref={(component) => {
                             this.refreshElement = component
@@ -163,11 +168,14 @@ export default class extends React.Component {
             </View>
         );
     }
+
+    componentDidMount() {
+        this.refreshElement.getWrappedInstance().handleRelease();
+    }
 }
 
 const styles = StyleSheet.create({
     fullScreen       : {
-        paddingTop     : isIos ? 20 : 0,
         flex           : 1,
         width          : undefined,
         height         : undefined,
@@ -189,7 +197,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     contentSection   : {
-        flex    : 1,
-        zIndex  : 2
+        flex  : 1,
+        zIndex: 2
     }
 });
