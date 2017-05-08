@@ -1,12 +1,19 @@
 import React, {Component} from 'react';
 
+import {connect} from 'react-redux';
+
 import {
-    View,
     Animated,
     StyleSheet,
-    Image
+    Alert
 } from 'react-native';
 
+import {setWeather} from '../actions/weatherActions';
+import {initForecast} from '../helpers/weatherAPI';
+
+@connect((store) => {
+    return {...store.weather.weather};
+})
 export default class Search extends Component {
     constructor(props) {
         super(props);
@@ -29,7 +36,7 @@ export default class Search extends Component {
     }
 
     handleScroll(value) {
-        var animatedValue = value < 3 * this.height ? -this.height + value : 2 * this.height;
+        const animatedValue = value < 3 * this.height ? -this.height + value : 2 * this.height;
 
         this.state.refreshTop.setValue(animatedValue);
     }
@@ -39,6 +46,23 @@ export default class Search extends Component {
             return this.hideRefreshTool();
         }
 
+        // /*TODO loading animation */
+        // const {lat, lon} = this.props.current;
+        // initForecast(`${lat},${lon}`, (err, res) => {
+        //     this.hideRefreshTool();
+        //
+        //     if(err){
+        //         return Alert.alert(
+        //             'Error',
+        //             err.message,
+        //             [
+        //                 {text: 'OK'},
+        //             ],
+        //             {cancelable: false})
+        //     }
+        //
+        //     this.props.dispatch(setWeather(res));
+        // })
 
     }
 
