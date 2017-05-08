@@ -49,8 +49,8 @@ export default class RefreshElement extends Component {
         this.state.refreshTop.setValue(animatedValue);
     }
 
-    _handleRelease() {
-        if (this.state.refreshTop._value !== this.height) {
+    handleRelease() {
+        if (this.state.refreshTop._value !== this.height || !this.props.location) {
             return this.hideRefreshTool();
         }
 
@@ -70,7 +70,7 @@ export default class RefreshElement extends Component {
             }
 
             this.props.dispatch(setWeather(res));
-        })
+        });
     }
 
     render() {
