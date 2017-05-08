@@ -81,7 +81,7 @@ export default class extends React.Component {
                 const {pageY} = e.nativeEvent;
                 let direction = (pageY > this.startY ? height : 0);
 
-                return this.refreshElement.handleRelease();
+                this.refreshElement.handleRelease();
 
                 this.scrollTo(direction);
             },
