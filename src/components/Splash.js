@@ -125,8 +125,7 @@ export default class Splash extends React.Component {
                         (position) => {
                             this._setLocation(position);
                             navigator.geolocation.clearWatch(this._locationWatchID);
-                        },
-                        getCurrentPositionOptions
+                        }
                     );
                 }
             },

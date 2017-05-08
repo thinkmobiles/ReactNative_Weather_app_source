@@ -69,15 +69,32 @@ export default class RefreshElement extends Component {
         }
     }
 
-    _handleRelease() {
-        if (this.state.refreshTop._value !== 10 || !this.props.location) {
-            return this.hideRefreshTool();
-        }
+    _getInitialLocation = (cb) => {
+        const getCurrentPositionOptions = {
+            enableHighAccuracy: true,
+            timeout           : 3000,
+            maximumAge        : 1000
+        };
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                if (cb && typeof cb === 'function') {
+                    cb(position);
+                }
+            },
+            () => {
+                this.hideRefreshTool();
+            },
+            getCurrentPositionOptions
+        );
+    };
+
+    _refreshData(position) {
+        const {lat, lon} = position;
 
         this.rotate = true;
         this.animateLoading();
 
-        const {lat, lon} = this.props.location;
         initForecast(`${lat},${lon}`, (err, res) => {
             if (err) {
                 return Alert.alert(
@@ -92,6 +109,22 @@ export default class RefreshElement extends Component {
             this.rotate = false;
             this.props.dispatch(setWeather(res));
         });
+    }
+
+    _handleRelease() {
+        if (this.state.refreshTop._value !== 10) {
+            return this.hideRefreshTool();
+        }
+
+        if (!this.props.location) {
+            return this._getInitialLocation((position) => {
+                const {latitude, longitude} = position.coords;
+
+                this._refreshData({lat: latitude, lon: longitude});
+            });
+        }
+
+        this._refreshData(this.props.location);
     }
 
     render() {
