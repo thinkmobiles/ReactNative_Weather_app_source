@@ -122,7 +122,7 @@ export default class Splash extends React.Component {
             },
             {
                 enableHighAccuracy: true,
-                timeout           : 20000,
+                timeout           : 1000,
                 maximumAge        : 1000
             }
         );

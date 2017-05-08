@@ -92,7 +92,7 @@ export default class extends React.Component {
 
 const styles = StyleSheet.create({
     moreInfo               : {
-        flex: 0.2
+        flex: 1
     },
     moreInfoTop            : {
         flexDirection : 'row',

@@ -13,8 +13,12 @@ import {setWeather} from '../actions/weatherActions';
 import {initForecast} from '../helpers/weatherAPI';
 
 @connect((store) => {
-    return {...store.weather.weather};
+    return {
+        ...store.weather.weather,
+        ...store.customVars.customVars
+    };
 }, null, null, {withRef: true})
+
 export default class RefreshElement extends Component {
     constructor(props) {
         super(props);
@@ -23,7 +27,7 @@ export default class RefreshElement extends Component {
 
         this.state = {
             readyToRefresh: false,
-            refreshTop    : new Animated.Value(-this.height),
+            refreshTop    : this.props.refreshAnimatedValue,
             spinValue     : new Animated.Value(0)
         };
 
@@ -32,6 +36,8 @@ export default class RefreshElement extends Component {
             inputRange : [0, 1],
             outputRange: ['0deg', '360deg']
         });
+        this.handleRelease = this._handleRelease.bind(this);
+        this.handleScroll = this._handleScroll.bind(this);
     }
 
     hideRefreshTool() {
@@ -43,8 +49,8 @@ export default class RefreshElement extends Component {
         ).start();
     }
 
-    handleScroll(value) {
-        const animatedValue = value < 3 * this.height ? -this.height + value : 2 * this.height;
+    _handleScroll(value) {
+        const animatedValue = value <= this.height ? -this.height + value : 10;
 
         this.state.refreshTop.setValue(animatedValue);
     }
@@ -63,8 +69,8 @@ export default class RefreshElement extends Component {
         }
     }
 
-    handleRelease() {
-        if (this.state.refreshTop._value !== 2 * this.height || !this.props.location) {
+    _handleRelease() {
+        if (this.state.refreshTop._value !== 10 || !this.props.location) {
             return this.hideRefreshTool();
         }
 
@@ -88,18 +94,16 @@ export default class RefreshElement extends Component {
         });
     }
 
-
     render() {
         return (
             <Animated.View
-                style={[styles.mainView, {maxHeight: this.height, top: this.state.refreshTop}]}>
+                style={[styles.mainView, {height: this.height, top: this.state.refreshTop}]}>
                 <Animated.Image
                     style={[
                         styles.element,
                         {
-                            paddingTop: this.height / 2,
-                            maxHeight : this.height * 0.8,
-                            maxWidth  : this.height * 0.8,
+                            maxHeight: this.height * 0.8,
+                            maxWidth : this.height * 0.8,
                         },
                         {
                             transform: [
@@ -116,10 +120,13 @@ export default class RefreshElement extends Component {
 
 const styles = StyleSheet.create({
     mainView: {
-        position: 'absolute',
-        left    : 0,
-        right   : 0,
-        zIndex  : 20,
+        flex          : 1,
+        position      : 'absolute',
+        justifyContent: 'flex-start',
+        display       : 'flex',
+        left          : 0,
+        right         : 0,
+        zIndex        : 20,
     },
     element : {
         flex     : 1,
