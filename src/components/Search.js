@@ -116,7 +116,6 @@ export default class Search extends Component {
     }
 
     setWeather(query) {
-        this.onItemPress = () => false;
         Keyboard.dismiss();
 
         this.setState({
@@ -124,22 +123,25 @@ export default class Search extends Component {
         });
 
         initForecast(query, (err, response) => {
-            this.setState({
-                loaderShow: false
-            });
-            if (err) {
-                Alert.alert(
-                    'Error',
-                    `Can't fetch weather. Please try later.`,
-                    [
-                        {text: 'OK'},
-                    ],
-                    {cancelable: false}
-                );
-            }
-            else {
-                this.props.setModalVisible(false);
-                this.props.dispatch(setWeather(response));
+            if (this._isMounted) {
+                this.setState({
+                    loaderShow: false
+                });
+                if (err) {
+                    Alert.alert(
+                        'Error',
+                        `Can't fetch weather. Please try later.`,
+                        [
+                            {text: 'OK'},
+                        ],
+                        {cancelable: false}
+                    );
+                }
+                else {
+
+                    this.props.setModalVisible(false);
+                    this.props.dispatch(setWeather(response));
+                }
             }
         });
     }
@@ -225,10 +227,12 @@ export default class Search extends Component {
 
     componentDidMount() {
         this.textInput.focus();
+        this._isMounted = true;
     }
 
     componentWillUnmount() {
         BackAndroid.removeEventListener('hardwareBackPress', this.onBackPress);
+        this._isMounted = false;
     }
 }
 

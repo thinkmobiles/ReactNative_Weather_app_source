@@ -5,7 +5,8 @@ import {connect} from 'react-redux';
 import {
     Animated,
     StyleSheet,
-    Alert
+    Alert,
+    Easing
 } from 'react-native';
 
 import {setWeather} from '../actions/weatherActions';
@@ -22,8 +23,15 @@ export default class RefreshElement extends Component {
 
         this.state = {
             readyToRefresh: false,
-            refreshTop    : new Animated.Value(-this.height)
-        }
+            refreshTop    : new Animated.Value(-this.height),
+            spinValue     : new Animated.Value(0)
+        };
+
+        this.rotate = false;
+        this.spin = this.state.spinValue.interpolate({
+            inputRange : [0, 1],
+            outputRange: ['0deg', '360deg']
+        });
     }
 
     hideRefreshTool() {
@@ -41,16 +49,30 @@ export default class RefreshElement extends Component {
         this.state.refreshTop.setValue(animatedValue);
     }
 
+    animateLoading() {
+        if (this.rotate) {
+            this.state.spinValue.setValue(0);
+            Animated.timing(
+                this.state.spinValue,
+                {
+                    toValue : 1,
+                    duration: 600,
+                    easing  : Easing.linear
+                }
+            ).start(() => this.animateLoading())
+        }
+    }
+
     handleRelease() {
         if (this.state.refreshTop._value !== 2 * this.height || !this.props.location) {
             return this.hideRefreshTool();
         }
 
-        /*TODO loading animation */
+        this.rotate = true;
+        this.animateLoading();
+
         const {lat, lon} = this.props.location;
         initForecast(`${lat},${lon}`, (err, res) => {
-            this.hideRefreshTool();
-
             if (err) {
                 return Alert.alert(
                     'Error',
@@ -60,10 +82,12 @@ export default class RefreshElement extends Component {
                     ],
                     {cancelable: false})
             }
-
+            this.hideRefreshTool();
+            this.rotate = false;
             this.props.dispatch(setWeather(res));
         });
     }
+
 
     render() {
         return (
@@ -76,6 +100,11 @@ export default class RefreshElement extends Component {
                             paddingTop: this.height / 2,
                             maxHeight : this.height * 0.8,
                             maxWidth  : this.height * 0.8,
+                        },
+                        {
+                            transform: [
+                                {rotate: this.spin}
+                            ]
                         }
                     ]}
                     source={require('../images/images.png')}
