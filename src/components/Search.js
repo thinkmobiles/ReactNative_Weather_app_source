@@ -49,6 +49,7 @@ export default class Search extends Component {
         this.onBackPress = this._onBackPress.bind(this);
         this.onChangeText = this._onChangeText.bind(this);
         this.onItemPress = this._onItemPress.bind(this);
+        this.onSubmitEditing = this._onSubmitEditing.bind(this);
         this.search = this._search.bind(this);
         this.renderItem = this._renderItem.bind(this);
 
@@ -82,6 +83,12 @@ export default class Search extends Component {
 
     _onItemPress(item) {
         this.setWeather(item.name);
+    }
+
+    _onSubmitEditing() {
+        if (this.state.text.length >= 3) {
+            this.debounceSearch(this.state.text);
+        }
     }
 
     _search(text) {
@@ -198,6 +205,7 @@ export default class Search extends Component {
                         style={styles.textInput}
                         value={this.state.text}
                         onChangeText={this.onChangeText}
+                        onSubmitEditing={this.onSubmitEditing}
                         underlineColorAndroid={'transparent'}
                         placeholder={'Enter your location'}
                         placeholderTextColor={'#e3e3e3'}

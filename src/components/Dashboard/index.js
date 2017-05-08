@@ -52,6 +52,7 @@ export default class extends React.Component {
 
         this.collapsed = false;
 
+
         this.state.panResponder = PanResponder.create({
             onStartShouldSetPanResponder: (e) => {
                 const {pageY} = e.nativeEvent;
@@ -75,14 +76,13 @@ export default class extends React.Component {
                 } else if (diff > 0 && collapsedState && (dy <= maxMargin)) {
                     return this.state.margin.setValue(-dy);
                 } else if (pageY > this.startY && !collapsedState) {
-                    return this.refreshElement.handleScroll(dy);
+                    return this.refreshElement.getWrappedInstance().handleScroll(dy);
                 }
             },
             onPanResponderRelease       : (e) => {
                 const {pageY} = e.nativeEvent;
                 let direction = (pageY > this.startY ? height : 0);
-
-                this.refreshElement.handleRelease();
+                this.refreshElement.getWrappedInstance().handleRelease();
 
                 this.scrollTo(direction);
             },
