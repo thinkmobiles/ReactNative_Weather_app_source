@@ -44,13 +44,13 @@ export default class RefreshElement extends Component {
     }
 
     _handleScroll(value) {
-        const animatedValue = value < 1.2 * this.height ? -this.height + value : this.height;
+        const animatedValue = value <= this.height ? -this.height + value : 10;
 
         this.state.refreshTop.setValue(animatedValue);
     }
 
-    handleRelease() {
-        if (this.state.refreshTop._value !== this.height || !this.props.location) {
+    _handleRelease() {
+        if (this.state.refreshTop._value !== 10 || !this.props.location) {
             return this.hideRefreshTool();
         }
 
