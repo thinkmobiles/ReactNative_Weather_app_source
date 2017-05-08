@@ -86,7 +86,7 @@ export default class Search extends Component {
     }
 
     _onSubmitEditing() {
-        if(this.state.text.length >= 3){
+        if (this.state.text.length >= 3) {
             this.debounceSearch(this.state.text);
         }
     }
