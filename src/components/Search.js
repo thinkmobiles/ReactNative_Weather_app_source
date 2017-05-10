@@ -212,7 +212,8 @@ export default class Search extends Component {
                         onSubmitEditing={this.onSubmitEditing}
                         underlineColorAndroid={'transparent'}
                         placeholder={'Enter your location'}
-                        placeholderTextColor={'#e3e3e3'}
+                        placeholderTextColor={'white'}
+                        tintColor={'white'}
                         returnKeyType={'search'}
                     />
                     {this.state.loaderShow && <ActivityIndicator
@@ -273,13 +274,13 @@ const styles = StyleSheet.create({
         flex      : 1,
         color     : '#fff',
         fontFamily: 'Muli-SemiBold',
-        fontSize  : isIos ? 16 : 20
+        fontSize  : isIos ? 16 : 18
     },
     topBar      : {
         flex         : 1,
         flexDirection: 'row',
         alignItems   : 'center',
         paddingTop   : isIos ? 20 : 0,
-        maxHeight    : isIos ? 92 : 72
+        maxHeight    : isIos ? 37 : 57
     }
 });
