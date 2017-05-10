@@ -145,7 +145,12 @@ export default class Splash extends React.Component {
                 </View>
                 <View style={styles.poweredByBlock}>
                     <Text style={styles.poweredByText}>
-                        Powered by: <Text onPress={() => Linking.openURL('https://www.apixu.com')}>www.apixu.com</Text>
+                        Powered by:
+                        <Text
+                            style={styles.poweredByText}
+                            onPress={() => Linking.openURL('https://www.apixu.com')}>
+                            {` www.apixu.com`}
+                        </Text>
                     </Text>
                 </View>
             </LinearGradient>
