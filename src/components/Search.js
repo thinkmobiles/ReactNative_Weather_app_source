@@ -9,7 +9,6 @@ import {
     Platform,
     View,
     TextInput,
-    Text,
     FlatList,
     TouchableOpacity,
     TouchableHighlight,
@@ -19,6 +18,8 @@ import {
     Keyboard,
     Alert
 } from 'react-native';
+
+import Text from './ScaledTextComponent';
 
 import {setWeather} from '../actions/weatherActions';
 import {getCities, initForecast} from '../helpers/weatherAPI';
