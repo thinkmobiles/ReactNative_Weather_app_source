@@ -22,7 +22,8 @@ import {
     Dimensions,
     Animated,
     PanResponder,
-    Modal
+    Modal,
+    NetInfo
 } from 'react-native';
 
 const {height} = Dimensions.get('window');
@@ -129,6 +130,12 @@ export default class extends React.Component {
         });
     };
 
+    _handleConnectionInfoChange = (connectionInfo) => {
+        if (['NONE', 'UNKNOWN'].indexOf(connectionInfo) < 0) {
+            this.refreshElement.getWrappedInstance().handleRelease(true);
+        }
+    };
+
     componentWillMount() {
         this.scrollTo(1);
     }
@@ -187,11 +194,13 @@ export default class extends React.Component {
 
     componentDidMount() {
         AppState.addEventListener('change', this._handleAppStateChange);
+        NetInfo.addEventListener('change', this._handleConnectionInfoChange);
         this.refreshElement.getWrappedInstance().handleRelease();
     }
 
     componentWillUnmount() {
         AppState.removeEventListener('change', this._handleAppStateChange);
+        NetInfo.removeEventListener('change', this._handleConnectionInfoChange);
     }
 }
 
