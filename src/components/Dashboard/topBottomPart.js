@@ -5,11 +5,12 @@ import {connect} from 'react-redux';
 
 import {
     View,
-    Text,
     StyleSheet,
     Dimensions,
     Animated
 } from 'react-native';
+
+import Text from '../ScaledTextComponent';
 
 const {height} = Dimensions.get('window');
 const maxMargin = new Animated.Value(height * 0.32);
@@ -95,10 +96,10 @@ const styles = StyleSheet.create({
         flex: 1
     },
     moreInfoTop            : {
-        flexDirection : 'row',
-        justifyContent: 'center'
+        flexDirection: 'row'
     },
     moreInfoTopElement     : {
+        flex      : 1,
         alignItems: 'center',
         marginTop : 52
     },
@@ -118,7 +119,8 @@ const styles = StyleSheet.create({
         marginTop  : 52
     },
     moreInfoSeparatorText  : {
-        fontSize: 24,
+        opacity : 0.5,
+        fontSize: 26,
         color   : '#fff'
     },
     moreInfoBottom         : {

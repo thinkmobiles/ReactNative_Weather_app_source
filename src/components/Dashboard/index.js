@@ -22,8 +22,7 @@ import {
     Dimensions,
     Animated,
     PanResponder,
-    Modal,
-    Text
+    Modal
 } from 'react-native';
 
 const {height} = Dimensions.get('window');

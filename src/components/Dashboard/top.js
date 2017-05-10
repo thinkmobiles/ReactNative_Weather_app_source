@@ -5,11 +5,11 @@ import {connect} from 'react-redux';
 
 import Icon from '../Icons';
 import TopBottomPart from './topBottomPart';
+import Text, {getScaledFontSize} from '../ScaledTextComponent';
 
 import {
     Platform,
     View,
-    Text,
     StyleSheet,
     Dimensions,
     TouchableOpacity
@@ -41,21 +41,6 @@ export default class extends React.Component {
         return this.props.scrollTo();
     }
 
-    getRealFont(text) {
-        const length = text.length;
-
-        let fontSize = locationDefFont;
-        let width = () => {
-            return length / 2 * fontSize * 0.7;
-        };
-
-        while (width() > width - 40) {
-            fontSize -= 2;
-        }
-
-        return fontSize;
-    }
-
     render() {
         const {
             location,
@@ -64,10 +49,7 @@ export default class extends React.Component {
         } = this.props;
 
         let locationText = location ? `${location.name}, ${location.country}` : 'Change location';
-        let fontSize = this.getRealFont(locationText);
-        let locationFontStyle = {
-            fontSize: fontSize
-        };
+        let iconSize = getScaledFontSize(locationDefFont);
 
         const condText = current.condition && current.condition.text || 'No location selected';
 
@@ -80,14 +62,14 @@ export default class extends React.Component {
                         <View style={{alignSelf: 'flex-start'}}>
                             <Icon
                                 name="location"
-                                height={fontSize + 3}
-                                width={fontSize + 3}
+                                height={iconSize + 3}
+                                width={iconSize + 3}
                                 fill="transparent"
                                 stroke="#fff"
                                 strokeWidth="1"
                             />
                         </View>
-                        <Text style={[styles.headerText, styles.locationText, locationFontStyle]}
+                        <Text style={[styles.headerText, styles.locationText]}
                               onPress={this.onLocationPress}>
                             {locationText}
                         </Text>
@@ -150,6 +132,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     locationText      : {
+        fontSize  : locationDefFont,
         fontFamily: 'Muli-Regular'
     },
     touchableContainer: {

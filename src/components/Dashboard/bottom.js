@@ -6,10 +6,10 @@ import {connect} from 'react-redux';
 
 import Icon from '../Icons';
 import {getProps} from '../../helpers/getWeatherProps';
+import Text from '../ScaledTextComponent';
 
 import {
     View,
-    Text,
     StyleSheet,
     Dimensions
 } from 'react-native';
