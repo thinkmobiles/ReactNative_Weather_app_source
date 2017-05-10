@@ -115,12 +115,12 @@ const styles = StyleSheet.create({
         flex: 1
     },
     iconBlock           : {
-        flex          : 1,
+        flex          : 0.7,
         alignItems    : 'center',
         justifyContent: 'center'
     },
     tempBlock           : {
-        flex          : 0.6,
+        flex          : 0.7,
         alignItems    : 'center',
         justifyContent: 'center',
         flexDirection : 'row'

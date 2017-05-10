@@ -80,8 +80,8 @@ export default class extends React.Component {
                         <View style={{alignSelf: 'flex-start'}}>
                             <Icon
                                 name="location"
-                                height={fontSize}
-                                width={fontSize}
+                                height={fontSize + 3}
+                                width={fontSize + 3}
                                 fill="transparent"
                                 stroke="#fff"
                                 strokeWidth="1"
