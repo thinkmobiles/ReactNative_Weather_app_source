@@ -96,6 +96,8 @@ export default class RefreshElement extends Component {
         this.animateLoading();
 
         initForecast(`${lat},${lon}`, (err, res) => {
+            this.hideRefreshTool();
+
             if (err) {
                 return Alert.alert(
                     'Error',
@@ -105,7 +107,6 @@ export default class RefreshElement extends Component {
                     ],
                     {cancelable: false});
             }
-            this.hideRefreshTool();
             this.rotate = false;
             this.props.dispatch(setWeather(res));
         });
