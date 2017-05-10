@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -12,6 +13,7 @@
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* WeatherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* WeatherTests.m */; };
+		09BE78927AAB43DB882836C8 /* Muli-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBC1E6775DCC4676B426AF8F /* Muli-ExtraLight.ttf */; };
 		0C1826B15B064E0D9EB0C3A3 /* Muli-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5859A55EA9114240A3675831 /* Muli-LightItalic.ttf */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
@@ -34,24 +36,23 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* WeatherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* WeatherTests.m */; };
+		2FE0D9CDB58C46819FE59642 /* Muli-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFADD607FAA84AA4BE438EAC /* Muli-ExtraLightItalic.ttf */; };
+		3FC6A91306B2433984E46944 /* Muli-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51FAF030A9D4ACFB129C9D0 /* Muli-Black.ttf */; };
 		5E60575EABEB459A97D0D52F /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29BDF64DE17466EB41CA85F /* libRNSVG.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		7B204A62DF174D0B89C8F406 /* Muli-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69522D9E666049F185EF5F39 /* Muli-ExtraBoldItalic.ttf */; };
+		7B3A4E428B8648DE9F726549 /* Muli-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E42D2971E1E4AB28E462FDD /* Muli-BlackItalic.ttf */; };
 		7E32EE83D463452C83302B10 /* Muli-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5346A6394B0545CC953C7A30 /* Muli-SemiBold.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		86EF525FF2CF461B89E6A9F5 /* Muli-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7E5FD2104EC47B2B5A62BF5 /* Muli-Light.ttf */; };
 		9DD7849E1EB37DD90074708E /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD7848F1EB3799C0074708E /* libBVLinearGradient.a */; };
 		AC9ED884FAE740A78E6CA295 /* Muli-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21875076D2AF4DC6ABF72197 /* Muli-Italic.ttf */; };
 		B59C3B8BE2196D29E96E0C18 /* Pods_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A946D8B36C79399D0C3E606 /* Pods_Weather.framework */; };
-		C3BB344AA7C5443C816D3F12 /* Muli-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4172E2165D747998F930D06 /* Muli-Bold.ttf */; };
-		FA0C3DF52AD1452CBE512999 /* Muli-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB341F4842004E08A1D7C8BF /* Muli-Regular.ttf */; };
-		3FC6A91306B2433984E46944 /* Muli-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51FAF030A9D4ACFB129C9D0 /* Muli-Black.ttf */; };
-		7B3A4E428B8648DE9F726549 /* Muli-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E42D2971E1E4AB28E462FDD /* Muli-BlackItalic.ttf */; };
-		C85C1F8CEF574474A92166C3 /* Muli-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 513624899CC04F668B12FA7C /* Muli-BoldItalic.ttf */; };
-		C5349D9EBA0A45059DDCCE14 /* Muli-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B93F2BF398834EB9858113EB /* Muli-ExtraBold.ttf */; };
-		7B204A62DF174D0B89C8F406 /* Muli-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69522D9E666049F185EF5F39 /* Muli-ExtraBoldItalic.ttf */; };
-		09BE78927AAB43DB882836C8 /* Muli-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBC1E6775DCC4676B426AF8F /* Muli-ExtraLight.ttf */; };
-		2FE0D9CDB58C46819FE59642 /* Muli-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFADD607FAA84AA4BE438EAC /* Muli-ExtraLightItalic.ttf */; };
 		B643D1A5878141B29BD14E49 /* Muli-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DED5C152216846D5979BFA61 /* Muli-SemiBoldItalic.ttf */; };
+		C3BB344AA7C5443C816D3F12 /* Muli-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4172E2165D747998F930D06 /* Muli-Bold.ttf */; };
+		C5349D9EBA0A45059DDCCE14 /* Muli-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B93F2BF398834EB9858113EB /* Muli-ExtraBold.ttf */; };
+		C85C1F8CEF574474A92166C3 /* Muli-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 513624899CC04F668B12FA7C /* Muli-BoldItalic.ttf */; };
+		FA0C3DF52AD1452CBE512999 /* Muli-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB341F4842004E08A1D7C8BF /* Muli-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -285,26 +286,26 @@
 		2D02E47B1E0B4A5D006451C7 /* Weather-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* Weather-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Weather-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A946D8B36C79399D0C3E606 /* Pods_Weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E42D2971E1E4AB28E462FDD /* Muli-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-BlackItalic.ttf"; path = "../src/fonts/Muli-BlackItalic.ttf"; sourceTree = "<group>"; };
+		513624899CC04F668B12FA7C /* Muli-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-BoldItalic.ttf"; path = "../src/fonts/Muli-BoldItalic.ttf"; sourceTree = "<group>"; };
 		5346A6394B0545CC953C7A30 /* Muli-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-SemiBold.ttf"; path = "../src/fonts/Muli-SemiBold.ttf"; sourceTree = "<group>"; };
 		5859A55EA9114240A3675831 /* Muli-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-LightItalic.ttf"; path = "../src/fonts/Muli-LightItalic.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		69522D9E666049F185EF5F39 /* Muli-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-ExtraBoldItalic.ttf"; path = "../src/fonts/Muli-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		95929EB4DFA24072B15B08C0 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
 		9DD7848A1EB3799C0074708E /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
+		A51FAF030A9D4ACFB129C9D0 /* Muli-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-Black.ttf"; path = "../src/fonts/Muli-Black.ttf"; sourceTree = "<group>"; };
+		B93F2BF398834EB9858113EB /* Muli-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-ExtraBold.ttf"; path = "../src/fonts/Muli-ExtraBold.ttf"; sourceTree = "<group>"; };
 		C4172E2165D747998F930D06 /* Muli-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-Bold.ttf"; path = "../src/fonts/Muli-Bold.ttf"; sourceTree = "<group>"; };
 		C7E5FD2104EC47B2B5A62BF5 /* Muli-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-Light.ttf"; path = "../src/fonts/Muli-Light.ttf"; sourceTree = "<group>"; };
+		CBC1E6775DCC4676B426AF8F /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-ExtraLight.ttf"; path = "../src/fonts/Muli-ExtraLight.ttf"; sourceTree = "<group>"; };
 		D29BDF64DE17466EB41CA85F /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSVG.a; sourceTree = "<group>"; };
 		DB341F4842004E08A1D7C8BF /* Muli-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-Regular.ttf"; path = "../src/fonts/Muli-Regular.ttf"; sourceTree = "<group>"; };
+		DED5C152216846D5979BFA61 /* Muli-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-SemiBoldItalic.ttf"; path = "../src/fonts/Muli-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		DFADD607FAA84AA4BE438EAC /* Muli-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Muli-ExtraLightItalic.ttf"; path = "../src/fonts/Muli-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		F6C04246D9DF7F587B15DC5B /* Pods-Weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weather/Pods-Weather.debug.xcconfig"; sourceTree = "<group>"; };
-		A51FAF030A9D4ACFB129C9D0 /* Muli-Black.ttf */ = {isa = PBXFileReference; name = "Muli-Black.ttf"; path = "../src/fonts/Muli-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		4E42D2971E1E4AB28E462FDD /* Muli-BlackItalic.ttf */ = {isa = PBXFileReference; name = "Muli-BlackItalic.ttf"; path = "../src/fonts/Muli-BlackItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		513624899CC04F668B12FA7C /* Muli-BoldItalic.ttf */ = {isa = PBXFileReference; name = "Muli-BoldItalic.ttf"; path = "../src/fonts/Muli-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B93F2BF398834EB9858113EB /* Muli-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Muli-ExtraBold.ttf"; path = "../src/fonts/Muli-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		69522D9E666049F185EF5F39 /* Muli-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; name = "Muli-ExtraBoldItalic.ttf"; path = "../src/fonts/Muli-ExtraBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		CBC1E6775DCC4676B426AF8F /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; name = "Muli-ExtraLight.ttf"; path = "../src/fonts/Muli-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		DFADD607FAA84AA4BE438EAC /* Muli-ExtraLightItalic.ttf */ = {isa = PBXFileReference; name = "Muli-ExtraLightItalic.ttf"; path = "../src/fonts/Muli-ExtraLightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		DED5C152216846D5979BFA61 /* Muli-SemiBoldItalic.ttf */ = {isa = PBXFileReference; name = "Muli-SemiBoldItalic.ttf"; path = "../src/fonts/Muli-SemiBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
