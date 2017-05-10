@@ -71,7 +71,7 @@ export default class RefreshElement extends Component {
 
     _getInitialLocation = (cb) => {
         const getCurrentPositionOptions = {
-            enableHighAccuracy: true,
+            enableHighAccuracy: false,
             timeout           : 3000,
             maximumAge        : 1000
         };
@@ -111,9 +111,13 @@ export default class RefreshElement extends Component {
         });
     }
 
-    _handleRelease() {
-        if (this.state.refreshTop._value !== 10) {
+    _handleRelease(refresh) {
+        if (this.state.refreshTop._value !== 10 && !refresh) {
             return this.hideRefreshTool();
+        }
+
+        if (refresh) {
+            this.handleScroll(this.height);
         }
 
         if (!this.props.location) {

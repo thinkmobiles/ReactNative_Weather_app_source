@@ -15,6 +15,7 @@ import Refresh from '../RefreshElement';
 import {getProps} from '../../helpers/getWeatherProps';
 
 import {
+    AppState,
     Platform,
     StyleSheet,
     View,
@@ -43,9 +44,11 @@ export default class extends React.Component {
         super(props);
 
         this.state = {
-            margin      : this.props.dashBoardAnimatedValue,
-            padding     : this.props.refreshAnimatedValue,
-            modalVisible: false
+            appState        : AppState.currentState,
+            previousAppState: AppState.currentState,
+            margin          : this.props.dashBoardAnimatedValue,
+            padding         : this.props.refreshAnimatedValue,
+            modalVisible    : false
         };
 
         this.modalAnimType = isIos ? 'slide' : 'fade';
@@ -84,6 +87,7 @@ export default class extends React.Component {
             onPanResponderRelease       : (e) => {
                 const {pageY} = e.nativeEvent;
                 let direction = (pageY > this.startY ? height : 0);
+
                 this.refreshElement.getWrappedInstance().handleRelease();
 
                 this.scrollTo(direction);
@@ -112,6 +116,19 @@ export default class extends React.Component {
             modalVisible: state
         });
     }
+
+    _handleAppStateChange = (appState) => {
+        let previousAppState = this.state.previousAppState;
+
+        if (appState !== previousAppState && appState === 'active') {
+            this.refreshElement.getWrappedInstance().handleRelease(true);
+        }
+
+        this.setState({
+            appState,
+            previousAppState: appState,
+        });
+    };
 
     componentWillMount() {
         this.scrollTo(1);
@@ -170,7 +187,12 @@ export default class extends React.Component {
     }
 
     componentDidMount() {
+        AppState.addEventListener('change', this._handleAppStateChange);
         this.refreshElement.getWrappedInstance().handleRelease();
+    }
+
+    componentWillUnmount() {
+        AppState.removeEventListener('change', this._handleAppStateChange);
     }
 }
 
