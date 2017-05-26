@@ -13,7 +13,6 @@
     "react": "16.0.0-alpha.6",
     "react-native": "0.43.2",
     "react-native-linear-gradient": "^2.0.0",
-    "react-native-router-flux": "3.38.0",
     "react-native-svg": "5.1.7",
     "react-native-svg-icon": "0.4.0",
     "react-redux": "5.0.4",
