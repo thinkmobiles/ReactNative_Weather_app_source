@@ -96,7 +96,9 @@ const styles = StyleSheet.create({
         flex: 1
     },
     moreInfoTop            : {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginLeft   : 25,
+        marginRight  : 25
     },
     moreInfoTopElement     : {
         flex      : 1,
@@ -124,11 +126,10 @@ const styles = StyleSheet.create({
         color   : '#fff'
     },
     moreInfoBottom         : {
-        flexDirection : 'row',
-        justifyContent: 'center',
-        marginLeft    : 25,
-        marginRight   : 24,
-        marginTop     : 34
+        flexDirection: 'row',
+        marginLeft   : 25,
+        marginRight  : 25,
+        marginTop    : 34
     },
     moreInfoBottomText     : {
         color        : '#fff',
