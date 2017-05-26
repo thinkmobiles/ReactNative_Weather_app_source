@@ -55,7 +55,7 @@ export default class Search extends Component {
         this.renderItem = this._renderItem.bind(this);
 
         this.debounceSearch = debounce((text) => {
-            this._search(text);
+            this.search(text);
         }, 500);
 
         BackAndroid.addEventListener('hardwareBackPress', this.onBackPress);
