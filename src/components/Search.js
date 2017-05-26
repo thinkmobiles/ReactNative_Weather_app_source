@@ -16,10 +16,11 @@ import {
     BackAndroid,
     StyleSheet,
     Keyboard,
-    Alert
+    Alert,
+    Text
 } from 'react-native';
 
-import Text from './ScaledTextComponent';
+import ScalableText from './ScaledTextComponent';
 
 import {setWeather} from '../actions/weatherActions';
 import {getCities, initForecast} from '../helpers/weatherAPI';
@@ -177,9 +178,9 @@ export default class Search extends Component {
                 keyboardShouldPersistTaps="always"
             />) : (
             <View style={styles.infoMsg}>
-                <Text style={styles.infoMsgText}>
+                <ScalableText style={styles.infoMsgText}>
                     {this.state.infoMsg}
-                </Text>
+                </ScalableText>
             </View>);
         return (
             <View
