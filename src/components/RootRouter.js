@@ -12,8 +12,8 @@ import {
 
 export default class RootRouter extends React.Component {
     renderScene(route, navigator) {
-        var {state, actions} = this.props;
-        var routeId = route.id;
+        const {state, actions} = this.props;
+        const routeId = route.id;
 
         if (routeId === 'Splash') {
             return (
